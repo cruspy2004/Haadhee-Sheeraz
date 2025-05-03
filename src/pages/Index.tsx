@@ -10,6 +10,7 @@ import Skills from "@/components/Skills";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import MouseFollower from "@/components/MouseFollower";
+import EducationalBackground from "@/components/EducationalBackground";
 
 const Index = () => {
   const [introComplete, setIntroComplete] = useState(false);
@@ -36,6 +37,7 @@ const Index = () => {
             <About />
             <Projects />
             <Experience />
+            <EducationalBackground />
             <Skills />
             <Contact />
             <Footer />

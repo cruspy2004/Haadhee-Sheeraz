@@ -45,22 +45,22 @@ const Hero = () => {
           </div>
         </motion.div>
         
-        {/* Profile Image */}
+        {/* Profile Image - positioned to match the animation end position */}
         <motion.div 
           className="hero-image"
           initial={{ opacity: 0, x: 100 }}
           animate={{ opacity: loaded ? 1 : 0, x: loaded ? 0 : 100 }}
           transition={{ duration: 0.7, delay: 0.3 }}
         >
-          <div className="relative max-w-md w-full aspect-square">
-            <div className="w-full h-full overflow-hidden rounded-full">
+          <div className="relative max-w-md w-full aspect-square flex justify-end">
+            <div className="w-3/4 h-3/4 overflow-hidden rounded-xl">
               <img 
                 src="/lovable-uploads/0361b692-6f36-4260-9278-b022843c2ab7.png" 
                 alt="Haadhee Sheeraz" 
                 className="w-full h-full object-cover animate-subtle-move"
               />
             </div>
-            <div className="absolute inset-0 bg-gradient-to-t from-portfolio-black via-transparent to-transparent rounded-full"></div>
+            <div className="absolute inset-0 bg-gradient-to-t from-portfolio-black via-transparent to-transparent rounded-xl"></div>
           </div>
         </motion.div>
       </div>
