@@ -46,11 +46,12 @@ const Header = () => {
         
         {/* Desktop Navigation */}
         <nav className="hidden md:flex gap-8 items-center">
-          <NavLink href="#about">About</NavLink>
-          <NavLink href="#projects">Projects</NavLink>
-          <NavLink href="#experience">Experience</NavLink>
-          <NavLink href="#skills">Skills</NavLink>
-          <NavLink href="#contact">Contact</NavLink>
+          <Link to="/" className="text-portfolio-lightgray hover:text-portfolio-gold transition-colors">Home</Link>
+          <HashLink href="#about">About</HashLink>
+          <Link to="/portfolio" className="text-portfolio-lightgray hover:text-portfolio-gold transition-colors">Portfolio</Link>
+          <HashLink href="#experience">Experience</HashLink>
+          <HashLink href="#skills">Skills</HashLink>
+          <HashLink href="#contact">Contact</HashLink>
         </nav>
       </div>
       
@@ -58,11 +59,12 @@ const Header = () => {
       {mobileMenuOpen && (
         <div className="md:hidden bg-portfolio-darkgray border-t border-portfolio-gold/20">
           <div className="container mx-auto py-4 px-4 flex flex-col gap-4">
-            <NavLink href="#about" onClick={() => setMobileMenuOpen(false)}>About</NavLink>
-            <NavLink href="#projects" onClick={() => setMobileMenuOpen(false)}>Projects</NavLink>
-            <NavLink href="#experience" onClick={() => setMobileMenuOpen(false)}>Experience</NavLink>
-            <NavLink href="#skills" onClick={() => setMobileMenuOpen(false)}>Skills</NavLink>
-            <NavLink href="#contact" onClick={() => setMobileMenuOpen(false)}>Contact</NavLink>
+            <Link to="/" className="text-portfolio-lightgray hover:text-portfolio-gold transition-colors" onClick={() => setMobileMenuOpen(false)}>Home</Link>
+            <HashLink href="#about" onClick={() => setMobileMenuOpen(false)}>About</HashLink>
+            <Link to="/portfolio" className="text-portfolio-lightgray hover:text-portfolio-gold transition-colors" onClick={() => setMobileMenuOpen(false)}>Portfolio</Link>
+            <HashLink href="#experience" onClick={() => setMobileMenuOpen(false)}>Experience</HashLink>
+            <HashLink href="#skills" onClick={() => setMobileMenuOpen(false)}>Skills</HashLink>
+            <HashLink href="#contact" onClick={() => setMobileMenuOpen(false)}>Contact</HashLink>
           </div>
         </div>
       )}
@@ -70,7 +72,8 @@ const Header = () => {
   );
 };
 
-const NavLink = ({ 
+// Helper component for hash navigation
+const HashLink = ({ 
   href, 
   children, 
   onClick 

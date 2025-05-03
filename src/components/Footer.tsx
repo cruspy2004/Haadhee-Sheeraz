@@ -8,11 +8,17 @@ const Footer = () => {
             <p className="text-portfolio-lightgray/70">&copy; {new Date().getFullYear()} Haadhee Sheeraz. All rights reserved.</p>
           </div>
           
-          <div className="flex gap-4">
-            <a href="#" className="text-portfolio-lightgray/70 hover:text-portfolio-gold transition-colors">Home</a>
-            <a href="#about" className="text-portfolio-lightgray/70 hover:text-portfolio-gold transition-colors">About</a>
-            <a href="#projects" className="text-portfolio-lightgray/70 hover:text-portfolio-gold transition-colors">Projects</a>
-            <a href="#contact" className="text-portfolio-lightgray/70 hover:text-portfolio-gold transition-colors">Contact</a>
+          <div className="flex flex-col md:flex-row gap-4">
+            <div className="flex gap-4">
+              <a href="#" className="text-portfolio-lightgray/70 hover:text-portfolio-gold transition-colors">Home</a>
+              <a href="#about" className="text-portfolio-lightgray/70 hover:text-portfolio-gold transition-colors">About</a>
+              <a href="#projects" className="text-portfolio-lightgray/70 hover:text-portfolio-gold transition-colors">Projects</a>
+              <a href="#contact" className="text-portfolio-lightgray/70 hover:text-portfolio-gold transition-colors">Contact</a>
+            </div>
+            <div className="flex gap-4 mt-4 md:mt-0 md:ml-6">
+              <a href="https://www.linkedin.com/in/m-haadhee-sheeraz-mian-7a25a12a2/" target="_blank" rel="noopener noreferrer" className="text-portfolio-lightgray/70 hover:text-portfolio-gold transition-colors">LinkedIn</a>
+              <a href="https://github.com/cruspy2004" target="_blank" rel="noopener noreferrer" className="text-portfolio-lightgray/70 hover:text-portfolio-gold transition-colors">GitHub</a>
+            </div>
           </div>
         </div>
       </div>

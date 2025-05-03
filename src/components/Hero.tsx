@@ -21,7 +21,7 @@ const Hero = () => {
             <span className="block text-portfolio-beige opacity-80">& Copywriter</span>
           </h2>
           <p className="text-lg text-portfolio-lightgray/80 max-w-md">
-            Creating impactful digital experiences with clean code and persuasive content
+            I write code that converts
           </p>
           <div className="pt-4 flex gap-4">
             <a 

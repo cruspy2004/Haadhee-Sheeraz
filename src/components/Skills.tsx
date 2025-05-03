@@ -9,11 +9,12 @@ const skillsData = {
   ],
   "Content": [
     "Copywriting", "Landing Pages", "Opt-ins", "Email Sequences",
-    "CRMs", "GUI Design", "Content Strategy"
+    "CRMs", "GUI Design", "Content Strategy", "GoHighLevel",
+    "Workflow Automations", "Funnel Building"
   ],
   "Soft Skills": [
     "Problem Solving", "Communication", "Team Collaboration",
-    "Project Management", "Time Management"
+    "Project Management", "Time Management", "SaaS Entrepreneurship"
   ]
 };
 

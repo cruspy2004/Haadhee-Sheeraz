@@ -7,10 +7,12 @@ import Experience from "@/components/Experience";
 import Skills from "@/components/Skills";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
+import MouseFollower from "@/components/MouseFollower";
 
 const Index = () => {
   return (
     <div className="min-h-screen bg-portfolio-black text-portfolio-lightgray">
+      <MouseFollower />
       <Header />
       <Hero />
       <About />
