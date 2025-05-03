@@ -50,9 +50,9 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
           }}
         >
           <img
-            src="/lovable-uploads/b6ba6a92-92c9-4f31-9f67-43132b0b3426.png"
+            src="/lovable-uploads/0361b692-6f36-4260-9278-b022843c2ab7.png"
             alt="Haadhee Sheeraz"
-            className="max-w-full h-auto max-h-[70vh] object-contain"
+            className="max-w-full h-auto max-h-[70vh] object-contain rounded-full"
           />
         </motion.div>
 

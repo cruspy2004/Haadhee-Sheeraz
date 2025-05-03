@@ -16,7 +16,7 @@ const Hero = () => {
         <motion.div 
           className="space-y-6"
           initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          animate={{ opacity: loaded ? 1 : 0, y: loaded ? 0 : 20 }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
           <h1 className="font-serif text-4xl md:text-6xl font-bold text-portfolio-gold">
@@ -49,18 +49,18 @@ const Hero = () => {
         <motion.div 
           className="hero-image"
           initial={{ opacity: 0, x: 100 }}
-          animate={{ opacity: 1, x: 0 }}
+          animate={{ opacity: loaded ? 1 : 0, x: loaded ? 0 : 100 }}
           transition={{ duration: 0.7, delay: 0.3 }}
         >
           <div className="relative max-w-md w-full aspect-square">
-            <div className="w-full h-full overflow-hidden">
+            <div className="w-full h-full overflow-hidden rounded-full">
               <img 
-                src="/lovable-uploads/b6ba6a92-92c9-4f31-9f67-43132b0b3426.png" 
-                alt="Haadhee Sheeraz silhouette" 
+                src="/lovable-uploads/0361b692-6f36-4260-9278-b022843c2ab7.png" 
+                alt="Haadhee Sheeraz" 
                 className="w-full h-full object-cover animate-subtle-move"
               />
             </div>
-            <div className="absolute inset-0 bg-gradient-to-t from-portfolio-black via-transparent to-transparent"></div>
+            <div className="absolute inset-0 bg-gradient-to-t from-portfolio-black via-transparent to-transparent rounded-full"></div>
           </div>
         </motion.div>
       </div>
@@ -69,7 +69,7 @@ const Hero = () => {
       <motion.div 
         className="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center"
         initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
+        animate={{ opacity: loaded ? 1 : 0, y: loaded ? 0 : 20 }}
         transition={{ duration: 0.5, delay: 0.8 }}
       >
         <span className="text-portfolio-lightgray/60 text-sm mb-2">Scroll Down</span>
