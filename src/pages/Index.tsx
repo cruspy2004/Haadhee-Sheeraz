@@ -1,6 +1,7 @@
 
+import { useEffect, useState } from "react";
 import Header from "@/components/Header";
-import Hero from "@/components/Hero";
+import IntroAnimation from "@/components/IntroAnimation";
 import About from "@/components/About";
 import Projects from "@/components/Projects";
 import Experience from "@/components/Experience";
@@ -10,17 +11,35 @@ import Footer from "@/components/Footer";
 import MouseFollower from "@/components/MouseFollower";
 
 const Index = () => {
+  const [introComplete, setIntroComplete] = useState(false);
+
+  useEffect(() => {
+    // After intro animation completes, show the rest of content
+    const timer = setTimeout(() => {
+      setIntroComplete(true);
+    }, 3000); // Total intro animation time
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <div className="min-h-screen bg-portfolio-black text-portfolio-lightgray">
       <MouseFollower />
-      <Header />
-      <Hero />
-      <About />
-      <Projects />
-      <Experience />
-      <Skills />
-      <Contact />
-      <Footer />
+      {!introComplete ? (
+        <IntroAnimation onComplete={() => setIntroComplete(true)} />
+      ) : (
+        <>
+          <Header />
+          <div className="content-container">
+            <About />
+            <Projects />
+            <Experience />
+            <Skills />
+            <Contact />
+            <Footer />
+          </div>
+        </>
+      )}
     </div>
   );
 };

@@ -45,10 +45,11 @@ const Header = () => {
         </button>
         
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex gap-8 items-center">
+        <nav className="hidden md:flex gap-6 items-center">
           <Link to="/" className="text-portfolio-lightgray hover:text-portfolio-gold transition-colors">Home</Link>
           <HashLink href="#about">About</HashLink>
           <Link to="/portfolio" className="text-portfolio-lightgray hover:text-portfolio-gold transition-colors">Portfolio</Link>
+          <Link to="/saas-projects" className="text-portfolio-lightgray hover:text-portfolio-gold transition-colors">SaaS Projects</Link>
           <HashLink href="#experience">Experience</HashLink>
           <HashLink href="#skills">Skills</HashLink>
           <HashLink href="#contact">Contact</HashLink>
@@ -62,6 +63,7 @@ const Header = () => {
             <Link to="/" className="text-portfolio-lightgray hover:text-portfolio-gold transition-colors" onClick={() => setMobileMenuOpen(false)}>Home</Link>
             <HashLink href="#about" onClick={() => setMobileMenuOpen(false)}>About</HashLink>
             <Link to="/portfolio" className="text-portfolio-lightgray hover:text-portfolio-gold transition-colors" onClick={() => setMobileMenuOpen(false)}>Portfolio</Link>
+            <Link to="/saas-projects" className="text-portfolio-lightgray hover:text-portfolio-gold transition-colors" onClick={() => setMobileMenuOpen(false)}>SaaS Projects</Link>
             <HashLink href="#experience" onClick={() => setMobileMenuOpen(false)}>Experience</HashLink>
             <HashLink href="#skills" onClick={() => setMobileMenuOpen(false)}>Skills</HashLink>
             <HashLink href="#contact" onClick={() => setMobileMenuOpen(false)}>Contact</HashLink>

@@ -1,5 +1,6 @@
 
 import { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
 
 const Hero = () => {
   const [loaded, setLoaded] = useState(false);
@@ -12,7 +13,12 @@ const Hero = () => {
     <section className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden pt-20">
       <div className="container mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
         {/* Text Content */}
-        <div className={`space-y-6 ${loaded ? 'animate-slide delay-300' : 'opacity-0'}`}>
+        <motion.div 
+          className="space-y-6"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+        >
           <h1 className="font-serif text-4xl md:text-6xl font-bold text-portfolio-gold">
             Haadhee Sheeraz
           </h1>
@@ -37,12 +43,17 @@ const Hero = () => {
               Get In Touch
             </a>
           </div>
-        </div>
+        </motion.div>
         
         {/* Profile Image */}
-        <div className="hero-image">
-          <div className={`relative max-w-md w-full aspect-square ${loaded ? 'animate-fade-in' : 'opacity-0'}`}>
-            <div className="w-full h-full overflow-hidden rounded-full">
+        <motion.div 
+          className="hero-image"
+          initial={{ opacity: 0, x: 100 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.7, delay: 0.3 }}
+        >
+          <div className="relative max-w-md w-full aspect-square">
+            <div className="w-full h-full overflow-hidden">
               <img 
                 src="/lovable-uploads/b6ba6a92-92c9-4f31-9f67-43132b0b3426.png" 
                 alt="Haadhee Sheeraz silhouette" 
@@ -51,16 +62,21 @@ const Hero = () => {
             </div>
             <div className="absolute inset-0 bg-gradient-to-t from-portfolio-black via-transparent to-transparent"></div>
           </div>
-        </div>
+        </motion.div>
       </div>
       
       {/* Scroll indicator */}
-      <div className={`absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center ${loaded ? 'animate-slide delay-500' : 'opacity-0'}`}>
+      <motion.div 
+        className="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.8 }}
+      >
         <span className="text-portfolio-lightgray/60 text-sm mb-2">Scroll Down</span>
         <div className="w-6 h-10 border-2 border-portfolio-gold/30 rounded-full flex justify-center">
           <div className="w-2 h-2 bg-portfolio-gold rounded-full animate-bounce mt-2"></div>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 };

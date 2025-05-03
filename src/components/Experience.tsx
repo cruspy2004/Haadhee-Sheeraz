@@ -1,5 +1,6 @@
 
 import { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 
 const experienceData = [
   {
@@ -10,9 +11,9 @@ const experienceData = [
   },
   {
     title: "Content Engineer",
-    company: "Software Company",
+    company: "It Empire (REM)",
     period: "Nov 2024 - Dec 2024",
-    description: "Helped redesign the landing page, privacy policy, store fronts (app store, play store) and more."
+    description: "Helped redesign the landing page, privacy policy, and store fronts for REM - an SAAS B2B AI real estate matchmaker app in Dubai."
   },
   {
     title: "Sponsorships Executive",
@@ -69,13 +70,13 @@ const Experience = () => {
         
         <div className="max-w-3xl mx-auto">
           {experienceData.map((exp, index) => (
-            <div 
+            <motion.div 
               key={index} 
               id={`exp-${index}`}
-              className={`timeline-item transition-all duration-700 ${
-                visibleItems[index] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-              }`}
-              style={{ transitionDelay: `${index * 100}ms` }}
+              className="timeline-item"
+              initial={{ opacity: 0, x: -20 }}
+              animate={visibleItems[index] ? { opacity: 1, x: 0 } : {}}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
             >
               <div className="timeline-dot"></div>
               <div>
@@ -86,7 +87,7 @@ const Experience = () => {
                 <p className="text-sm text-portfolio-lightgray/70 mb-2">{exp.period}</p>
                 <p className="text-portfolio-lightgray/90">{exp.description}</p>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

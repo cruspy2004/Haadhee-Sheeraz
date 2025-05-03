@@ -1,4 +1,6 @@
 
+import { Link } from 'react-router-dom';
+
 const Footer = () => {
   return (
     <footer className="py-8 bg-portfolio-black border-t border-portfolio-gold/10">
@@ -10,10 +12,10 @@ const Footer = () => {
           
           <div className="flex flex-col md:flex-row gap-4">
             <div className="flex gap-4">
-              <a href="#" className="text-portfolio-lightgray/70 hover:text-portfolio-gold transition-colors">Home</a>
+              <Link to="/" className="text-portfolio-lightgray/70 hover:text-portfolio-gold transition-colors">Home</Link>
               <a href="#about" className="text-portfolio-lightgray/70 hover:text-portfolio-gold transition-colors">About</a>
-              <a href="#projects" className="text-portfolio-lightgray/70 hover:text-portfolio-gold transition-colors">Projects</a>
-              <a href="#contact" className="text-portfolio-lightgray/70 hover:text-portfolio-gold transition-colors">Contact</a>
+              <Link to="/portfolio" className="text-portfolio-lightgray/70 hover:text-portfolio-gold transition-colors">Portfolio</Link>
+              <Link to="/saas-projects" className="text-portfolio-lightgray/70 hover:text-portfolio-gold transition-colors">SaaS Projects</Link>
             </div>
             <div className="flex gap-4 mt-4 md:mt-0 md:ml-6">
               <a href="https://www.linkedin.com/in/m-haadhee-sheeraz-mian-7a25a12a2/" target="_blank" rel="noopener noreferrer" className="text-portfolio-lightgray/70 hover:text-portfolio-gold transition-colors">LinkedIn</a>

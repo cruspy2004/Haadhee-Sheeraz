@@ -1,5 +1,6 @@
 
 import { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 
 const About = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -29,39 +30,48 @@ const About = () => {
         <div className={`max-w-4xl mx-auto transition-all duration-700 ${
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
         }`}>
-          <h2 className="section-heading text-center">About Me</h2>
+          <h2 className="section-heading text-center mb-12">About Me</h2>
           
-          <div className="grid md:grid-cols-2 gap-10 items-center">
-            <div>
-              <div className="bg-portfolio-darkgray rounded-lg p-6 border border-portfolio-gold/10">
-                <h3 className="font-serif text-xl text-portfolio-gold mb-3">Who I Am</h3>
-                <p className="text-portfolio-lightgray/90 mb-4">
-                  I'm a MERN Stack Developer and Copywriter with a focus on creating effective digital solutions.
-                  Currently pursuing my BSCS at NUST, Pakistan's #1 university according to QS World Rankings.
-                </p>
-                <p className="text-portfolio-lightgray/90">
-                  With experience in both technical development and persuasive marketing content,
-                  I combine logical problem-solving with creative communication to deliver unique value.
-                </p>
-              </div>
-            </div>
+          <motion.div 
+            className="bg-portfolio-darkgray rounded-lg p-8 border border-portfolio-gold/20 shadow-lg"
+            initial={{ opacity: 0, y: 20 }}
+            animate={isVisible ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6 }}
+          >
+            <h3 className="font-serif text-2xl text-portfolio-gold mb-6 border-b border-portfolio-gold/30 pb-3">Who I Am</h3>
+            <p className="text-portfolio-lightgray/90 mb-6 text-lg">
+              A 20 year old CS Student with 1.5 years of copywriting experience, and multiple programming projects. 
+              <span className="text-portfolio-gold font-medium"> I write code that actually converts.</span>
+            </p>
             
-            <div>
-              <div className="bg-portfolio-darkgray rounded-lg p-6 border border-portfolio-gold/10">
-                <h3 className="font-serif text-xl text-portfolio-gold mb-3">Educational Background</h3>
-                <div className="mb-4">
-                  <h4 className="font-medium text-portfolio-beige">NUST, H12 Islamabad</h4>
-                  <p className="text-sm text-portfolio-lightgray/70">BSCS (August 2023 - August 2027)</p>
-                  <p className="text-portfolio-lightgray/90 mt-1">No. 1 in Pakistan (QS World Rankings)</p>
-                </div>
-                <div>
-                  <h4 className="font-medium text-portfolio-beige">PCS, Faisalabad</h4>
-                  <p className="text-sm text-portfolio-lightgray/70">FSc. (March 2020 - March 2022)</p>
-                  <p className="text-portfolio-lightgray/90 mt-1">Score: 90.5% (With an O-levels background)</p>
-                </div>
-              </div>
+            <p className="text-portfolio-lightgray/90 mb-6 text-lg">
+              Right now involved in SAAS based solutions. Proficient with tools like GHL, Kajabi, ClickFunnels etc. 
+              I build landing pages, funnels and workflow automations that help your business scale.
+            </p>
+            
+            <p className="text-portfolio-lightgray/90 text-lg font-light italic">
+              Remember: This is a DEV talking, not a marketer. A dev that understands how that CTA button is pressed.
+            </p>
+          </motion.div>
+          
+          <motion.div 
+            className="mt-8 bg-portfolio-darkgray rounded-lg p-8 border border-portfolio-gold/20 shadow-lg"
+            initial={{ opacity: 0, y: 20 }}
+            animate={isVisible ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            <h3 className="font-serif text-2xl text-portfolio-gold mb-6 border-b border-portfolio-gold/30 pb-3">Educational Background</h3>
+            <div className="mb-6">
+              <h4 className="font-medium text-xl text-portfolio-beige">NUST, H12 Islamabad</h4>
+              <p className="text-sm text-portfolio-lightgray/70">BSCS (August 2023 - August 2027)</p>
+              <p className="text-portfolio-lightgray/90 mt-1">No. 1 in Pakistan (QS World Rankings)</p>
             </div>
-          </div>
+            <div>
+              <h4 className="font-medium text-xl text-portfolio-beige">PCS, Faisalabad</h4>
+              <p className="text-sm text-portfolio-lightgray/70">FSc. (March 2020 - March 2022)</p>
+              <p className="text-portfolio-lightgray/90 mt-1">Score: 90.5% (With an O-levels background)</p>
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>
