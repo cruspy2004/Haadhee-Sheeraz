@@ -9,6 +9,14 @@ const projectData = [
     badges: ["Fintech", "IoT", "Incubated"],
     highlight: true,
   },
+
+    {
+    title: "Watify",
+    category: "Business automation solution",
+    description: "All in one B2B communication solution. Used by wateen to manage over 5 thousand employees",
+    badges: ["React", "Node.js", "PostgreSql"],
+    highlight: true,
+  },
   {
     title: "Medium Influence & Sentiment Analysis AI",
     category: "Web Scraping & NLP",

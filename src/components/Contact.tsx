@@ -1,9 +1,58 @@
 
 import { useState, useEffect } from 'react';
 import { Github, Linkedin, Mail, Phone } from 'lucide-react';
+import emailjs from '@emailjs/browser';
+import { EMAILJS_CONFIG } from '../config/emailjs';
 
 const Contact = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: ''
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+
+  // Initialize EmailJS
+  useEffect(() => {
+    emailjs.init(EMAILJS_CONFIG.PUBLIC_KEY);
+  }, []);
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+
+    try {
+      await emailjs.send(
+        EMAILJS_CONFIG.SERVICE_ID,
+        EMAILJS_CONFIG.TEMPLATE_ID,
+        {
+          from_name: formData.name,
+          from_email: formData.email,
+          message: formData.message,
+          to_email: 'Haadheesheeraz2004@gmail.com'
+        }
+      );
+      
+      setSubmitStatus('success');
+      setFormData({ name: '', email: '', message: '' });
+    } catch (error) {
+      console.error('Email send failed:', error);
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
   
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -64,7 +113,19 @@ const Contact = () => {
             <div className="bg-portfolio-darkgray rounded-lg p-6 border border-portfolio-gold/10">
               <h3 className="font-serif text-xl text-portfolio-gold mb-4">Send a Message</h3>
               
-              <form className="space-y-4">
+              {submitStatus === 'success' && (
+                <div className="mb-4 p-3 bg-green-900/20 border border-green-500/50 rounded text-green-400 text-sm">
+                  Message sent successfully! I'll get back to you soon.
+                </div>
+              )}
+              
+              {submitStatus === 'error' && (
+                <div className="mb-4 p-3 bg-red-900/20 border border-red-500/50 rounded text-red-400 text-sm">
+                  Failed to send message. Please try again or contact me directly.
+                </div>
+              )}
+              
+              <form className="space-y-4" onSubmit={handleSubmit}>
                 <div>
                   <label htmlFor="name" className="block text-sm text-portfolio-lightgray/70 mb-1">
                     Name
@@ -72,6 +133,10 @@ const Contact = () => {
                   <input
                     type="text"
                     id="name"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleInputChange}
+                    required
                     className="w-full bg-portfolio-black border border-portfolio-gold/20 rounded px-3 py-2 text-portfolio-lightgray focus:outline-none focus:border-portfolio-gold"
                   />
                 </div>
@@ -83,6 +148,10 @@ const Contact = () => {
                   <input
                     type="email"
                     id="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    required
                     className="w-full bg-portfolio-black border border-portfolio-gold/20 rounded px-3 py-2 text-portfolio-lightgray focus:outline-none focus:border-portfolio-gold"
                   />
                 </div>
@@ -93,6 +162,10 @@ const Contact = () => {
                   </label>
                   <textarea
                     id="message"
+                    name="message"
+                    value={formData.message}
+                    onChange={handleInputChange}
+                    required
                     rows={4}
                     className="w-full bg-portfolio-black border border-portfolio-gold/20 rounded px-3 py-2 text-portfolio-lightgray focus:outline-none focus:border-portfolio-gold"
                   ></textarea>
@@ -100,9 +173,10 @@ const Contact = () => {
                 
                 <button
                   type="submit"
-                  className="px-6 py-3 bg-portfolio-gold text-portfolio-black font-medium rounded-md hover:bg-portfolio-gold/90 transition-all w-full"
+                  disabled={isSubmitting}
+                  className="px-6 py-3 bg-portfolio-gold text-portfolio-black font-medium rounded-md hover:bg-portfolio-gold/90 transition-all w-full disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  Send Message
+                  {isSubmitting ? 'Sending...' : 'Send Message'}
                 </button>
               </form>
             </div>

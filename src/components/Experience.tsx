@@ -4,10 +4,16 @@ import { motion } from 'framer-motion';
 
 const experienceData = [
   {
-    title: "Freelance Copywriter",
+    title: "Freelance landing page dev",
     company: "",
     period: "Current",
     description: "Creating landing pages, opt-in pages, email sequences and long form content for clients."
+  },
+  {
+    title: "SWE ",
+    company: "Wateen",
+    period: "Current",
+    description: "Creating business solutions that boost sales and employee productivity."
   },
   {
     title: "Content Engineer",
