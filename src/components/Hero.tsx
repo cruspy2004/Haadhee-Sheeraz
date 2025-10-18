@@ -1,8 +1,30 @@
-
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import emailjs from '@emailjs/browser';
-import { EMAILJS_CONFIG } from '../config/emailjs';
+import { SMTP_CONFIG } from '../config/emailjs';
+
+// Declare Email global for SMTP.js
+interface EmailSendConfig {
+  Host?: string;
+  Username?: string;
+  Password?: string;
+  To?: string;
+  From?: string;
+  Subject?: string;
+  Body?: string;
+  CC?: string;
+  BCC?: string;
+  SecureToken?: string;
+  Attachments?: Array<Record<string, unknown>>;
+  [key: string]: unknown;
+}
+
+declare global {
+  interface Window {
+    Email: {
+      send: (config: EmailSendConfig) => Promise<string>;
+    };
+  }
+}
 
 const Hero = () => {
   const [loaded, setLoaded] = useState(false);
@@ -14,8 +36,6 @@ const Hero = () => {
 
   useEffect(() => {
     setLoaded(true);
-    // Initialize EmailJS
-    emailjs.init(EMAILJS_CONFIG.PUBLIC_KEY);
   }, []);
 
   const handleHireSubmit = async (e: React.FormEvent) => {
@@ -24,21 +44,29 @@ const Hero = () => {
     setSubmitStatus('idle');
 
     try {
-      await emailjs.send(
-        EMAILJS_CONFIG.SERVICE_ID,
-        EMAILJS_CONFIG.TEMPLATE_ID,
-        {
-          from_name: 'Potential Client',
-          from_email: contactEmail,
-          message: `HIRE REQUEST: ${hireMessage}`,
-          to_email: 'Haadheesheeraz2004@gmail.com'
-        }
-      );
+      const result = await window.Email.send({
+        Host: SMTP_CONFIG.Host,
+        Username: SMTP_CONFIG.Username,
+        Password: SMTP_CONFIG.Password,
+        To: SMTP_CONFIG.To,
+        From: SMTP_CONFIG.From,
+        Subject: `HIRE REQUEST from ${contactEmail}`,
+        Body: `
+          <h3>New Hire Request</h3>
+          <p><strong>From:</strong> ${contactEmail}</p>
+          <p><strong>Message:</strong></p>
+          <p>${hireMessage}</p>
+        `
+      });
       
-      setSubmitStatus('success');
-      setHireMessage('');
-      setContactEmail('');
-      setTimeout(() => setShowHireForm(false), 2000);
+      if (result === "OK") {
+        setSubmitStatus('success');
+        setHireMessage('');
+        setContactEmail('');
+        setTimeout(() => setShowHireForm(false), 2000);
+      } else {
+        setSubmitStatus('error');
+      }
     } catch (error) {
       console.error('Email send failed:', error);
       setSubmitStatus('error');
@@ -154,16 +182,16 @@ const Hero = () => {
           animate={{ opacity: loaded ? 1 : 0, x: loaded ? 0 : 100 }}
           transition={{ duration: 0.7, delay: 0.3 }}
         >
-          <div className="relative max-w-md w-full aspect-square flex justify-end">
-            <div className="w-3/4 h-3/4 overflow-hidden rounded-xl">
-              <img 
-                src="/lovable-uploads/0361b692-6f36-4260-9278-b022843c2ab7.png" 
-                alt="Haadhee Sheeraz" 
-                className="w-full h-full object-cover animate-subtle-move"
-              />
-            </div>
-            <div className="absolute inset-0 bg-gradient-to-t from-portfolio-black via-transparent to-transparent rounded-xl"></div>
-          </div>
+          <div className="relative rounded-3xl overflow-hidden">
+           <img
+             src="/lovable-uploads/0361b692-6f36-4260-9278-b022843c2ab7.png"
+             alt="Haadhee Sheeraz"
+             className="w-full h-full object-cover animate-subtle-move"
+             decoding="async"
+             loading="lazy"
+           />
+           <div className="absolute inset-0 bg-gradient-to-t from-portfolio-black via-transparent to-transparent pointer-events-none"></div>
+         </div>
         </motion.div>
       </div>
       

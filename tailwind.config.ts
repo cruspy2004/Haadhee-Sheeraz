@@ -140,7 +140,7 @@ export default {
 			},
 			fontFamily: {
 				serif: ['Playfair Display', 'serif'],
-				sans: ['Inter', 'sans-serif']
+				sans: ['Poppins', 'sans-serif']
 			}
 		}
 	},
