@@ -43,10 +43,15 @@ const EducationalBackground = () => {
               <p className="text-sm text-portfolio-lightgray/70">BSCS (August 2023 - August 2027)</p>
               <p className="text-portfolio-lightgray/90 mt-1">No. 1 in Pakistan (QS World Rankings)</p>
             </div>
-            <div>
+            <div className='mb-6'>
               <h4 className="font-medium text-xl text-portfolio-beige">PCS, Faisalabad</h4>
               <p className="text-sm text-portfolio-lightgray/70">FSc. (March 2020 - March 2022)</p>
               <p className="text-portfolio-lightgray/90 mt-1">Score: 90.5% (With an O-levels background)</p>
+            </div>
+            <div>
+              <h4 className="font-medium text-xl text-portfolio-beige">Founders Institute</h4>
+              <p className="text-sm text-portfolio-lightgray/70">FSc. (Jan 2025 - Nov 2025)</p>
+              <p className="text-portfolio-lightgray/90 mt-1">Succesfully graduated from founders university</p>
             </div>
           </motion.div>
         </div>

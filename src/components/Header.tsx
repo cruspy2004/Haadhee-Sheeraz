@@ -8,7 +8,7 @@ const Header = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 50) {
+      if (window.scrollY > 20) {
         setScrolled(true);
       } else {
         setScrolled(false);
@@ -28,9 +28,18 @@ const Header = () => {
       }`}
     >
       <div className="container mx-auto px-4 flex justify-between items-center">
-        <Link to="/" className="font-serif text-2xl font-bold text-portfolio-gold">
+    <div className="relative flex items-center">
+      <Link to="/" className="flex items-center font-serif text-2xl font-bold text-portfolio-gold">
+        <img src="/favicon.ico" alt="Logo" className="h-8" />
+        <span
+          className={`absolute left-12 -top-1 text-2xl font-serif font-bold text-portfolio-gold transition-all duration-300 ${
+            scrolled ? "translate-x-[-17px] opacity-0" : "translate-x-0"
+          }`}
+        >
           HS/DEV
-        </Link>
+        </span>
+      </Link>
+    </div>
         
         {/* Mobile menu button */}
         <button 

@@ -76,11 +76,11 @@ const Hero = () => {
   };
 
   return (
-    <section className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden pt-20">
+    <section className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden pt-20 bg-portfolio-black/95">
       <div className="container mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
         {/* Text Content */}
         <motion.div 
-          className="space-y-6"
+          className="space-y-6 md:pl-6 lg:pl-10"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: loaded ? 1 : 0, y: loaded ? 0 : 20 }}
           transition={{ duration: 0.5, delay: 0.2 }}
