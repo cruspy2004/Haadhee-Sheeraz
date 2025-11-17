@@ -22,6 +22,12 @@ const experienceData = [
     description: "Helped redesign the landing page, privacy policy, and store fronts for REM - an SAAS B2B AI real estate matchmaker app in Dubai."
   },
   {
+    title: "Growth Engineer",
+    company: "Leetly",
+    period: "1 month",
+    description: "Helped grow the mobile alternative of leetcode"
+  },
+  {
     title: "Sponsorships Executive",
     company: "Hack Club",
     period: "1 year",
