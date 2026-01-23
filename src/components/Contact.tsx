@@ -1,15 +1,5 @@
 import { useState, useEffect } from 'react';
 import { Github, Linkedin, Mail, Phone } from 'lucide-react';
-import { SMTP_CONFIG } from '../config/emailjs';
-
-// Declare Email global for SMTP.js
-declare global {
-  interface Window {
-    Email: {
-      send: (config: any) => Promise<string>;
-    };
-  }
-}
 
 const Contact = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -35,30 +25,29 @@ const Contact = () => {
     setSubmitStatus('idle');
 
     try {
-      const result = await window.Email.send({
-        Host: SMTP_CONFIG.Host,
-        Username: SMTP_CONFIG.Username,
-        Password: SMTP_CONFIG.Password,
-        To: SMTP_CONFIG.To,
-        From: SMTP_CONFIG.From,
-        Subject: `New Contact Form Message from ${formData.name}`,
-        Body: `
-          <h3>New Contact Form Submission</h3>
-          <p><strong>Name:</strong> ${formData.name}</p>
-          <p><strong>Email:</strong> ${formData.email}</p>
-          <p><strong>Message:</strong></p>
-          <p>${formData.message}</p>
-        `
+      const response = await fetch("https://www.formbackend.com/f/58ff956cbe5f393c", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json"
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          message: formData.message
+        }),
       });
-      
-      if (result === "OK") {
-        setSubmitStatus('success');
-        setFormData({ name: '', email: '', message: '' });
-      } else {
-        setSubmitStatus('error');
+
+      if (response.status === 422) {
+        throw new Error("Validation error");
+      } else if (!response.ok) {
+        throw new Error("Something went wrong");
       }
+
+      setSubmitStatus('success');
+      setFormData({ name: '', email: '', message: '' });
     } catch (error) {
-      console.error('Email send failed:', error);
+      console.error('Form submission failed:', error);
       setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);

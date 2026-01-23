@@ -5,7 +5,7 @@
 
 export const SMTP_CONFIG = {
   Host: "smtp.elasticemail.com", // Replace with your SMTP host
-  Username: "your-email@domain.com", // Replace with your SMTP username
+  Username: "haadheesheeraz2004@gmail.com", // Replace with your SMTP username
   Password: "your-smtp-password", // Replace with your SMTP password
   Port: 587, // Common SMTP port
   To: "Haadheesheeraz2004@gmail.com", // Your email to receive messages

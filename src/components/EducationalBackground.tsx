@@ -50,7 +50,7 @@ const EducationalBackground = () => {
             </div>
             <div>
               <h4 className="font-medium text-xl text-portfolio-beige">Founders Institute</h4>
-              <p className="text-sm text-portfolio-lightgray/70">FSc. (Jan 2025 - Nov 2025)</p>
+              <p className="text-sm text-portfolio-lightgray/70">FI. (Jan 2025 - Nov 2025)</p>
               <p className="text-portfolio-lightgray/90 mt-1">Succesfully graduated from founders university</p>
             </div>
           </motion.div>
