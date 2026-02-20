@@ -40,7 +40,7 @@ const About = () => {
           >
             <h3 className="font-serif text-2xl text-portfolio-gold mb-6 border-b border-portfolio-gold/30 pb-3">Who I Am</h3>
             <p className="text-portfolio-lightgray/90 mb-6 text-lg">
-              A 20 year old CS student at NUST with 1.5 years of copywriting experience, and multiple programming projects. 
+              A software developer with about 3 years of experience, and multiple industry projects. 
               <span className="text-portfolio-gold font-medium"> I write code that actually converts.</span>
             </p>
             

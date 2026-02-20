@@ -3,10 +3,19 @@ import { useState, useEffect } from 'react';
 
 const projectData = [
   {
-    title: "KAROBAR BOX",
-    category: "Fintech & IoT",
-    description: "Incubated in NIC and Founder institute. 1 of the 30 selected from 570 (the only fintech project selected). Validates your transaction instantly with audiovisual messages.",
-    badges: ["Fintech", "IoT", "Incubated"],
+    title: "H1Grow",
+    category: "Content Monetization SAAS",
+    description: "Recuring monetization for creators, using software products.",
+    badges: ["Next.js", "Tailwind CSS", "PostgreSql"],
+    link: "https://h1grow.store",
+    highlight: true,
+  },
+   {
+    title: "JAVASCRIPT PETER",
+    category: "Javascript content instagram page",
+    description: "Upload an instagram reel with just one click. over a million views and 7k followers in 2 months (2 brand deals) ",
+    badges: ["Python", ],
+    link: "https://www.instagram.com/javascriptpeter",
     highlight: true,
   },
 
@@ -15,6 +24,7 @@ const projectData = [
     category: "Business automation solution",
     description: "All in one B2B communication solution. Used by wateen to manage over 5 thousand employees",
     badges: ["React", "Node.js", "PostgreSql"],
+    link: "https://watify.vercel.app/",
     highlight: true,
   },
   {
@@ -22,24 +32,29 @@ const projectData = [
     category: "Web Scraping & NLP",
     description: "Helps with effective outreach through sentiment and influence analysis for both creators and topics. Built with Web scraping, NLP, Python, Flask.",
     badges: ["Python", "NLP", "Flask", "Web Scraping"],
+    link: "https://github.com/cruspy2004/Medium-scrapper-and-sentiment-analysis-",
   },
-  {
-    title: "Stack Overflow Trend Analysis",
-    category: "Data Analysis",
-    description: "Identifies trends and saturation in the developer market, while clearly stating your competition and ranking them. Built with Web scraping, Python, Flask.",
-    badges: ["Python", "Flask", "Web Scraping", "Data Analysis"],
-  },
+
   {
     title: "Project Memetent",
     category: "Java Game",
     description: "A compilation game made in Java, Swing, FX. Achieved 60% boost in interaction and a 14% higher click-through rate, because of the responsive memes added to the classic games we love.",
     badges: ["Java", "Swing", "JavaFX", "Game Development"],
+    link: "https://github.com/cruspy2004/memetent-memes-and-games-",
   },
   {
     title: "Project 2048",
     category: "C Game",
     description: "Game made with C and Raylib. A modern implementation of the classic 2048 puzzle game.",
     badges: ["C", "Raylib", "Game Development"],
+  },
+  {
+    title: "KAROBAR BOX",
+    category: "Fintech & IoT",
+    description: "Incubated in NIC and Founder institute. 1 of the 30 selected from 570 (the only fintech project selected). Validates your transaction instantly with audiovisual messages.",
+    badges: ["Fintech", "IoT", "Incubated"],
+    link: "https://karobar-box.vercel.app/",
+    highlight: false,
   },
 ];
 
@@ -64,6 +79,38 @@ const ProjectCard = ({ project, index }: { project: typeof projectData[0]; index
       if (element) observer.unobserve(element);
     };
   }, [index]);
+
+  if (project.link) {
+    return (
+      <a
+        href={project.link}
+        target="_blank"
+        rel="noopener noreferrer"
+        id={`project-${index}`}
+        className={`project-card block ${
+          project.highlight 
+            ? 'md:col-span-2 bg-gradient-to-br from-portfolio-darkgray to-portfolio-darkgray/80 border border-portfolio-gold/20' 
+            : 'bg-portfolio-darkgray/40 border border-portfolio-darkgray'
+        } transition-all duration-700 ${
+          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+        } cursor-pointer hover:border-portfolio-gold/40 hover:shadow-lg hover:shadow-portfolio-gold/10 hover:scale-105`}
+        style={{ transitionDelay: `${index * 100}ms` }}
+      >
+        <div className="p-6">
+          <div className="flex flex-wrap gap-2 mb-3">
+            {project.badges.map((badge, i) => (
+              <span key={i} className="bg-portfolio-black/50 text-portfolio-gold/90 text-xs px-2 py-1 rounded">
+                {badge}
+              </span>
+            ))}
+          </div>
+          <h3 className="font-serif text-xl text-portfolio-gold mb-1">{project.title}</h3>
+          <p className="text-sm text-portfolio-lightgray/70 mb-3">{project.category}</p>
+          <p className="text-portfolio-lightgray/90">{project.description}</p>
+        </div>
+      </a>
+    );
+  }
 
   return (
     <div 
