@@ -89,8 +89,8 @@ const Hero = () => {
             Haadhee Sheeraz
           </h1>
           <h2 className="text-2xl md:text-3xl text-portfolio-lightgray font-light leading-relaxed">
-            Landing Page Developer 
-            <span className="block text-portfolio-beige opacity-80">& Copywriter</span>
+            Software Developmet 
+            <span className="block text-portfolio-beige opacity-80">& Automations</span>
           </h2>
           <p className="text-lg text-portfolio-lightgray/80 max-w-md">
             I write code that converts
