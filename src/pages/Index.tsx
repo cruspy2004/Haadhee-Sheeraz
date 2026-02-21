@@ -1,6 +1,6 @@
 
 import { useEffect, useState } from "react";
-import Header from "@/components/Header";
+import NavDock from "@/components/NavDock";
 import IntroAnimation from "@/components/IntroAnimation";
 import Hero from "@/components/Hero";
 import Banner from "@/components/Banner";
@@ -32,7 +32,7 @@ const Index = () => {
         <IntroAnimation onComplete={() => setIntroComplete(true)} />
       ) : (
         <>
-          <Header />
+          <NavDock />
           <div className="content-container">
             <Hero />
             <Banner />
