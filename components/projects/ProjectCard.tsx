@@ -34,13 +34,18 @@ export default function ProjectCard({ project, index, total, active }: Props) {
 
   return (
     <div
-      className="absolute inset-0 flex items-center justify-center px-6 pb-24 pt-28 sm:px-12"
+      className="absolute inset-0 flex items-center justify-center px-5 pb-20 pt-24 sm:px-10 sm:pb-24 sm:pt-28"
       style={{ color: ink, pointerEvents: active ? 'auto' : 'none' }}
       aria-hidden={!active}
     >
-      <div className="grid w-full max-w-6xl items-center gap-10 lg:grid-cols-[1fr_1.05fr] lg:gap-16">
+      {/*
+        Two columns from md up, not lg: the panel is locked to one viewport
+        height, so a single stacked column at tablet widths overflows it and
+        clips the description and the visit link straight off the bottom.
+      */}
+      <div className="grid max-h-full w-full max-w-6xl items-center gap-5 md:grid-cols-[1fr_1.05fr] md:gap-9 lg:gap-14">
         {/* Copy */}
-        <div className="order-2 lg:order-1">
+        <div className="order-2 md:order-1">
           <motion.p
             {...rise(0)}
             className="font-mono text-[0.7rem] uppercase tracking-[0.24em]"
@@ -51,13 +56,13 @@ export default function ProjectCard({ project, index, total, active }: Props) {
 
           <motion.h2
             {...rise(1)}
-            className="mt-4 text-[clamp(2.1rem,6vw,4.25rem)] font-light leading-[0.94] tracking-[-0.045em]"
+            className="mt-3 text-[clamp(1.75rem,5vw,4.25rem)] font-light leading-[0.94] tracking-[-0.045em]"
             style={{ color: ink }}
           >
             {project.name}
           </motion.h2>
 
-          <motion.ul {...rise(2)} className="mt-6 flex flex-wrap gap-2">
+          <motion.ul {...rise(2)} className="mt-4 flex flex-wrap gap-2">
             {project.tags.map((tag) => (
               <li
                 key={tag}
@@ -74,13 +79,13 @@ export default function ProjectCard({ project, index, total, active }: Props) {
 
           <motion.p
             {...rise(3)}
-            className="mt-6 max-w-lg text-[0.95rem] leading-relaxed"
+            className="mt-4 max-w-lg text-[0.875rem] leading-relaxed sm:text-[0.95rem]"
             style={{ color: ink, opacity: 0.82 }}
           >
             {project.description}
           </motion.p>
 
-          <motion.div {...rise(4)} className="mt-8">
+          <motion.div {...rise(4)} className="mt-5 sm:mt-7">
             <a
               href={project.liveUrl}
               target="_blank"
@@ -112,19 +117,20 @@ export default function ProjectCard({ project, index, total, active }: Props) {
           target="_blank"
           rel="noopener noreferrer"
           aria-label={`Open ${project.name}`}
-          className="order-1 block overflow-hidden rounded-glass lg:order-2"
+          className="order-1 block overflow-hidden rounded-glass md:order-2"
           style={{
             boxShadow: '0 40px 80px -32px rgba(0,0,0,0.55)',
             border: `1px solid color-mix(in srgb, ${ink} 16%, transparent)`,
           }}
         >
           {project.imagePath ? (
-            <div className="relative aspect-[16/10] w-full">
+            // Height-capped so the stacked layout still fits one viewport.
+            <div className="relative aspect-[16/10] max-h-[26svh] w-full sm:max-h-[30svh] md:max-h-[50svh]">
               <Image
                 src={project.imagePath}
                 alt={`${project.name} interface`}
                 fill
-                sizes="(max-width: 1024px) 90vw, 46vw"
+                sizes="(max-width: 768px) 90vw, 46vw"
                 className="object-cover"
               />
             </div>
@@ -146,7 +152,7 @@ function TypographicCover({ project }: { project: Project }) {
   const { ink, colorDeep } = project;
   return (
     <div
-      className="relative aspect-[16/10] w-full overflow-hidden"
+      className="relative aspect-[16/10] max-h-[26svh] w-full overflow-hidden sm:max-h-[30svh] md:max-h-[50svh]"
       style={{
         background: `radial-gradient(120% 130% at 18% 8%, ${colorDeep} 0%, transparent 62%)`,
       }}

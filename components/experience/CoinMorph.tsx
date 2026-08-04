@@ -41,8 +41,15 @@ export default function CoinMorph({ t, from, to }: Props) {
     'linear-gradient(135deg, rgba(255,255,255,0.42) 0%, rgba(255,255,255,0.06) 34%, rgba(0,0,0,0.28) 62%, rgba(255,255,255,0.14) 100%)';
 
   return (
+    /*
+     * Fixed, not absolute: the morph begins while the hero is still on
+     * screen, before the Experience stage has pinned, so the coin must be
+     * positioned against the viewport rather than that stage. Once the
+     * stage is stuck at top:0 its coordinates and the viewport's coincide,
+     * so the landing point lines up with the path's start exactly.
+     */
     <div
-      className="pointer-events-none absolute"
+      className="pointer-events-none fixed z-30"
       style={{
         left: x,
         top: y,

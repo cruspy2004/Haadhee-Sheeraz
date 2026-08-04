@@ -25,8 +25,7 @@ export const experience: ExperienceEntryData[] = [
     role: 'Backend Engineering Intern',
     company: 'FlyRank AI',
     dates: 'Aug 2026 — Present',
-    description:
-      'Current role. Backend engineering on an AI product — services, APIs, and the data layer underneath them.',
+    description: 'A simple, reliable builder.',
     anchor: 0.15,
     side: 'right',
   },

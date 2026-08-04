@@ -7,16 +7,14 @@ import PathTrail from './PathTrail';
 import CoinMorph from './CoinMorph';
 import ExperienceEntry from './ExperienceEntry';
 import { experience } from './experience.data';
-import { buildSnakePath, measurePath, slice } from '@/lib/animation/path';
+import { buildSnakePath, measurePath } from '@/lib/animation/path';
 import { usePrefersReducedMotion } from '@/lib/animation/useScrollProgress';
 import { useIsomorphicLayoutEffect } from '@/lib/useIsomorphicLayoutEffect';
 
-/** The coin owns the first slice of progress; the comet takes the rest. */
-const MORPH_END = 0.18;
-
 /**
- * PRD §4.3. One scroll-progress value drives the coin morph, the comet and
- * every entry's arrival.
+ * PRD §4.3. The coin morph runs across the hero's scroll-out; the comet and
+ * every entry's arrival run across this section's own range. The two ranges
+ * meet exactly where the hero ends and this section pins.
  *
  * The viewport is held with CSS `position: sticky` rather than a
  * ScrollTrigger pin. Design-doc §7 flags pin jank on low-end mobile
@@ -27,6 +25,7 @@ export default function ExperienceSection() {
   const sectionRef = useRef<HTMLElement | null>(null);
   const stageRef = useRef<HTMLDivElement | null>(null);
   const [progress, setProgress] = useState(0);
+  const [morphRaw, setMorph] = useState(0);
   const [size, setSize] = useState({ w: 0, h: 0 });
   const reduced = usePrefersReducedMotion();
 
@@ -88,6 +87,31 @@ export default function ExperienceSection() {
     return () => st.kill();
   }, []);
 
+  /*
+   * The coin runs on its own range, anchored to the hero rather than to
+   * this section: the morph should begin the instant the visitor starts
+   * scrolling away from the hero, not after the hero has fully cleared and
+   * this section has pinned. The two ranges are contiguous — the hero's
+   * bottom reaching the top of the viewport is exactly when this section
+   * pins — so the coin lands on the path start with no seam.
+   */
+  useEffect(() => {
+    const hero = document.getElementById('hero');
+    if (!hero) return;
+    gsap.registerPlugin(ScrollTrigger);
+
+    const st = ScrollTrigger.create({
+      trigger: hero,
+      start: 'top top',
+      end: 'bottom top',
+      scrub: true,
+      invalidateOnRefresh: true,
+      onUpdate: (self) => setMorph(self.progress),
+    });
+
+    return () => st.kill();
+  }, []);
+
   const narrow = size.w > 0 && size.w < 860;
 
   const { d, length, pointAt } = useMemo(() => {
@@ -97,9 +121,9 @@ export default function ExperienceSection() {
   }, [size.w, size.h, narrow]);
 
   // Reduced motion: the route is simply present and every entry is shown.
-  const head = reduced ? 1 : slice(progress, MORPH_END, 1);
-  const morph = reduced ? 1 : slice(progress, 0, MORPH_END);
+  const head = reduced ? 1 : progress;
 
+  const morph = reduced ? 1 : morphRaw;
   const headPoint = useMemo(() => pointAt(head), [pointAt, head]);
   const pathStart = useMemo(() => pointAt(0), [pointAt]);
 
@@ -121,6 +145,16 @@ export default function ExperienceSection() {
       className="relative h-[520svh]"
       aria-label="Experience"
     >
+      {/* Outside the sticky stage: the coin is viewport-positioned and
+          starts moving while the hero is still on screen. */}
+      {!reduced && size.w > 0 && morph > 0.001 && morph < 1 && (
+        <CoinMorph
+          t={morph}
+          from={{ x: size.w * 0.5, y: size.h * 0.42 }}
+          to={pathStart}
+        />
+      )}
+
       <div
         ref={stageRef}
         className="sticky top-0 h-[100svh] overflow-hidden"
@@ -138,16 +172,8 @@ export default function ExperienceSection() {
               head={head}
               totalLength={length}
               headPoint={headPoint}
-              active={reduced || progress > MORPH_END * 0.82}
+              active={reduced || morph > 0.9}
             />
-
-            {!reduced && morph > 0 && morph < 1 && (
-              <CoinMorph
-                t={morph}
-                from={{ x: size.w * 0.5, y: -size.h * 0.14 }}
-                to={pathStart}
-              />
-            )}
 
             {anchors.map((entry) => (
               <ExperienceEntry
