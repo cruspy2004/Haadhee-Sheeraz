@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Haadhee Sheeraz portfolio: software engineering, growth engineering, AI, backend systems, and creator tools."
+    />
+    <title>Haadhee Sheeraz | Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Pinyon+Script&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="intro" aria-hidden="true">
+      <div class="intro-mark">
+        <span class="script-name">Haadhee Sheeraz</span>
+      </div>
+    </div>
+
+    <nav class="site-nav" aria-label="Primary navigation">
+      <a class="nav-brand" href="#hero" aria-label="Haadhee Sheeraz home">
+        <span>Haadhee Sheeraz</span>
+      </a>
+      <div class="nav-links">
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </nav>
+
+    <main>
+      <section class="hero section" id="hero">
+        <div class="hero-media" aria-hidden="true">
+          <img src="HerosectionImage.png" alt="" />
+          <div class="hero-edge"></div>
+        </div>
+        <div class="hero-copy">
+          <p class="eyebrow">Software engineer | Growth engineer | Builder</p>
+          <h1>Haadhee Sheeraz</h1>
+          <p>
+            I build backend-heavy products, AI content systems, and growth loops
+            that turn scrappy ideas into working software.
+          </p>
+        </div>
+      </section>
+
+      <section class="experience section" id="experience">
+        <div class="coin-stage" aria-hidden="true">
+          <div class="coin">
+            <span>HS</span>
+          </div>
+          <div class="coin-glow"></div>
+        </div>
+
+        <svg class="route" viewBox="0 0 1200 900" role="img" aria-label="Career route">
+          <defs>
+            <linearGradient id="trailGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#ffffff" stop-opacity="0" />
+              <stop offset="55%" stop-color="#c8c9cc" stop-opacity=".55" />
+              <stop offset="100%" stop-color="#ffffff" stop-opacity="1" />
+            </linearGradient>
+          </defs>
+          <path
+            class="route-base"
+            d="M72 708 C236 510 306 744 470 548 S602 178 782 286 S902 602 1126 230"
+          />
+          <path
+            class="route-trail"
+            d="M72 708 C236 510 306 744 470 548 S602 178 782 286 S902 602 1126 230"
+          />
+        </svg>
+
+        <div class="experience-content">
+          <p class="eyebrow">Experience</p>
+          <h2>Built across telecom scale, edtech growth, and AI SaaS.</h2>
+          <div class="timeline" aria-label="Professional experience timeline">
+            <article>
+              <span>May 2025 - Aug 2025</span>
+              <h3>Software Engineering Intern | Wateen Telecom</h3>
+              <p>
+                Worked in an agile PERN team on authentication, database schema,
+                migrations, API creation, testing, lazy loading, and system
+                design for a large B2B telecom brand.
+              </p>
+            </article>
+            <article>
+              <span>Nov 2024 - Jan 2025</span>
+              <h3>Growth Engineer | Leetly</h3>
+              <p>
+                Drove adoption for a mobile DSA learning product through
+                experiments, funnel thinking, and pipeline optimization.
+              </p>
+            </article>
+            <article>
+              <span>Sep 2024 - Nov 2024</span>
+              <h3>Content Engineer | REM / IT Empire</h3>
+              <p>
+                Built content strategy and brand voice for an AI B2B SaaS
+                helping realtors match properties at startup stage.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="projects section" id="projects" aria-label="Featured projects">
+        <div class="project-bg h1-bg active"></div>
+        <div class="project-bg watify-bg"></div>
+
+        <button class="project-arrow prev" type="button" aria-label="Previous project">
+          &lt;
+        </button>
+        <button class="project-arrow next" type="button" aria-label="Next project">
+          &gt;
+        </button>
+
+        <div class="project-track">
+          <article class="project-panel active" data-project="h1">
+            <div class="project-text">
+              <p class="eyebrow">Featured project</p>
+              <h2>H1GROW</h2>
+              <p>
+                Content monetization for creators: helping creators 5x revenue
+                by turning audiences and content into software products.
+              </p>
+              <a class="visit-link" href="#" aria-label="Visit H1GROW site">Visit</a>
+            </div>
+            <a class="project-shot" href="#" aria-label="Open H1GROW project">
+              <img src="Project Images/H1Grow.png" alt="H1GROW monetization landing page" />
+            </a>
+          </article>
+
+          <article class="project-panel" data-project="watify">
+            <div class="project-text">
+              <p class="eyebrow">Featured project</p>
+              <h2>Watify</h2>
+              <p>
+                Internal communications for 5,000+ Wateen employees. I
+                engineered REST and GraphQL APIs, PostgreSQL migrations, JWT
+                authentication, WebSockets, and lazy loading for scale.
+              </p>
+              <a class="visit-link" href="#" aria-label="Visit Watify site">Visit</a>
+            </div>
+            <a class="project-shot" href="#" aria-label="Open Watify project">
+              <img
+                src="Project Images/Screenshot 2026-07-25 095946.png"
+                alt="Watify internal communications login screen"
+              />
+            </a>
+          </article>
+        </div>
+
+        <div class="project-status" aria-live="polite">
+          <span class="dot active"></span>
+          <span class="dot"></span>
+          <span>Swipe, drag, or use arrow keys</span>
+        </div>
+      </section>
+
+      <section class="contact section" id="contact">
+        <div class="contact-shell">
+          <div>
+            <p class="eyebrow">Contact</p>
+            <h2>Let's build something sharp.</h2>
+            <p>
+              Based around NUST SEECS, currently working across backend systems,
+              AI tools, creator infrastructure, and growth experiments.
+            </p>
+          </div>
+          <div class="contact-actions">
+            <a href="mailto:haadheesheeraz2004@gmail.com">Email</a>
+            <a href="tel:+923258660707">Call</a>
+            <a href="#" aria-label="GitHub profile link placeholder">GitHub</a>
+            <a href="#" aria-label="LinkedIn profile link placeholder">LinkedIn</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
