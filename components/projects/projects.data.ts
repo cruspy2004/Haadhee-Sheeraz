@@ -57,8 +57,10 @@ export const projects: Project[] = [
     tags: ['Instagram', 'Content Automation', 'Python', 'OpenAI API'],
     description:
       'An automated content pipeline using Python and the OpenAI API that generates, produces, and schedules short-form technical videos from simple prompts. Grew to 7.5k+ followers and 3M+ views within 2 months, validating pipeline output quality at scale. Covers bite-sized JS content — DSA, JS syntax, new AI tools, and interviews.',
-    color: '#c2477f',
-    colorDeep: '#5a1739',
+    // Darkened from #c2477f, which put the heading at 4.16:1 and the
+    // description at ~3.4:1 — both under the AA floor.
+    color: '#a12f68',
+    colorDeep: '#4b1230',
     ink: '#fdeef5',
     imagePath: '/project-images/javascriptpeter.png',
     liveUrl: 'https://www.instagram.com/javascriptpeter/',
@@ -83,8 +85,11 @@ export const projects: Project[] = [
     tags: ['Java', 'Swing', 'JavaFX', 'Game'],
     description:
       'A compilation game built in Java (Swing/JavaFX). Added responsive memes to classic games, driving a 60% boost in interaction and a 14% higher click-through rate.',
-    color: '#c8862a',
-    colorDeep: '#5c3a0b',
+    // Darkened hard from #c8862a: amber with near-white ink measured
+    // 2.84:1 on the heading and ~2.3:1 on the description — the worst
+    // pairing on the site and effectively unreadable.
+    color: '#7c4f0f',
+    colorDeep: '#3a2405',
     ink: '#fff6e6',
     imagePath: null,
     liveUrl: 'https://github.com/cruspy2004/memetent-memes-and-games-',

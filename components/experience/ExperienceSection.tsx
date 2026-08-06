@@ -142,7 +142,13 @@ export default function ExperienceSection() {
     <section
       id="experience"
       ref={sectionRef}
-      className="relative h-[520svh]"
+      /*
+       * 320svh, down from 520. At 520 this section was 62% of the whole
+       * document while Projects — six shipped projects, the actual point
+       * of the site — got 11%. The path still has room to read; it just
+       * no longer outweighs the work.
+       */
+      className="relative h-[320svh]"
       aria-label="Experience"
     >
       {/* Outside the sticky stage: the coin is viewport-positioned and

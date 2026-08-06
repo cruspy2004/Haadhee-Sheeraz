@@ -78,12 +78,18 @@ export default function PathTrail({
         </filter>
       </defs>
 
-      {/* The complete route, always visible once the section is reached. */}
+      {/*
+        The complete route, always visible once the section is reached.
+        At the design doc's 8%/1.25px this was effectively invisible on a
+        real screen — and it is the central device of the section that
+        occupies most of the page, so it needs to read as a deliberate
+        object rather than a rendering artifact.
+      */}
       <path
         d={d}
         stroke="#c8c9cc"
-        strokeOpacity={0.08}
-        strokeWidth={1.25}
+        strokeOpacity={0.16}
+        strokeWidth={1.5}
         strokeLinecap="round"
       />
 

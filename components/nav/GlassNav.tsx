@@ -7,6 +7,7 @@ import { site } from '@/lib/site';
 
 const LINKS = [
   { href: '#experience', label: 'Experience' },
+  { href: '#skills', label: 'Skills' },
   { href: '#projects', label: 'Projects' },
   { href: '#contact', label: 'Contact' },
 ];
@@ -62,7 +63,7 @@ export default function GlassNav() {
               <li key={l.href}>
                 <a
                   href={l.href}
-                  className="meta rounded-soft px-3 py-1.5 text-silver-dim transition-colors duration-200 hover:bg-white/[0.06] hover:text-silver-bright"
+                  className="tap meta relative flex min-h-[44px] items-center rounded-soft px-3 text-silver-dim transition-colors duration-200 hover:bg-white/[0.06] hover:text-silver-bright"
                 >
                   {l.label}
                 </a>
@@ -73,7 +74,7 @@ export default function GlassNav() {
           <a
             href={site.resume}
             download
-            className="press meta ml-auto whitespace-nowrap rounded-soft border border-white/10 px-3 py-1.5 text-silver-bright hover:bg-white/[0.06]"
+            className="press meta ml-auto flex min-h-[40px] items-center whitespace-nowrap rounded-soft border border-white/10 px-4 text-silver-bright hover:bg-white/[0.06]"
           >
             Résumé
           </a>

@@ -36,9 +36,14 @@ export default function HeroResting() {
         }}
       />
 
-      {/* ~70% of the viewport. Portrait aspect is locked so swapping in a
-          video changes nothing about the layout. */}
-      <div className="relative h-[68svh] w-[min(86vw,42svh)] sm:h-[72svh] sm:w-[min(60vw,44svh)]">
+      {/*
+        Widened from a 42svh cap. The photo was 72% of the viewport's
+        height but only ~25% of its width, so the frame read as a large
+        black field with small elements floating in it rather than a
+        portrait carrying the composition. Aspect stays locked so a video
+        still drops in with no layout change.
+      */}
+      <div className="relative h-[66svh] w-[min(90vw,52svh)] sm:h-[74svh] sm:w-[min(72vw,62svh)]">
         <HeroMedia />
       </div>
 
@@ -65,7 +70,7 @@ export default function HeroResting() {
         <motion.p
           custom={1}
           variants={rise}
-          className="max-w-md text-sm leading-relaxed text-silver-dim"
+          className="max-w-md text-[length:var(--t-body-s)] leading-relaxed text-silver-dim"
         >
           Backend systems at telecom scale, AI content pipelines, and products
           that ship.
@@ -76,7 +81,7 @@ export default function HeroResting() {
           className="mt-2 flex flex-col items-center gap-2"
           aria-hidden="true"
         >
-          <span className="meta text-[0.65rem] tracking-[0.3em]">SCROLL</span>
+          <span className="eyebrow tracking-[0.3em]">SCROLL</span>
           <span className="scroll-line block h-10 w-px bg-gradient-to-b from-silver-faint to-transparent" />
         </motion.div>
       </motion.div>

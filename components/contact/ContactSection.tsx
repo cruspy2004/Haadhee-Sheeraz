@@ -162,7 +162,7 @@ export default function ContactSection() {
               Send message
             </button>
             <p
-              className="meta text-[0.68rem] text-silver-faint"
+              className="meta text-silver-faint"
               aria-live="polite"
             >
               {sent

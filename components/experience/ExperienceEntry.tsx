@@ -63,17 +63,19 @@ export default function ExperienceEntry({
       transition={{ duration: 0.5, ease: EASE_ENTRANCE }}
     >
       <div className={`flex items-center gap-3 ${onRight ? '' : 'justify-end'}`}>
-        <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full border border-white/15 bg-white/[0.04] font-mono text-[0.7rem] text-silver-bright">
+        <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-white/15 bg-white/[0.04] font-mono text-[length:var(--t-meta)] text-silver-bright">
           {entry.number}
         </span>
-        <span className="meta text-silver-faint">{entry.dates}</span>
+        <span className="meta">{entry.dates}</span>
       </div>
 
-      <h3 className="mt-3 text-xl font-normal leading-tight text-silver-bright sm:text-2xl">
+      <h3 className="mt-3 text-[length:var(--t-h3)] font-normal leading-tight text-silver-bright">
         {entry.role}
       </h3>
-      <p className="mt-1 text-base text-silver">{entry.company}</p>
-      <p className="mt-3 text-sm leading-relaxed text-silver-dim">
+      <p className="mt-1 text-[length:var(--t-body)] text-silver">
+        {entry.company}
+      </p>
+      <p className="mt-3 text-[length:var(--t-body-s)] leading-relaxed text-silver-dim">
         {entry.description}
       </p>
     </motion.article>

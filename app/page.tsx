@@ -1,6 +1,7 @@
 import GlassNav from '@/components/nav/GlassNav';
 import HeroResting from '@/components/hero/HeroResting';
 import ExperienceSection from '@/components/experience/ExperienceSection';
+import SkillsBand from '@/components/skills/SkillsBand';
 import PivotTransition from '@/components/pivot/PivotTransition';
 import ProjectsSection from '@/components/projects/ProjectsSection';
 import ContactSection from '@/components/contact/ContactSection';
@@ -16,6 +17,7 @@ export default function Page() {
       <main>
         <HeroResting />
         <ExperienceSection />
+        <SkillsBand />
         <PivotTransition>
           <ProjectsSection />
         </PivotTransition>

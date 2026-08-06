@@ -46,17 +46,23 @@ export default function ProjectCard({ project, index, total, active }: Props) {
       <div className="grid max-h-full w-full max-w-6xl items-center gap-5 md:grid-cols-[1fr_1.05fr] md:gap-9 lg:gap-14">
         {/* Copy */}
         <div className="order-2 md:order-1">
+          {/*
+            De-emphasis is done by mixing toward the panel colour rather
+            than with `opacity`. Opacity silently costs a contrast step on
+            every layer it touches; a mixed colour is an explicit value we
+            can actually measure.
+          */}
           <motion.p
             {...rise(0)}
-            className="font-mono text-[0.7rem] uppercase tracking-[0.24em]"
-            style={{ color: ink, opacity: 0.55 }}
+            className="panel-label"
+            style={{ color: `color-mix(in srgb, ${ink} 72%, ${project.color})` }}
           >
             {String(index + 1).padStart(2, '0')} / {String(total).padStart(2, '0')}
           </motion.p>
 
           <motion.h2
             {...rise(1)}
-            className="mt-3 text-[clamp(1.75rem,5vw,4.25rem)] font-light leading-[0.94] tracking-[-0.045em]"
+            className="mt-3 text-[clamp(2rem,5vw,var(--t-display))] font-light leading-[0.94] tracking-[-0.045em]"
             style={{ color: ink }}
           >
             {project.name}
@@ -66,9 +72,9 @@ export default function ProjectCard({ project, index, total, active }: Props) {
             {project.tags.map((tag) => (
               <li
                 key={tag}
-                className="rounded-full border px-3 py-1 font-mono text-[0.68rem] tracking-[0.06em]"
+                className="rounded-full border px-3 py-1 font-mono text-[length:var(--t-meta)] tracking-[0.06em]"
                 style={{
-                  borderColor: `color-mix(in srgb, ${ink} 26%, transparent)`,
+                  borderColor: `color-mix(in srgb, ${ink} 30%, transparent)`,
                   color: ink,
                 }}
               >
@@ -79,8 +85,8 @@ export default function ProjectCard({ project, index, total, active }: Props) {
 
           <motion.p
             {...rise(3)}
-            className="mt-4 max-w-lg text-[0.875rem] leading-relaxed sm:text-[0.95rem]"
-            style={{ color: ink, opacity: 0.82 }}
+            className="mt-4 max-w-lg text-[length:var(--t-body-s)] leading-relaxed"
+            style={{ color: ink }}
           >
             {project.description}
           </motion.p>
@@ -90,9 +96,9 @@ export default function ProjectCard({ project, index, total, active }: Props) {
               href={project.liveUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="press group inline-flex items-center gap-3 rounded-full border px-5 py-2.5 font-mono text-[0.72rem] uppercase tracking-[0.16em] transition-colors"
+              className="press group inline-flex min-h-[44px] items-center gap-3 rounded-full border px-6 font-mono text-[length:var(--t-meta)] uppercase tracking-[0.16em] transition-colors"
               style={{
-                borderColor: `color-mix(in srgb, ${ink} 34%, transparent)`,
+                borderColor: `color-mix(in srgb, ${ink} 38%, transparent)`,
                 color: ink,
               }}
             >
@@ -102,8 +108,8 @@ export default function ProjectCard({ project, index, total, active }: Props) {
               </span>
             </a>
             <p
-              className="mt-3 font-mono text-[0.68rem] tracking-[0.04em]"
-              style={{ color: ink, opacity: 0.5 }}
+              className="mt-3 font-mono text-[length:var(--t-meta)] tracking-[0.04em]"
+              style={{ color: `color-mix(in srgb, ${ink} 68%, ${project.color})` }}
             >
               {project.linkLabel}
             </p>
@@ -184,20 +190,20 @@ function TypographicCover({ project }: { project: Project }) {
 
       <div className="relative flex h-full flex-col justify-between p-7 sm:p-9">
         <p
-          className="font-mono text-[0.68rem] uppercase tracking-[0.24em]"
-          style={{ color: ink, opacity: 0.6 }}
+          className="panel-label"
+          style={{ color: `color-mix(in srgb, ${ink} 70%, ${project.color})` }}
         >
           {project.linkLabel}
         </p>
         <div>
           <p
-            className="font-mono text-[0.7rem] uppercase tracking-[0.2em]"
-            style={{ color: ink, opacity: 0.55 }}
+            className="panel-label"
+            style={{ color: `color-mix(in srgb, ${ink} 70%, ${project.color})` }}
           >
             {project.tags.join('  ·  ')}
           </p>
           <p
-            className="mt-2 text-2xl font-light tracking-tight sm:text-3xl"
+            className="mt-2 text-[length:var(--t-h2)] font-light tracking-tight"
             style={{ color: ink }}
           >
             {project.name}

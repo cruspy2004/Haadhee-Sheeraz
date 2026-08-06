@@ -217,7 +217,7 @@ export default function ProjectsSection() {
             animate={{ opacity: 0.7, y: 0 }}
             exit={{ opacity: 0, y: -6 }}
             transition={{ duration: 0.5, ease: EASE_ENTRANCE }}
-            className="absolute bottom-7 left-1/2 z-20 -translate-x-1/2 whitespace-nowrap font-mono text-[0.66rem] uppercase tracking-[0.22em]"
+            className="panel-label absolute bottom-7 left-1/2 z-20 -translate-x-1/2 whitespace-nowrap"
             style={{ color: project.ink }}
           >
             Swipe, drag or use ← → · scroll down to continue

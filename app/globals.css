@@ -12,7 +12,11 @@
   --silver: #c8c9cc;
   --silver-bright: #f2f3f5;
   --silver-dim: #8a8c91;
-  --silver-faint: #4a4c52;
+  /* 4.9:1 on --ink, solved rather than eyeballed: AA needs relative
+     luminance >= 0.183 against this background, which puts the channel
+     floor at 0x77. The original #4a4c52 measured 2.37:1 at 11px, and this
+     is the site's most-used label style. */
+  --silver-faint: #7c7e85;
 
   /* The hero photo's key light is warm and top-left; echo it faintly. */
   --keylight: #d8cdbe;
@@ -62,6 +66,25 @@
   }
 }
 
+/*
+  One type scale, used everywhere.
+
+  The build had drifted to fourteen size/weight pairs, six of them between
+  10.4px and 12px — perceptually identical but inconsistent, which is
+  exactly what reads as unresolved. Principle 12: consistency IS the polish.
+
+  Sizes are the only ones any component should reach for.
+*/
+:root {
+  --t-eyebrow: 0.6875rem; /* 11px — uppercase mono labels */
+  --t-meta: 0.8125rem; /*    13px — dates, tags, link labels */
+  --t-body-s: 0.875rem; /*   14px — dense body copy */
+  --t-body: 1rem; /*         16px — body copy */
+  --t-h3: 1.25rem; /*        20px — entry roles */
+  --t-h2: 2rem; /*           32px — section headings */
+  --t-display: 3.5rem; /*    56px — project names */
+}
+
 @layer components {
   .glass {
     background: var(--glass-bg);
@@ -74,7 +97,7 @@
   /* Wide-tracked mono micro-label used for every eyebrow on the site. */
   .eyebrow {
     font-family: var(--font-mono), ui-monospace, monospace;
-    font-size: 0.6875rem;
+    font-size: var(--t-eyebrow);
     letter-spacing: 0.22em;
     text-transform: uppercase;
     color: var(--silver-faint);
@@ -82,9 +105,18 @@
 
   .meta {
     font-family: var(--font-mono), ui-monospace, monospace;
-    font-size: 0.75rem;
-    letter-spacing: 0.08em;
+    font-size: var(--t-meta);
+    letter-spacing: 0.06em;
     color: var(--silver-dim);
+  }
+
+  /* Mono label sitting on a coloured project panel, where colour is set
+     by the panel rather than the token. */
+  .panel-label {
+    font-family: var(--font-mono), ui-monospace, monospace;
+    font-size: var(--t-eyebrow);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
   }
 }
 
@@ -156,6 +188,23 @@
   transition:
     opacity 300ms var(--ease-ambient),
     filter 300ms var(--ease-ambient);
+}
+
+/*
+  Minimum comfortable hit area. Applied via a pseudo-element so a visually
+  small control (a 28px nav link) still takes a 44px target without the
+  layout inflating around it.
+*/
+.tap::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  min-width: 44px;
+  min-height: 44px;
+  width: 100%;
+  height: 100%;
+  transform: translate(-50%, -50%);
 }
 
 /* Principle 1 — squash & stretch, hover/press feedback only. */
