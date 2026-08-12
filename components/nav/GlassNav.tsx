@@ -6,8 +6,8 @@ import { EASE_ENTRANCE } from '@/lib/animation/easings';
 import { site } from '@/lib/site';
 
 const LINKS = [
+  { href: '#education', label: 'Education' },
   { href: '#experience', label: 'Experience' },
-  { href: '#skills', label: 'Skills' },
   { href: '#projects', label: 'Projects' },
   { href: '#contact', label: 'Contact' },
 ];

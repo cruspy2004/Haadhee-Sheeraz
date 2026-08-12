@@ -43,7 +43,10 @@ export default function HeroResting() {
         portrait carrying the composition. Aspect stays locked so a video
         still drops in with no layout change.
       */}
-      <div className="relative h-[66svh] w-[min(90vw,52svh)] sm:h-[74svh] sm:w-[min(72vw,62svh)]">
+      <div
+        id="hero-media"
+        className="relative h-[66svh] w-[min(90vw,52svh)] sm:h-[74svh] sm:w-[min(72vw,62svh)]"
+      >
         <HeroMedia />
       </div>
 
@@ -70,10 +73,9 @@ export default function HeroResting() {
         <motion.p
           custom={1}
           variants={rise}
-          className="max-w-md text-[length:var(--t-body-s)] leading-relaxed text-silver-dim"
+          className="max-w-md text-[length:var(--t-body)] leading-relaxed text-silver"
         >
-          Backend systems at telecom scale, AI content pipelines, and products
-          that ship.
+          A simple, reliable builder.
         </motion.p>
         <motion.div
           custom={2}

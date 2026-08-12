@@ -88,29 +88,33 @@ export default function ExperienceSection() {
   }, []);
 
   /*
-   * The coin runs on its own range, anchored to the hero rather than to
-   * this section: the morph should begin the instant the visitor starts
-   * scrolling away from the hero, not after the hero has fully cleared and
-   * this section has pinned. The two ranges are contiguous — the hero's
-   * bottom reaching the top of the viewport is exactly when this section
-   * pins — so the coin lands on the path start with no seam.
+   * COIN MORPH — DISABLED, PENDING REVISIT.
+   *
+   * The hero-photo-to-coin morph is switched off rather than deleted: the
+   * component, its easing and its S-curve maths are all still in
+   * CoinMorph.tsx, and re-enabling is a matter of restoring this trigger
+   * and the render block below.
+   *
+   * It ran on its own range anchored to the hero (top top → bottom top) so
+   * the morph began the instant the visitor scrolled away from the hero,
+   * contiguous with this section's own range.
    */
-  useEffect(() => {
-    const hero = document.getElementById('hero');
-    if (!hero) return;
-    gsap.registerPlugin(ScrollTrigger);
-
-    const st = ScrollTrigger.create({
-      trigger: hero,
-      start: 'top top',
-      end: 'bottom top',
-      scrub: true,
-      invalidateOnRefresh: true,
-      onUpdate: (self) => setMorph(self.progress),
-    });
-
-    return () => st.kill();
-  }, []);
+  // useEffect(() => {
+  //   const hero = document.getElementById('hero');
+  //   if (!hero) return;
+  //   gsap.registerPlugin(ScrollTrigger);
+  //
+  //   const st = ScrollTrigger.create({
+  //     trigger: hero,
+  //     start: 'top top',
+  //     end: 'bottom top',
+  //     scrub: true,
+  //     invalidateOnRefresh: true,
+  //     onUpdate: (self) => setMorph(self.progress),
+  //   });
+  //
+  //   return () => st.kill();
+  // }, []);
 
   const narrow = size.w > 0 && size.w < 860;
 
@@ -123,9 +127,7 @@ export default function ExperienceSection() {
   // Reduced motion: the route is simply present and every entry is shown.
   const head = reduced ? 1 : progress;
 
-  const morph = reduced ? 1 : morphRaw;
   const headPoint = useMemo(() => pointAt(head), [pointAt, head]);
-  const pathStart = useMemo(() => pointAt(0), [pointAt]);
 
   const anchors = useMemo(
     () =>
@@ -151,8 +153,10 @@ export default function ExperienceSection() {
       className="relative h-[320svh]"
       aria-label="Experience"
     >
-      {/* Outside the sticky stage: the coin is viewport-positioned and
-          starts moving while the hero is still on screen. */}
+      {/* COIN MORPH — DISABLED, PENDING REVISIT. See the note above.
+          Sat outside the sticky stage because the coin is viewport-
+          positioned and began moving while the hero was still on screen.
+
       {!reduced && size.w > 0 && morph > 0.001 && morph < 1 && (
         <CoinMorph
           t={morph}
@@ -160,6 +164,7 @@ export default function ExperienceSection() {
           to={pathStart}
         />
       )}
+      */}
 
       <div
         ref={stageRef}
@@ -178,7 +183,7 @@ export default function ExperienceSection() {
               head={head}
               totalLength={length}
               headPoint={headPoint}
-              active={reduced || morph > 0.9}
+              active={true}
             />
 
             {anchors.map((entry) => (
