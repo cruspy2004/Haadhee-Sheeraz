@@ -6,9 +6,17 @@ import { EASE_ENTRANCE, STAGGER } from '@/lib/animation/easings';
 import { site } from '@/lib/site';
 
 /**
- * PRD §4.1 resting state. The photo is the dominant element (~70% of the
- * viewport), edge-dissolved into the page, with the wordmark at logo scale
- * above it and a slow breathing light on the photo's edge.
+ * Hero.
+ *
+ * The portrait is anchored to the BOTTOM of the viewport rather than
+ * centred in the flow. Because the frame is taller than the source image
+ * is wide-to-tall, object-cover scales the image to fill the frame's
+ * height and crops horizontally only — so the full height of the photo is
+ * always shown, and bottom-aligning the frame puts the bottom of the image
+ * exactly on the bottom of the screen.
+ *
+ * The copy then overlays the lower portion (which is the dark jacket) with
+ * a scrim behind it, instead of sitting below the photo and pushing it up.
  */
 export default function HeroResting() {
   const rise = {
@@ -23,38 +31,33 @@ export default function HeroResting() {
   return (
     <section
       id="hero"
-      className="relative flex min-h-[100svh] flex-col items-center justify-center overflow-hidden px-6"
+      className="relative min-h-[100svh] overflow-hidden"
     >
       {/* Ambient breathing light behind the subject — straight-ahead motion
           (principle 4), so it never reads as a visible loop. */}
       <div
         aria-hidden="true"
-        className="hero-breath pointer-events-none absolute left-1/2 top-1/2 h-[78vh] w-[78vh] -translate-x-1/2 -translate-y-1/2 rounded-full"
+        className="hero-breath pointer-events-none absolute bottom-[18svh] left-1/2 h-[78svh] w-[78svh] -translate-x-1/2 rounded-full"
         style={{
           background:
             'radial-gradient(circle, rgba(216,205,190,0.10) 0%, rgba(200,201,204,0.045) 38%, transparent 68%)',
         }}
       />
 
-      {/*
-        Widened from a 42svh cap. The photo was 72% of the viewport's
-        height but only ~25% of its width, so the frame read as a large
-        black field with small elements floating in it rather than a
-        portrait carrying the composition. Aspect stays locked so a video
-        still drops in with no layout change.
-      */}
+      {/* Bottom-aligned, horizontally centred. Aspect stays locked so a
+          video still drops in with no layout change. */}
       <div
         id="hero-media"
-        className="relative h-[66svh] w-[min(90vw,52svh)] sm:h-[74svh] sm:w-[min(72vw,62svh)]"
+        className="absolute bottom-0 left-1/2 h-[86svh] w-[min(94vw,72svh)] -translate-x-1/2"
       >
         <HeroMedia />
       </div>
 
-      {/* Wordmark sits over the upper third of the photo. Centred with
-          inset rather than a translate class — Framer owns `transform` on
-          anything it animates and would overwrite it. */}
+      {/* Wordmark overlaps the top of the hair. Centred with inset rather
+          than a translate class — Framer owns `transform` on anything it
+          animates and would overwrite it. */}
       <motion.h1
-        className="pointer-events-none absolute inset-x-0 top-[14%] text-center font-script text-[clamp(2.6rem,7.5vw,5.5rem)] font-normal leading-none tracking-normal text-silver-bright"
+        className="pointer-events-none absolute inset-x-0 top-[9%] px-4 text-center font-script text-[clamp(2.6rem,7.5vw,5.5rem)] font-normal leading-none tracking-normal text-silver-bright"
         initial={{ opacity: 0, y: 14 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.9, ease: EASE_ENTRANCE }}
@@ -62,8 +65,18 @@ export default function HeroResting() {
         {site.name}
       </motion.h1>
 
+      {/* Scrim so the copy stays legible over the portrait's lower half. */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-[34svh]"
+        style={{
+          background:
+            'linear-gradient(to top, rgba(5,5,6,0.92) 0%, rgba(5,5,6,0.72) 38%, transparent 100%)',
+        }}
+      />
+
       <motion.div
-        className="absolute bottom-10 left-0 right-0 flex flex-col items-center gap-3 px-6 text-center"
+        className="absolute inset-x-0 bottom-9 flex flex-col items-center gap-3 px-6 text-center"
         initial="hidden"
         animate="show"
       >
@@ -80,11 +93,11 @@ export default function HeroResting() {
         <motion.div
           custom={2}
           variants={rise}
-          className="mt-2 flex flex-col items-center gap-2"
+          className="mt-1 flex flex-col items-center gap-2"
           aria-hidden="true"
         >
           <span className="eyebrow tracking-[0.3em]">SCROLL</span>
-          <span className="scroll-line block h-10 w-px bg-gradient-to-b from-silver-faint to-transparent" />
+          <span className="scroll-line block h-9 w-px bg-gradient-to-b from-silver-faint to-transparent" />
         </motion.div>
       </motion.div>
 
@@ -96,15 +109,15 @@ export default function HeroResting() {
           0%,
           100% {
             opacity: 0.75;
-            transform: translate(-50%, -50%) scale(1);
+            transform: translateX(-50%) scale(1);
           }
           43% {
             opacity: 1;
-            transform: translate(-50%, -50%) scale(1.045);
+            transform: translateX(-50%) scale(1.045);
           }
           71% {
             opacity: 0.86;
-            transform: translate(-50%, -50%) scale(1.015);
+            transform: translateX(-50%) scale(1.015);
           }
         }
         .scroll-line {

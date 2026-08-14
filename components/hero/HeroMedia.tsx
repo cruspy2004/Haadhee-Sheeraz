@@ -10,11 +10,22 @@ import Image from 'next/image';
 const HERO_VIDEO_SRC: string | null = null;
 
 /**
- * The photo already sits on crushed black. The radial mask feathers its
- * rectangular crop into the page so no hard edge is ever visible.
+ * Edge treatment.
+ *
+ * The previous mask was radial-gradient(72% 62% at 50% 44%) — an ellipse
+ * narrower than the frame, which cut the shoulders off and faded the
+ * bottom of the portrait out well before the container ended. That, not
+ * the object-fit crop, was what made it look like most of the photo was
+ * missing.
+ *
+ * This one is deliberately generous: it reaches past the frame on every
+ * side (120% x 110%) and is centred low, so only the far corners feather
+ * and the bottom edge stays fully opaque — the portrait can run all the
+ * way down to the bottom of the screen. The source image is already on
+ * pure black, so the sides blend into the page on their own.
  */
 const EDGE_MASK =
-  'radial-gradient(72% 62% at 50% 44%, #000 42%, rgba(0,0,0,0.85) 62%, rgba(0,0,0,0.25) 84%, transparent 100%)';
+  'radial-gradient(120% 110% at 50% 55%, #000 70%, rgba(0,0,0,0.6) 88%, transparent 100%)';
 
 export default function HeroMedia() {
   return (
@@ -40,7 +51,7 @@ export default function HeroMedia() {
           alt="Haadhee Sheeraz"
           fill
           priority
-          sizes="(max-width: 768px) 90vw, 46vw"
+          sizes="(max-width: 768px) 94vw, 74vh"
           className="object-cover object-center"
         />
       )}
