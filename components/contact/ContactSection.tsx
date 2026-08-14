@@ -4,31 +4,69 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { EASE_ENTRANCE, STAGGER } from '@/lib/animation/easings';
 import { site } from '@/lib/site';
+import JackContact from '@/components/jack/JackContact';
 
 /**
  * PRD §4.6 — same glass treatment as the nav, real contact details, résumé
- * download, and a simple form.
+ * download, and a working form.
  *
- * The form composes a pre-filled message in the visitor's mail client
- * rather than posting to a service, so there is no backend, no third-party
- * dependency and no secret to leak. The address is also shown in plain
- * text directly above it, so anyone without a configured mail client can
- * still copy it.
+ * Submissions POST to FormSubmit, which relays them to `site.email`. It was
+ * chosen over Formspree/Resend because it needs no account, no dashboard
+ * and no API key — nothing secret ends up in the repo — and over the
+ * previous `mailto:` handler because that silently did nothing for anyone
+ * without a configured desktop mail client, which is most visitors.
+ *
+ * ONE-TIME STEP: the very first submission triggers a confirmation email
+ * to `site.email`. Click the link in it once and the endpoint is live
+ * forever after. Until then nothing is delivered.
+ *
+ * If the request fails for any reason the UI falls back to a prefilled
+ * mailto link rather than losing the message.
  */
+const ENDPOINT = `https://formsubmit.co/ajax/${site.email}`;
+
+type Status = 'idle' | 'sending' | 'sent' | 'error';
+
 export default function ContactSection() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
-  const [sent, setSent] = useState(false);
+  const [status, setStatus] = useState<Status>('idle');
 
-  const onSubmit = (e: React.FormEvent) => {
+  const mailtoFallback = `mailto:${site.email}?subject=${encodeURIComponent(
+    `Portfolio enquiry — ${name || 'Hello'}`
+  )}&body=${encodeURIComponent(`${message}\n\n—\n${name}\n${email}`.trim())}`;
+
+  const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const subject = encodeURIComponent(`Portfolio enquiry — ${name || 'Hello'}`);
-    const body = encodeURIComponent(
-      `${message}\n\n—\n${name}\n${email}`.trim()
-    );
-    window.location.href = `mailto:${site.email}?subject=${subject}&body=${body}`;
-    setSent(true);
+    setStatus('sending');
+
+    try {
+      const res = await fetch(ENDPOINT, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          message,
+          _subject: `Portfolio enquiry — ${name || 'Hello'}`,
+          // Honeypot: bots fill hidden fields, humans never see this one.
+          _honey: '',
+          _template: 'table',
+        }),
+      });
+
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      setStatus('sent');
+      setName('');
+      setEmail('');
+      setMessage('');
+    } catch {
+      setStatus('error');
+    }
   };
 
   const rise = (i: number) => ({
@@ -157,22 +195,43 @@ export default function ContactSection() {
             </div>
             <button
               type="submit"
-              className="press meta w-full rounded-soft border border-white/15 bg-white/[0.07] px-4 py-3 uppercase tracking-[0.18em] text-silver-bright hover:bg-white/[0.12]"
+              disabled={status === 'sending' || status === 'sent'}
+              className="press meta w-full rounded-soft border border-white/15 bg-white/[0.07] px-4 py-3 uppercase tracking-[0.18em] text-silver-bright transition hover:bg-white/[0.12] disabled:opacity-50"
             >
-              Send message
+              {status === 'sending'
+                ? 'Sending…'
+                : status === 'sent'
+                  ? 'Sent ✓'
+                  : 'Send message'}
             </button>
-            <p
-              className="meta text-silver-faint"
-              aria-live="polite"
-            >
-              {sent
-                ? 'Opening your mail app — press send there to deliver it.'
-                : 'Opens in your mail app, pre-filled and ready to send.'}
+
+            <p className="meta text-silver-faint" aria-live="polite">
+              {status === 'sent' ? (
+                <>Message sent. I&rsquo;ll get back to you.</>
+              ) : status === 'error' ? (
+                <>
+                  Couldn&rsquo;t send from here.{' '}
+                  <a
+                    href={mailtoFallback}
+                    className="text-silver-bright underline decoration-white/30 underline-offset-4"
+                  >
+                    Open it in your mail app instead
+                  </a>
+                  , or write to {site.email}.
+                </>
+              ) : (
+                <>Goes straight to my inbox.</>
+              )}
             </p>
           </motion.form>
         </div>
 
-        <div className="mt-12 flex flex-col gap-2 border-t border-white/[0.07] pt-6 sm:flex-row sm:items-center sm:justify-between">
+        {/* Jack, delivering the nudge. */}
+        <div className="mt-10">
+          <JackContact />
+        </div>
+
+        <div className="mt-8 flex flex-col gap-2 border-t border-white/[0.07] pt-6 sm:flex-row sm:items-center sm:justify-between">
           {/* Static rather than new Date(): the server and client can sit
               on opposite sides of a year boundary, which hydrates as a
               mismatch. */}

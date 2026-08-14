@@ -14,16 +14,23 @@ import SmoothScroll from '@/components/providers/SmoothScroll';
  * To update a face: re-download the woff2 from Google Fonts into
  * /public/fonts and keep the filename.
  */
+/*
+ * Wordmark face. BDO Grotesk is a commercial Atipo Foundry release, so
+ * this is Schibsted Grotesk — the closest free neo-grotesque in
+ * proportion and aperture. Swapping to the real thing later is a matter
+ * of dropping the woff2 in and changing this one path.
+ */
 const script = localFont({
   src: [
-    { path: '../public/fonts/pinyon-script-400-latin.woff2', weight: '400', style: 'normal' },
+    {
+      path: '../public/fonts/schibsted-grotesk-400-900-latin.woff2',
+      weight: '400 900',
+      style: 'normal',
+    },
   ],
   variable: '--font-script',
   display: 'swap',
-  // Pinyon Script is very wide and light; this keeps the fallback swap
-  // from shifting layout noticeably.
-  adjustFontFallback: 'Times New Roman',
-  fallback: ['cursive'],
+  fallback: ['system-ui', 'sans-serif'],
 });
 
 const sans = localFont({

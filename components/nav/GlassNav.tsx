@@ -51,7 +51,7 @@ export default function GlassNav() {
         >
           <a
             href="#hero"
-            className="whitespace-nowrap font-script text-lg leading-none text-silver-bright transition-opacity hover:opacity-70 sm:text-xl"
+            className="whitespace-nowrap font-script text-[0.95rem] font-semibold uppercase leading-none tracking-[-0.02em] text-silver-bright transition-opacity hover:opacity-70 sm:text-base"
           >
             {site.name}
           </a>

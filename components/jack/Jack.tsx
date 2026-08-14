@@ -27,7 +27,6 @@ type Phase =
   | 'jumpToHead'
   | 'crossHead'
   | 'dropOff'
-  | 'runOut'
   | 'gone';
 
 type Runtime = {
@@ -200,13 +199,10 @@ export default function Jack() {
             s.clipStart = now;
             s.landedAt = now;
           }
-          // Missed the platform entirely — fall back to the ground.
-          if (s.y >= s.ground) {
-            s.y = s.ground;
-            s.vy = 0;
-            s.phase = 'runOut';
-            s.clip = 'run';
-            s.clipStart = now;
+          // Missed the platform entirely — keep falling and exit below.
+          if (s.y > window.innerHeight + DISPLAY) {
+            s.phase = 'gone';
+            setInteractive(false);
           }
           break;
         }
@@ -228,30 +224,21 @@ export default function Jack() {
           break;
         }
 
+        /*
+         * Off the head and straight down, out through the bottom of the
+         * screen. There is deliberately no ground collision and no run-off
+         * here: the jump simply never lands, which is what sells him
+         * leaving the scene rather than wandering to the corner.
+         */
         case 'dropOff': {
           s.vy += GRAVITY * dt;
           s.y += s.vy * dt;
-          s.x += RUN_SPEED * dt;
+          // A small forward carry so it reads as a hop off the edge, not
+          // a trapdoor — but nothing like a run.
+          s.x += HEAD_RUN_SPEED * 0.35 * dt;
           s.clip = s.vy > 60 ? 'fall' : 'apex';
 
-          if (s.y >= s.ground) {
-            s.y = s.ground;
-            s.vy = 0;
-            s.phase = 'runOut';
-            s.clip = 'land';
-            s.clipStart = now;
-            s.landedAt = now;
-          }
-          break;
-        }
-
-        case 'runOut': {
-          if (s.clip === 'land' && now - s.landedAt > LAND_MS) {
-            s.clip = 'run';
-            s.clipStart = now;
-          }
-          if (s.clip === 'run') s.x += RUN_SPEED * dt;
-          if (s.x > window.innerWidth + DISPLAY) {
+          if (s.y > window.innerHeight + DISPLAY) {
             s.phase = 'gone';
             setInteractive(false);
           }

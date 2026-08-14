@@ -19,7 +19,10 @@ const config: Config = {
         },
       },
       fontFamily: {
-        script: ['var(--font-script)', 'cursive'],
+        // Wordmark face. Named `script` for historical reasons — it was
+        // Pinyon Script before the grotesk swap — and kept so the class
+        // name stays stable across the codebase.
+        script: ['var(--font-script)', 'system-ui', 'sans-serif'],
         sans: ['var(--font-sans)', 'system-ui', 'sans-serif'],
       },
       borderRadius: {

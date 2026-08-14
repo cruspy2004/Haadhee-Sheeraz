@@ -57,7 +57,7 @@ export default function HeroResting() {
           than a translate class — Framer owns `transform` on anything it
           animates and would overwrite it. */}
       <motion.h1
-        className="pointer-events-none absolute inset-x-0 top-[9%] px-4 text-center font-script text-[clamp(2.6rem,7.5vw,5.5rem)] font-normal leading-none tracking-normal text-silver-bright"
+        className="pointer-events-none absolute inset-x-0 top-[9%] px-4 text-center font-script text-[clamp(2rem,6vw,4.25rem)] font-semibold uppercase leading-none tracking-[-0.035em] text-silver-bright"
         initial={{ opacity: 0, y: 14 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.9, ease: EASE_ENTRANCE }}
