@@ -80,6 +80,35 @@ export const CLIPS = {
 
 export type ClipName = keyof typeof CLIPS;
 
+/**
+ * Picks the frame for a clip at a given elapsed time, in milliseconds.
+ *
+ * Guards two things that both produce `undefined` and crash the
+ * destructure at the call site:
+ *
+ * 1. NEGATIVE ELAPSED. requestAnimationFrame's timestamp is the moment the
+ *    frame *began*, so a performance.now() taken inside a scroll or resize
+ *    handler during that same frame is LATER than it. Storing that as the
+ *    clip's start makes `now - start` negative, and JavaScript's % returns
+ *    a negative remainder for negative operands — so frames[-2].
+ * 2. NaN, from a start time that was never set.
+ *
+ * The modulo is Euclidean, so the result is always a valid index.
+ */
+export function frameAt(clip: Clip, elapsedMs: number): [number, number] {
+  const n = clip.frames.length;
+  if (n === 0) return [0, 0];
+
+  const raw = Math.floor((Math.max(0, elapsedMs) / 1000) * clip.fps);
+  if (!Number.isFinite(raw)) return clip.frames[0] as [number, number];
+
+  const i = clip.loop
+    ? ((raw % n) + n) % n
+    : Math.min(raw, n - 1);
+
+  return (clip.frames[i] ?? clip.frames[0]) as [number, number];
+}
+
 /*
  * Physics. Units are CSS pixels and seconds.
  *

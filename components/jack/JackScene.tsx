@@ -8,6 +8,7 @@ import {
   RUN_SPEED,
   ROWS,
   SHEET_SRC,
+  frameAt,
   type ClipName,
 } from './jack.config';
 
@@ -79,7 +80,10 @@ export default function JackScene({
         st.current.width = r.width;
         st.current.stopX = r.width * stopAt;
         st.current.phase = 'running';
-        st.current.clipStart = performance.now();
+        // clipStart is deliberately left for the loop to set from its own
+        // rAF timestamp — see frameAt() on why mixing the two clocks here
+        // produces a negative elapsed time.
+        st.current.clipStart = -1;
       }
     };
     check();
@@ -103,6 +107,10 @@ export default function JackScene({
       const s = st.current;
       const dt = Math.min((now - last) / 1000, 1 / 30);
       last = now;
+
+      // Adopt this frame's clock the first time we run after a handler
+      // asked for a clip change.
+      if (s.clipStart < 0) s.clipStart = now;
 
       if (s.phase === 'running') {
         s.x += RUN_SPEED * dt;
@@ -141,10 +149,7 @@ export default function JackScene({
         if (s.x > s.width + DISPLAY) s.phase = 'gone';
       }
 
-      const clip = CLIPS[s.clip];
-      const i =
-        Math.floor(((now - s.clipStart) / 1000) * clip.fps) % clip.frames.length;
-      const [row, col] = clip.frames[i];
+      const [row, col] = frameAt(CLIPS[s.clip], now - s.clipStart);
 
       dog.style.transform = `translate3d(${Math.round(s.x)}px, 0, 0)`;
       dog.style.backgroundPosition = `${-col * DISPLAY}px ${-row * DISPLAY}px`;
