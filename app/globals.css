@@ -92,8 +92,13 @@
 
   /* ── THE BIG NAME (hero heading) ────────────────────────────────
      `top` is measured from the top of the screen. Smaller = higher.
-     `size` is clamp(minimum, scales-with-width, maximum).          */
-  --hero-name-top: 9%;
+     `size` is clamp(minimum, scales-with-width, maximum).
+
+     Written relative to the nav rather than as a plain % so it always
+     clears it — the nav is a fixed pixel height, so a percentage that
+     looked fine on one screen collided with it on another. Raise or
+     lower the 4.5rem to move the name.                              */
+  --hero-name-top: calc(var(--nav-top) + 4.5rem);
   --hero-name-size: clamp(2rem, 6vw, 4.25rem);
   --hero-name-tracking: -0.035em;
 
@@ -115,7 +120,7 @@
   :root {
     --hero-photo-height: 66svh;
     --hero-photo-max-width: 90vw;
-    --hero-name-top: 7%;
+    --hero-name-top: calc(var(--nav-top) + 3.75rem);
     --hero-copy-bottom: 1.5rem;
     --nav-top: 1rem;
   }

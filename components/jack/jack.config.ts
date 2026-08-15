@@ -131,12 +131,26 @@ export const LAND_MS = 130;
 /** Delay before Jack first appears, in ms. */
 export const GREET_DELAY = 1600;
 
-/**
- * The head platform, expressed as fractions of the hero media frame rather
- * than pixels, so it survives any resize or re-crop of the portrait.
- */
+/* ══════════════════════════════════════════════════════════════════
+   ⬇⬇⬇  JACK'S LANDING SPOT — EDIT HERE  ⬇⬇⬇
+
+   Where Jack lands when he jumps the portrait. The fractions are of the
+   hero photo's frame, not the screen, so they hold at any window size.
+
+   If he lands too LOW (sunk into the hair):  make nudgeY MORE negative
+   If he lands too HIGH (floating above):     make nudgeY MORE positive
+   If he lands too far left/right:            adjust leftFrac / rightFrac
+   ══════════════════════════════════════════════════════════════════ */
 export const HEAD = {
-  topFrac: 0.17, // y of the top of the hair
-  leftFrac: 0.3, // x where the skull becomes standable
+  /** Top of the hair, as a fraction down the photo frame. */
+  topFrac: 0.17,
+  /** Where the skull becomes wide enough to stand on. */
+  leftFrac: 0.3,
+  /** Where it stops being wide enough. */
   rightFrac: 0.72,
+  /** Pixel nudge. Negative = he stands higher. */
+  nudgeY: -10,
 };
+/* ══════════════════════════════════════════════════════════════════
+   ⬆⬆⬆  END JACK'S LANDING SPOT  ⬆⬆⬆
+   ══════════════════════════════════════════════════════════════════ */

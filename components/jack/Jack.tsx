@@ -93,7 +93,8 @@ export default function Jack() {
     const r = media?.getBoundingClientRect();
 
     const ground = (r ? r.bottom : vh * 0.86) - DISPLAY;
-    const headTop = (r ? r.top + r.height * HEAD.topFrac : vh * 0.3) - DISPLAY;
+    const headTop =
+      (r ? r.top + r.height * HEAD.topFrac : vh * 0.3) - DISPLAY + HEAD.nudgeY;
     const headLeft = r ? r.left + r.width * HEAD.leftFrac : vw * 0.4;
     const headRight = r ? r.left + r.width * HEAD.rightFrac : vw * 0.6;
 

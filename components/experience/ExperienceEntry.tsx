@@ -63,6 +63,14 @@ export default function ExperienceEntry({
         animate={{
           opacity: current ? 1 : 0,
           y: current ? 0 : 14,
+          /*
+           * Explicitly cleared, not omitted. `size` starts at 0 so the
+           * first render is always the wide branch, which applies
+           * blur(4px) while unarrived. Framer does not reset a property
+           * you stop passing it, so dropping `filter` here left every
+           * entry permanently blurred once the layout switched to narrow.
+           */
+          filter: 'blur(0px)',
         }}
         transition={{ duration: 0.42, ease: EASE_ENTRANCE }}
         aria-hidden={!current}
