@@ -113,7 +113,8 @@ export default function Jack() {
     setShowBubble(false);
     rt.current.phase = 'runToJump';
     rt.current.clip = 'run';
-    rt.current.clipStart = performance.now();
+    // -1 means "adopt the next rAF timestamp"; see frameAt().
+    rt.current.clipStart = -1;
   }, []);
 
   useEffect(() => {
@@ -129,7 +130,7 @@ export default function Jack() {
       vy: 0,
       facing: 1,
       clip: 'idle',
-      clipStart: performance.now(),
+      clipStart: -1,
       landedAt: 0,
       ...m,
     };
@@ -138,7 +139,7 @@ export default function Jack() {
       if (!rt.current) return;
       rt.current.phase = 'entering';
       rt.current.clip = 'run';
-      rt.current.clipStart = performance.now();
+      rt.current.clipStart = -1;
     }, GREET_DELAY);
 
     const onResize = () => {
