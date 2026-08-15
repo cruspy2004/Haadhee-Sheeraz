@@ -16,6 +16,7 @@ import {
   ROWS,
   RUN_SPEED,
   SHEET_SRC,
+  frameAt,
   type ClipName,
 } from './jack.config';
 
@@ -27,6 +28,8 @@ type Phase =
   | 'jumpToHead'
   | 'crossHead'
   | 'dropOff'
+  /** Scrolled past without being clicked — trots back off the left. */
+  | 'dismissed'
   | 'gone';
 
 type Runtime = {
@@ -142,8 +145,37 @@ export default function Jack() {
       if (!rt.current) return;
       Object.assign(rt.current, measure());
     };
+
+    /*
+     * He is position:fixed, so without this he stays welded to the screen
+     * for the whole page — following the visitor into every section below.
+     * If the hero scrolls away and he was never clicked, he trots back off
+     * the left and does not return.
+     */
+    const onScroll = () => {
+      const s = rt.current;
+      if (!s) return;
+      onResize();
+
+      const hero = document.getElementById('hero');
+      if (!hero) return;
+      const gone = hero.getBoundingClientRect().bottom < window.innerHeight * 0.4;
+
+      const idlePhase =
+        s.phase === 'waiting' || s.phase === 'entering' || s.phase === 'greeting';
+
+      if (gone && idlePhase) {
+        s.phase = 'dismissed';
+        s.facing = -1;
+        s.clip = 'run';
+        s.clipStart = -1;
+        setShowBubble(false);
+        setInteractive(false);
+      }
+    };
+
     window.addEventListener('resize', onResize);
-    window.addEventListener('scroll', onResize, { passive: true });
+    window.addEventListener('scroll', onScroll, { passive: true });
 
     let last = performance.now();
 
@@ -155,6 +187,10 @@ export default function Jack() {
       // Clamp dt so a backgrounded tab does not teleport him on return.
       const dt = Math.min((now - last) / 1000, 1 / 30);
       last = now;
+
+      // Adopt this frame's clock when a handler asked for a clip change,
+      // rather than mixing rAF's timestamp with performance.now().
+      if (s.clipStart < 0) s.clipStart = now;
 
       switch (s.phase) {
         case 'entering': {
@@ -244,16 +280,17 @@ export default function Jack() {
           }
           break;
         }
+
+        case 'dismissed': {
+          s.x -= RUN_SPEED * dt;
+          s.clip = 'run';
+          if (s.x < -DISPLAY * 2) s.phase = 'gone';
+          break;
+        }
       }
 
       /* ---- render ---- */
-      const clip = CLIPS[s.clip];
-      const elapsed = (now - s.clipStart) / 1000;
-      const total = clip.frames.length;
-      const i = clip.loop
-        ? Math.floor(elapsed * clip.fps) % total
-        : Math.min(Math.floor(elapsed * clip.fps), total - 1);
-      const [row, col] = clip.frames[i];
+      const [row, col] = frameAt(CLIPS[s.clip], now - s.clipStart);
 
       // Squash release on touchdown — the only non-physics flourish.
       const sinceLand = now - s.landedAt;
@@ -275,7 +312,7 @@ export default function Jack() {
       cancelAnimationFrame(rafRef.current);
       window.clearTimeout(enterTimer);
       window.removeEventListener('resize', onResize);
-      window.removeEventListener('scroll', onResize);
+      window.removeEventListener('scroll', onScroll);
     };
   }, [ready, measure]);
 
