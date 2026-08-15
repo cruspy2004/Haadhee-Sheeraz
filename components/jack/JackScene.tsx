@@ -166,7 +166,8 @@ export default function JackScene({
   return (
     <div
       ref={wrapRef}
-      className="pointer-events-none relative h-[86px] w-full overflow-hidden"
+      /* Taller on phones so a wrapped two-line bubble has somewhere to go. */
+      className="pointer-events-none relative h-[132px] w-full overflow-hidden sm:h-[86px]"
       aria-hidden="true"
     >
       <div
@@ -186,8 +187,12 @@ export default function JackScene({
 
       {line >= 0 && lines[line] && (
         <p
-          className="jack-line meta absolute bottom-[46px]"
-          style={{ left: `calc(${stopAt * 100}% + ${DISPLAY - 8}px)` }}
+          className="jack-line meta"
+          style={
+            {
+              '--jack-bubble-left': `calc(${stopAt * 100}% + ${DISPLAY - 8}px)`,
+            } as React.CSSProperties
+          }
           key={line}
         >
           {lines[line]}
@@ -196,26 +201,53 @@ export default function JackScene({
 
       <style jsx>{`
         .jack-line {
+          position: absolute;
           background: var(--silver-bright);
           color: var(--ink);
           padding: 7px 12px;
           border-radius: 10px;
-          white-space: nowrap;
-          max-width: 60vw;
-          overflow: hidden;
-          text-overflow: ellipsis;
           animation: jack-say-in 260ms cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        /*
+          Phones first. Anchoring the bubble beside Jack pushed it straight
+          off the right edge — his lines were being clipped mid-sentence.
+          Here it spans the container instead and wraps, sitting above him.
+        */
+        .jack-line {
+          left: 8px;
+          right: 8px;
+          bottom: 54px;
+          white-space: normal;
+          line-height: 1.45;
         }
         .jack-line::after {
           content: '';
           position: absolute;
-          left: -4px;
-          bottom: 10px;
+          left: 26px;
+          bottom: -5px;
           width: 10px;
           height: 10px;
           background: var(--silver-bright);
           transform: rotate(45deg);
           border-radius: 2px;
+        }
+
+        /* Roomy screens: back beside him, on one line. */
+        @media (min-width: 641px) {
+          .jack-line {
+            left: var(--jack-bubble-left);
+            right: auto;
+            bottom: 46px;
+            white-space: nowrap;
+            max-width: min(420px, 46vw);
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+          .jack-line::after {
+            left: -4px;
+            bottom: 10px;
+          }
         }
         @keyframes jack-say-in {
           from {

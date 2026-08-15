@@ -25,7 +25,8 @@ export const experience: ExperienceEntryData[] = [
     role: 'Backend Engineering Intern',
     company: 'FlyRank AI',
     dates: 'Aug 2026 — Present',
-    description: 'Building backend services and APIs for an AI product.',
+    description:
+      'Building and shipping backend services and APIs for an AI product.',
     anchor: 0.15,
     side: 'right',
   },
@@ -36,7 +37,7 @@ export const experience: ExperienceEntryData[] = [
     company: 'Wateen Telecom',
     dates: 'May 2025 — Aug 2025',
     description:
-      'Worked as a coder in an agile development team, working with the PERN stack at scale — auth, DB schema, migrations, API creation and testing. Optimized code through lazy loading and stronger system design principles. Selected out of 5,000 applicants for one of Pakistan’s largest B2B telecom brands.',
+      'Selected from 5,000 applicants. Engineered the backend for Watify, an internal platform serving 5,000+ employees — REST and GraphQL APIs, PostgreSQL schema and migrations, JWT authentication, and lazy loading for scale. Shipped in an agile team on the PERN stack.',
     anchor: 0.38,
     side: 'left',
   },
@@ -47,7 +48,7 @@ export const experience: ExperienceEntryData[] = [
     company: 'Leetly',
     dates: 'Nov 2024 — Jan 2025',
     description:
-      'Drove user adoption for a mobile-based DSA learning product through data-driven growth experiments. Built a working understanding of how sales funnels and pipelines are structured and optimized.',
+      'Drove user adoption for a mobile DSA learning product through data-driven growth experiments — instrumenting the funnel, testing against it, and acting on what the numbers said.',
     anchor: 0.62,
     side: 'right',
   },

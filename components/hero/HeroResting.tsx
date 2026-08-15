@@ -95,6 +95,11 @@ export default function HeroResting() {
         <motion.p custom={0} variants={rise} className="eyebrow">
           {site.role} · Islamabad
         </motion.p>
+        {/*
+          The tagline stays as written. The line under it is what a hiring
+          manager can actually act on — "simple, reliable builder" is a
+          good line but it names nothing you have done.
+        */}
         <motion.p
           custom={1}
           variants={rise}
@@ -102,8 +107,16 @@ export default function HeroResting() {
         >
           A simple, reliable builder.
         </motion.p>
-        <motion.div
+        <motion.p
           custom={2}
+          variants={rise}
+          className="max-w-lg text-[length:var(--t-body-s)] leading-relaxed text-silver-dim"
+        >
+          I ship products end to end — and I teach 7.5k developers how they
+          work.
+        </motion.p>
+        <motion.div
+          custom={3}
           variants={rise}
           className="mt-1 flex flex-col items-center gap-2"
           aria-hidden="true"

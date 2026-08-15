@@ -140,6 +140,22 @@ export default function ExperienceSection() {
     [pointAt, size.h]
   );
 
+  /*
+   * Narrow screens show one entry at a time in a fixed slot, so we need to
+   * know which one the head is currently on: the last entry whose anchor
+   * it has passed. Before the first anchor, nothing is shown.
+   */
+  const currentIdx = useMemo(() => {
+    // Starts at 0, not -1: the head reaches the first anchor a little way
+    // into the section, and leaving the slot empty until then means the
+    // visitor lands on a blank screen with nothing but the path.
+    let idx = 0;
+    experience.forEach((e, i) => {
+      if (head >= e.anchor - 0.06) idx = i;
+    });
+    return idx;
+  }, [head]);
+
   return (
     <section
       id="experience"
@@ -186,15 +202,17 @@ export default function ExperienceSection() {
               active={true}
             />
 
-            {anchors.map((entry) => (
+            {anchors.map((entry, i) => (
               <ExperienceEntry
                 key={entry.id}
                 entry={entry}
                 x={entry.x}
                 y={entry.y}
                 stageW={size.w}
+                stageH={size.h}
                 narrow={narrow}
                 arrived={reduced || head >= entry.anchor}
+                current={reduced ? i === 0 : i === currentIdx}
               />
             ))}
           </>

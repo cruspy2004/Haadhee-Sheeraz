@@ -24,20 +24,13 @@ export type Project = {
  * PRD §4.5 — real copy, real destinations. Live URLs are the ones linked
  * from resume.pdf's own hyperlinks.
  */
+/*
+ * Ordered by what each one PROVES, not by date — the first panel is the
+ * one a hiring manager should see first. Watify proves engineering,
+ * JavascriptPeter proves audience, TopicPulse proves both and its code is
+ * public. See vault/Site Copy.md.
+ */
 export const projects: Project[] = [
-  {
-    id: 'h1grow',
-    name: 'H1GROW',
-    tags: ['Content Monetization', 'Web', 'AI'],
-    description:
-      'Helps creators 5x their revenue by monetizing their content through software products.',
-    color: '#c8c9cc',
-    colorDeep: '#84868c',
-    ink: '#0a0a0b',
-    imagePath: '/project-images/h1grow.png',
-    liveUrl: 'https://www.h1grow.store/',
-    linkLabel: 'h1grow.store',
-  },
   {
     id: 'watify',
     name: 'WATIFY',
@@ -78,6 +71,19 @@ export const projects: Project[] = [
     imagePath: '/project-images/topicpulse.png',
     liveUrl: 'https://medium-scrapper-and-sentiment-analy.vercel.app/',
     linkLabel: 'medium-scrapper-and-sentiment-analy.vercel.app',
+  },
+  {
+    id: 'h1grow',
+    name: 'H1GROW',
+    tags: ['Content Monetization', 'Web', 'AI'],
+    description:
+      'Helps creators 5x their revenue by monetizing their content through software products.',
+    color: '#c8c9cc',
+    colorDeep: '#84868c',
+    ink: '#0a0a0b',
+    imagePath: '/project-images/h1grow.png',
+    liveUrl: 'https://www.h1grow.store/',
+    linkLabel: 'h1grow.store',
   },
   {
     id: 'memetent',

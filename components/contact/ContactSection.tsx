@@ -94,9 +94,9 @@ export default function ContactSection() {
               {...rise(1)}
               className="mt-5 text-[clamp(1.9rem,4.5vw,3rem)] font-light leading-[1.05] tracking-[-0.04em]"
             >
-              Let’s build
+              Hiring, or building
               <br />
-              something sharp.
+              something? Say hi.
             </motion.h2>
 
             <motion.dl {...rise(2)} className="mt-10 space-y-4">
