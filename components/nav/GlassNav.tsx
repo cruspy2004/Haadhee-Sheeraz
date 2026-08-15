@@ -33,7 +33,11 @@ export default function GlassNav() {
   }, []);
 
   return (
-    <div className="pointer-events-none fixed inset-x-0 top-4 z-50 flex justify-center px-3 sm:top-6">
+    /* POSITION: --nav-top in globals.css */
+    <div
+      className="pointer-events-none fixed inset-x-0 z-50 flex justify-center px-3"
+      style={{ top: 'var(--nav-top)' }}
+    >
       <motion.nav
         id="glass-nav"
         aria-label="Primary"

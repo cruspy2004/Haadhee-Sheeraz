@@ -331,7 +331,7 @@ function Bubble({ onClick }: { onClick: () => void }) {
       }}
     >
       <span className="font-mono text-[length:var(--t-meta)] tracking-[0.04em]">
-        Hi, I&rsquo;m Jack
+        Hi, I&rsquo;m Jack — click me to interact
       </span>
       <style jsx>{`
         .jack-bubble {

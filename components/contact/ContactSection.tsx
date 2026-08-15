@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { EASE_ENTRANCE, STAGGER } from '@/lib/animation/easings';
 import { site } from '@/lib/site';
-import JackContact from '@/components/jack/JackContact';
+import JackScene from '@/components/jack/JackScene';
 
 /**
  * PRD §4.6 — same glass treatment as the nav, real contact details, résumé
@@ -226,9 +226,15 @@ export default function ContactSection() {
           </motion.form>
         </div>
 
-        {/* Jack, delivering the nudge. */}
+        {/* Jack runs across and delivers the nudge, then carries on out. */}
         <div className="mt-10">
-          <JackContact />
+          <JackScene
+            stopAt={0.34}
+            lines={[
+              'Still here? Say something.',
+              'He actually replies. Usually.',
+            ]}
+          />
         </div>
 
         <div className="mt-8 flex flex-col gap-2 border-t border-white/[0.07] pt-6 sm:flex-row sm:items-center sm:justify-between">

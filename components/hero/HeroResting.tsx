@@ -44,11 +44,15 @@ export default function HeroResting() {
         }}
       />
 
-      {/* Bottom-aligned, horizontally centred. Aspect stays locked so a
-          video still drops in with no layout change. */}
+      {/* POSITION: size/offset come from --hero-photo-* in globals.css */}
       <div
         id="hero-media"
-        className="absolute bottom-0 left-1/2 h-[86svh] w-[min(94vw,72svh)] -translate-x-1/2"
+        className="absolute left-1/2 h-[var(--hero-photo-height)] w-[min(94vw,var(--hero-photo-max-width))]"
+        style={{
+          bottom: 'var(--hero-photo-bottom)',
+          transform:
+            'translateX(calc(-50% + var(--hero-photo-shift-x)))',
+        }}
       >
         <HeroMedia />
       </div>
@@ -56,8 +60,14 @@ export default function HeroResting() {
       {/* Wordmark overlaps the top of the hair. Centred with inset rather
           than a translate class — Framer owns `transform` on anything it
           animates and would overwrite it. */}
+      {/* POSITION: --hero-name-* in globals.css */}
       <motion.h1
-        className="pointer-events-none absolute inset-x-0 top-[9%] px-4 text-center font-script text-[clamp(2rem,6vw,4.25rem)] font-semibold uppercase leading-none tracking-[-0.035em] text-silver-bright"
+        className="pointer-events-none absolute inset-x-0 px-4 text-center font-script font-semibold uppercase leading-none text-silver-bright"
+        style={{
+          top: 'var(--hero-name-top)',
+          fontSize: 'var(--hero-name-size)',
+          letterSpacing: 'var(--hero-name-tracking)',
+        }}
         initial={{ opacity: 0, y: 14 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.9, ease: EASE_ENTRANCE }}
@@ -75,8 +85,10 @@ export default function HeroResting() {
         }}
       />
 
+      {/* POSITION: --hero-copy-bottom in globals.css */}
       <motion.div
-        className="absolute inset-x-0 bottom-9 flex flex-col items-center gap-3 px-6 text-center"
+        className="absolute inset-x-0 flex flex-col items-center gap-3 px-6 text-center"
+        style={{ bottom: 'var(--hero-copy-bottom)' }}
         initial="hidden"
         animate="show"
       >

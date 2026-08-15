@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { education } from './education.data';
+import JackScene from '@/components/jack/JackScene';
 import { EASE_ENTRANCE, STAGGER } from '@/lib/animation/easings';
 
 /**
@@ -55,6 +56,18 @@ export default function EducationSection() {
           </motion.li>
         ))}
       </ul>
+
+      {/* Jack runs in and summarises this section. */}
+      <div className="mt-8">
+        <JackScene
+          stopAt={0.3}
+          lines={[
+            'Computer Science at NUST SEECS — graduating 2027.',
+            'McKinsey Forward, and Founders Institute under NIC Pakistan.',
+            'Cohort 3. He finished it.',
+          ]}
+        />
+      </div>
     </section>
   );
 }

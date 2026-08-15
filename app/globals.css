@@ -66,6 +66,64 @@
   }
 }
 
+/* ══════════════════════════════════════════════════════════════════
+   ⬇⬇⬇  POSITIONING CONTROLS — EDIT HERE  ⬇⬇⬇
+
+   Every number that moves the hero photo, the big heading, or the nav
+   bar lives in this one block. Change a value, save, the page updates.
+   You should not need to touch any .tsx file to reposition things.
+
+   Units you can use:
+     svh = 1% of the screen height   (86svh  = 86% of screen height)
+     vw  = 1% of the screen width
+     %   = relative to the parent box
+     px  = exact pixels
+   ══════════════════════════════════════════════════════════════════ */
+:root {
+  /* ── THE HERO PHOTO ─────────────────────────────────────────────
+     Bigger height = taller photo. Bigger max-width = wider / less
+     cropped at the sides. Increase `bottom` to lift it off the
+     bottom edge of the screen. `shift-x` nudges it left (negative)
+     or right (positive).                                          */
+  --hero-photo-height: 86svh;
+  --hero-photo-max-width: 72svh;
+  --hero-photo-bottom: 0px;
+  --hero-photo-shift-x: 0px;
+
+  /* ── THE BIG NAME (hero heading) ────────────────────────────────
+     `top` is measured from the top of the screen. Smaller = higher.
+     `size` is clamp(minimum, scales-with-width, maximum).          */
+  --hero-name-top: 9%;
+  --hero-name-size: clamp(2rem, 6vw, 4.25rem);
+  --hero-name-tracking: -0.035em;
+
+  /* ── THE TEXT UNDER THE PHOTO (role, tagline, SCROLL) ───────────
+     Distance up from the bottom of the screen.                     */
+  --hero-copy-bottom: 2.25rem;
+
+  /* ── THE NAV BAR ────────────────────────────────────────────────
+     `top` is distance from the top of the screen.                  */
+  --nav-top: 1.5rem;
+
+  /* ── JACK ───────────────────────────────────────────────────────
+     How far up from the bottom of a section Jack stands.           */
+  --jack-baseline: 2rem;
+}
+
+/* Phones: same knobs, different values. */
+@media (max-width: 640px) {
+  :root {
+    --hero-photo-height: 66svh;
+    --hero-photo-max-width: 90vw;
+    --hero-name-top: 7%;
+    --hero-copy-bottom: 1.5rem;
+    --nav-top: 1rem;
+  }
+}
+/* ══════════════════════════════════════════════════════════════════
+   ⬆⬆⬆  END POSITIONING CONTROLS  ⬆⬆⬆
+   ══════════════════════════════════════════════════════════════════ */
+
 /*
   One type scale, used everywhere.
 

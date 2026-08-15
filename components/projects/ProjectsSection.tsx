@@ -6,6 +6,7 @@ import ProjectCard from './ProjectCard';
 import { projects } from './projects.data';
 import { CSS_EASE_AMBIENT, DUR, EASE_ENTRANCE } from '@/lib/animation/easings';
 import { useIsomorphicLayoutEffect } from '@/lib/useIsomorphicLayoutEffect';
+import JackScene from '@/components/jack/JackScene';
 
 const DRAG_THRESHOLD = 56;
 
@@ -224,6 +225,19 @@ export default function ProjectsSection() {
           </motion.p>
         )}
       </AnimatePresence>
+
+      {/* Jack runs the bottom of the panel and summarises the work. */}
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-20">
+        <JackScene
+          stopAt={0.24}
+          lineSeconds={2.9}
+          lines={[
+            'Five shipped projects down here.',
+            'Backend for 5,000 users, and 3M views teaching JavaScript.',
+            'Click any of them — they all go somewhere real.',
+          ]}
+        />
+      </div>
     </section>
   );
 }
