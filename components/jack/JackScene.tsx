@@ -166,8 +166,13 @@ export default function JackScene({
   return (
     <div
       ref={wrapRef}
-      /* Taller on phones so a wrapped two-line bubble has somewhere to go. */
-      className="pointer-events-none relative h-[132px] w-full overflow-hidden sm:h-[86px]"
+      /*
+       * Tall enough for a wrapped two-line bubble on both breakpoints.
+       * overflow-hidden is what hides Jack once he runs off the right, so
+       * the box has to be tall enough for the speech rather than the
+       * speech being clipped to fit the box.
+       */
+      className="pointer-events-none relative h-[132px] w-full overflow-hidden sm:h-[124px]"
       aria-hidden="true"
     >
       <div
@@ -233,16 +238,23 @@ export default function JackScene({
           border-radius: 2px;
         }
 
-        /* Roomy screens: back beside him, on one line. */
+        /*
+          Roomy screens: the bubble sits beside him again.
+
+          It wraps rather than truncating. nowrap + text-overflow: ellipsis
+          was cutting his longer lines off mid-sentence — "Founders
+          Institute unde…" — which reads as a layout bug, not as brevity.
+          The box grows upward from its bottom edge, so a second line is
+          free.
+        */
         @media (min-width: 641px) {
           .jack-line {
             left: var(--jack-bubble-left);
             right: auto;
             bottom: 46px;
-            white-space: nowrap;
-            max-width: min(420px, 46vw);
-            overflow: hidden;
-            text-overflow: ellipsis;
+            white-space: normal;
+            width: max-content;
+            max-width: min(440px, 40vw);
           }
           .jack-line::after {
             left: -4px;
