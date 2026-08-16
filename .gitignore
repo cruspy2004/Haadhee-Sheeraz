@@ -2,6 +2,9 @@ node_modules/
 .next/
 out/
 build/
+# Vite's output dir. Nothing produces it any more, but the deploy was
+# previously configured to serve it — keep it from ever reappearing.
+dist/
 .DS_Store
 *.pem
 npm-debug.log*
