@@ -1,0 +1,296 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+  Palette + surface language (PRD §1, design-doc principle 12).
+  One blur value, one radius family, one set of easing curves.
+*/
+:root {
+  --ink: #050506;
+  --ink-soft: #0b0b0d;
+  --silver: #c8c9cc;
+  --silver-bright: #f2f3f5;
+  --silver-dim: #8a8c91;
+  /* 4.9:1 on --ink, solved rather than eyeballed: AA needs relative
+     luminance >= 0.183 against this background, which puts the channel
+     floor at 0x77. The original #4a4c52 measured 2.37:1 at 11px, and this
+     is the site's most-used label style. */
+  --silver-faint: #7c7e85;
+
+  /* The hero photo's key light is warm and top-left; echo it faintly. */
+  --keylight: #d8cdbe;
+
+  --glass-blur: 18px;
+  --glass-bg: rgba(255, 255, 255, 0.045);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --radius-glass: 16px;
+  --radius-soft: 12px;
+
+  --ease-entrance: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-exit: cubic-bezier(0.7, 0, 0.84, 0);
+  --ease-ambient: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-overshoot: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* Driven by ProjectsSection so the page chrome can follow the panel. */
+  --page-bg: var(--ink);
+}
+
+@layer base {
+  html {
+    background: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    background: var(--page-bg);
+    color: var(--silver);
+    font-family: var(--font-sans), system-ui, sans-serif;
+    overflow-x: hidden;
+    transition: background-color 600ms var(--ease-ambient);
+  }
+
+  ::selection {
+    background: var(--silver-bright);
+    color: var(--ink);
+  }
+
+  /* Section headings: light weight, tight tracking — restraint over flourish. */
+  h1,
+  h2,
+  h3 {
+    font-weight: 300;
+    letter-spacing: -0.03em;
+    color: var(--silver-bright);
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   ⬇⬇⬇  POSITIONING CONTROLS — EDIT HERE  ⬇⬇⬇
+
+   Every number that moves the hero photo, the big heading, or the nav
+   bar lives in this one block. Change a value, save, the page updates.
+   You should not need to touch any .tsx file to reposition things.
+
+   Units you can use:
+     svh = 1% of the screen height   (86svh  = 86% of screen height)
+     vw  = 1% of the screen width
+     %   = relative to the parent box
+     px  = exact pixels
+   ══════════════════════════════════════════════════════════════════ */
+:root {
+  /* ── THE HERO PHOTO ─────────────────────────────────────────────
+     Bigger height = taller photo. Bigger max-width = wider / less
+     cropped at the sides. Increase `bottom` to lift it off the
+     bottom edge of the screen. `shift-x` nudges it left (negative)
+     or right (positive).                                          */
+  --hero-photo-height: 86svh;
+  --hero-photo-max-width: 72svh;
+  --hero-photo-bottom: 0px;
+  --hero-photo-shift-x: 0px;
+
+  /* ── THE BIG NAME (hero heading) ────────────────────────────────
+     `top` is measured from the top of the screen. Smaller = higher.
+     `size` is clamp(minimum, scales-with-width, maximum).
+
+     Written relative to the nav rather than as a plain % so it always
+     clears it — the nav is a fixed pixel height, so a percentage that
+     looked fine on one screen collided with it on another. Raise or
+     lower the 4.5rem to move the name.                              */
+  --hero-name-top: calc(var(--nav-top) + 4.5rem);
+  --hero-name-size: clamp(2rem, 6vw, 4.25rem);
+  --hero-name-tracking: -0.035em;
+
+  /* ── THE TEXT UNDER THE PHOTO (role, tagline, SCROLL) ───────────
+     Distance up from the bottom of the screen.                     */
+  --hero-copy-bottom: 2.25rem;
+
+  /* ── THE NAV BAR ────────────────────────────────────────────────
+     `top` is distance from the top of the screen.                  */
+  --nav-top: 1.5rem;
+
+  /* ── JACK ───────────────────────────────────────────────────────
+     How far up from the bottom of a section Jack stands.           */
+  --jack-baseline: 2rem;
+}
+
+/* Phones: same knobs, different values. */
+@media (max-width: 640px) {
+  :root {
+    --hero-photo-height: 66svh;
+    --hero-photo-max-width: 90vw;
+    --hero-name-top: calc(var(--nav-top) + 3.75rem);
+    --hero-copy-bottom: 1.5rem;
+    --nav-top: 1rem;
+  }
+}
+/* ══════════════════════════════════════════════════════════════════
+   ⬆⬆⬆  END POSITIONING CONTROLS  ⬆⬆⬆
+   ══════════════════════════════════════════════════════════════════ */
+
+/*
+  One type scale, used everywhere.
+
+  The build had drifted to fourteen size/weight pairs, six of them between
+  10.4px and 12px — perceptually identical but inconsistent, which is
+  exactly what reads as unresolved. Principle 12: consistency IS the polish.
+
+  Sizes are the only ones any component should reach for.
+*/
+:root {
+  --t-eyebrow: 0.6875rem; /* 11px — uppercase mono labels */
+  --t-meta: 0.8125rem; /*    13px — dates, tags, link labels */
+  --t-body-s: 0.875rem; /*   14px — dense body copy */
+  --t-body: 1rem; /*         16px — body copy */
+  --t-h3: 1.25rem; /*        20px — entry roles */
+  --t-h2: 2rem; /*           32px — section headings */
+  --t-display: 3.5rem; /*    56px — project names */
+}
+
+@layer components {
+  .glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur)) saturate(1.4);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(1.4);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-glass);
+  }
+
+  /* Wide-tracked mono micro-label used for every eyebrow on the site. */
+  .eyebrow {
+    font-family: var(--font-mono), ui-monospace, monospace;
+    font-size: var(--t-eyebrow);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--silver-faint);
+  }
+
+  .meta {
+    font-family: var(--font-mono), ui-monospace, monospace;
+    font-size: var(--t-meta);
+    letter-spacing: 0.06em;
+    color: var(--silver-dim);
+  }
+
+  /* Mono label sitting on a coloured project panel, where colour is set
+     by the panel rather than the token. */
+  .panel-label {
+    font-family: var(--font-mono), ui-monospace, monospace;
+    font-size: var(--t-eyebrow);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+}
+
+/*
+  Cinematic grain. Fixed, non-interactive, very low opacity — it stops the
+  large black fields from banding on cheap panels and gives the whole page
+  a single filmic surface.
+*/
+.grain::after {
+  content: '';
+  position: fixed;
+  inset: -50%;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.16;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  animation: grain-drift 7s steps(6) infinite;
+}
+
+@keyframes grain-drift {
+  0% {
+    transform: translate(0, 0);
+  }
+  20% {
+    transform: translate(-3%, 2%);
+  }
+  40% {
+    transform: translate(2%, -3%);
+  }
+  60% {
+    transform: translate(-2%, -2%);
+  }
+  80% {
+    transform: translate(3%, 1%);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+/*
+  Principle 8 — secondary action on the pivot: a faint chromatic ripple
+  runs across the nav's glass at the exact moment the page turns, decaying
+  over 400ms. Added and removed by PivotTransition.
+*/
+.nav-ripple > div {
+  animation: nav-ripple 420ms var(--ease-ambient) 1;
+}
+
+@keyframes nav-ripple {
+  0% {
+    backdrop-filter: blur(var(--glass-blur)) saturate(1.4) hue-rotate(0deg);
+    box-shadow: 0 0 0 0 rgba(242, 243, 245, 0);
+  }
+  35% {
+    backdrop-filter: blur(30px) saturate(2.1) hue-rotate(-14deg);
+    box-shadow: 0 0 34px 2px rgba(242, 243, 245, 0.14);
+  }
+  100% {
+    backdrop-filter: blur(var(--glass-blur)) saturate(1.4) hue-rotate(0deg);
+    box-shadow: 0 0 0 0 rgba(242, 243, 245, 0);
+  }
+}
+
+/* Principle 3 — staging: what isn't focal recedes, it doesn't vanish. */
+.defocus {
+  opacity: 0.4;
+  filter: blur(6px);
+  transition:
+    opacity 300ms var(--ease-ambient),
+    filter 300ms var(--ease-ambient);
+}
+
+/*
+  Minimum comfortable hit area. Applied via a pseudo-element so a visually
+  small control (a 28px nav link) still takes a 44px target without the
+  layout inflating around it.
+*/
+.tap::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  min-width: 44px;
+  min-height: 44px;
+  width: 100%;
+  height: 100%;
+  transform: translate(-50%, -50%);
+}
+
+/* Principle 1 — squash & stretch, hover/press feedback only. */
+.press {
+  transition: transform 180ms var(--ease-overshoot);
+}
+.press:hover {
+  transform: scaleX(1.04) scaleY(0.98);
+  transition-duration: 90ms;
+}
+.press:active {
+  transform: scaleX(0.98) scaleY(1.02);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .grain::after {
+    animation: none;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
