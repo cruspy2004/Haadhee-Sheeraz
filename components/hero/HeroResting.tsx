@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import HeroMedia from './HeroMedia';
+import HeroGrid from './HeroGrid';
 import { EASE_ENTRANCE, STAGGER } from '@/lib/animation/easings';
 import { site } from '@/lib/site';
 
@@ -33,6 +34,8 @@ export default function HeroResting() {
       id="hero"
       className="relative min-h-[100svh] overflow-hidden"
     >
+      <HeroGrid />
+
       {/* Ambient breathing light behind the subject — straight-ahead motion
           (principle 4), so it never reads as a visible loop. */}
       <div

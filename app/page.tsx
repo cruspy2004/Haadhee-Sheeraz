@@ -1,4 +1,3 @@
-import GlassNav from '@/components/nav/GlassNav';
 import HeroResting from '@/components/hero/HeroResting';
 import EducationSection from '@/components/education/EducationSection';
 import ExperienceSection from '@/components/experience/ExperienceSection';
@@ -18,10 +17,8 @@ import Jack from '@/components/jack/Jack';
 export default function Page() {
   return (
     <>
-      <div className="grid-field" aria-hidden="true" />
       <div className="tech-frame" aria-hidden="true" />
 
-      <GlassNav />
       <Jack />
 
       <main className="relative z-[1]">

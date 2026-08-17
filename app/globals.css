@@ -94,21 +94,16 @@
      `top` is measured from the top of the screen. Smaller = higher.
      `size` is clamp(minimum, scales-with-width, maximum).
 
-     Written relative to the nav rather than as a plain % so it always
-     clears it — the nav is a fixed pixel height, so a percentage that
-     looked fine on one screen collided with it on another. Raise or
-     lower the 4.5rem to move the name.                              */
-  --hero-name-top: calc(var(--nav-top) + 4.5rem);
+     A plain distance from the top of the screen. It used to be written
+     as calc(var(--nav-top) + ...) so it always cleared the nav bar; with
+     the nav gone there is nothing to clear.                          */
+  --hero-name-top: 4rem;
   --hero-name-size: clamp(2rem, 6vw, 4.25rem);
   --hero-name-tracking: -0.035em;
 
   /* ── THE TEXT UNDER THE PHOTO (role, tagline, SCROLL) ───────────
      Distance up from the bottom of the screen.                     */
   --hero-copy-bottom: 2.25rem;
-
-  /* ── THE NAV BAR ────────────────────────────────────────────────
-     `top` is distance from the top of the screen.                  */
-  --nav-top: 1.5rem;
 
   /* ── JACK ───────────────────────────────────────────────────────
      How far up from the bottom of a section Jack stands.           */
@@ -120,9 +115,8 @@
   :root {
     --hero-photo-height: 66svh;
     --hero-photo-max-width: 90vw;
-    --hero-name-top: calc(var(--nav-top) + 3.75rem);
+    --hero-name-top: 3rem;
     --hero-copy-bottom: 1.5rem;
-    --nav-top: 1rem;
   }
 }
 /* ══════════════════════════════════════════════════════════════════
@@ -351,20 +345,70 @@
   box-shadow: calc(100vw - 2 * var(--frame-inset) - 35px) 0 0 var(--silver-faint);
 }
 
-/* Hairline grid, very low contrast. Gives the black field a sense of
-   measurement instead of emptiness. */
+/*
+   Hairline grid. Scoped to the hero only — running it down the whole page
+   competed with the Experience path and the coloured project panels, both
+   of which already carry their own structure.
+
+   Two stacked layers: a dim base that is always on, and a bright copy
+   revealed only inside a soft circle that follows the cursor, so the grid
+   lights up under the pointer. The lit layer is masked rather than
+   redrawn, so hovering costs two custom-property updates per frame and no
+   layout.
+*/
 .grid-field {
-  position: fixed;
+  position: absolute;
   inset: 0;
   z-index: 0;
   pointer-events: none;
+  overflow: hidden;
+}
+
+.grid-field::before,
+.grid-field::after {
+  content: '';
+  position: absolute;
+  inset: 0;
   background-image:
     linear-gradient(to right, var(--hair) 1px, transparent 1px),
     linear-gradient(to bottom, var(--hair) 1px, transparent 1px);
   background-size: var(--grid-size) var(--grid-size);
-  opacity: 0.34;
-  mask-image: radial-gradient(120% 90% at 50% 40%, #000 25%, transparent 82%);
-  -webkit-mask-image: radial-gradient(120% 90% at 50% 40%, #000 25%, transparent 82%);
+}
+
+/* Base layer: faint, fading out toward the edges of the section. */
+.grid-field::before {
+  opacity: 0.3;
+  mask-image: radial-gradient(115% 85% at 50% 45%, #000 22%, transparent 80%);
+  -webkit-mask-image: radial-gradient(115% 85% at 50% 45%, #000 22%, transparent 80%);
+}
+
+/* Lit layer: brighter lines, revealed only near the pointer. */
+.grid-field::after {
+  background-image:
+    linear-gradient(to right, var(--silver-dim) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--silver-dim) 1px, transparent 1px);
+  opacity: var(--grid-glow, 0);
+  transition: opacity 420ms var(--ease-ambient);
+  mask-image: radial-gradient(
+    circle 190px at var(--grid-x, 50%) var(--grid-y, 50%),
+    #000 0%,
+    rgba(0, 0, 0, 0.45) 45%,
+    transparent 72%
+  );
+  -webkit-mask-image: radial-gradient(
+    circle 190px at var(--grid-x, 50%) var(--grid-y, 50%),
+    #000 0%,
+    rgba(0, 0, 0, 0.45) 45%,
+    transparent 72%
+  );
+}
+
+/* Coarse pointers have no hover; the lit layer would never show and the
+   listener would be dead weight. */
+@media (hover: none) {
+  .grid-field::after {
+    display: none;
+  }
 }
 
 /* A modular block. */
