@@ -294,3 +294,133 @@
     transition-duration: 0.01ms !important;
   }
 }
+
+/* ══════════════════════════════════════════════════════════════════
+   NEO-TECH SURFACE
+
+   Structural language borrowed from the reference: a bordered frame
+   around the whole viewport, modular panels with corner markers, a
+   hairline grid, and spec-sheet labelling.
+
+   Built on the dark ground rather than the reference's light grey. The
+   hero portrait is a studio shot on black whose edges dissolve into the
+   page; on a light field it would need a hard rectangular crop and stop
+   reading as a portrait at all. Flipping later means changing the tokens
+   in this block, not the markup.
+   ══════════════════════════════════════════════════════════════════ */
+:root {
+  --ink-outer: #08080a;
+  --radius-panel: 22px;
+  --frame-inset: 12px;
+  --hair: rgba(255, 255, 255, 0.085);
+  --hair-strong: rgba(255, 255, 255, 0.17);
+  --grid-size: 46px;
+}
+
+/* The viewport frame. Drawn as a fixed overlay rather than as a wrapper
+   element: wrapping would put an overflow/transform ancestor around the
+   Experience section and kill its position: sticky. */
+.tech-frame {
+  position: fixed;
+  inset: var(--frame-inset);
+  z-index: 55;
+  pointer-events: none;
+  border: 1px solid var(--hair-strong);
+  border-radius: var(--radius-panel);
+}
+
+/* Corner markers — the small circles that make the frame read as a
+   machined part rather than as a plain box. */
+.tech-frame::before,
+.tech-frame::after {
+  content: '';
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--silver-faint);
+}
+.tech-frame::before {
+  top: 14px;
+  left: 14px;
+  box-shadow: calc(100vw - 2 * var(--frame-inset) - 35px) 0 0 var(--silver-faint);
+}
+.tech-frame::after {
+  bottom: 14px;
+  left: 14px;
+  box-shadow: calc(100vw - 2 * var(--frame-inset) - 35px) 0 0 var(--silver-faint);
+}
+
+/* Hairline grid, very low contrast. Gives the black field a sense of
+   measurement instead of emptiness. */
+.grid-field {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(to right, var(--hair) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--hair) 1px, transparent 1px);
+  background-size: var(--grid-size) var(--grid-size);
+  opacity: 0.34;
+  mask-image: radial-gradient(120% 90% at 50% 40%, #000 25%, transparent 82%);
+  -webkit-mask-image: radial-gradient(120% 90% at 50% 40%, #000 25%, transparent 82%);
+}
+
+/* A modular block. */
+.panel {
+  position: relative;
+  border: 1px solid var(--hair);
+  border-radius: var(--radius-panel);
+  background: rgba(255, 255, 255, 0.018);
+}
+
+/* Bracket ticks on a panel's top corners. */
+.panel-ticks::before,
+.panel-ticks::after {
+  content: '';
+  position: absolute;
+  top: -1px;
+  width: 26px;
+  height: 1px;
+  background: var(--hair-strong);
+}
+.panel-ticks::before {
+  left: 22px;
+}
+.panel-ticks::after {
+  right: 22px;
+}
+
+/* Spec-sheet row: label left, value right, hairline between. */
+.spec-row {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: baseline;
+  gap: 12px;
+}
+.spec-row > .rule {
+  height: 1px;
+  background: var(--hair);
+  transform: translateY(-3px);
+}
+
+/* Index numeral used beside section titles, e.g. "01 /". */
+.tech-index {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: var(--t-eyebrow);
+  letter-spacing: 0.18em;
+  color: var(--silver-faint);
+}
+
+@media (max-width: 640px) {
+  :root {
+    --frame-inset: 8px;
+    --radius-panel: 18px;
+    --grid-size: 34px;
+  }
+  .tech-frame::before,
+  .tech-frame::after {
+    box-shadow: calc(100vw - 2 * var(--frame-inset) - 35px) 0 0 var(--silver-faint);
+  }
+}

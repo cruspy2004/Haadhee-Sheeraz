@@ -166,6 +166,14 @@ export default function ProjectsSection() {
         />
       ))}
 
+      {/* Module index, matched to the other sections. */}
+      <div
+        className="panel-label pointer-events-none absolute right-5 top-8 z-20 sm:right-10 sm:top-12"
+        style={{ color: project.ink, opacity: 0.55 }}
+      >
+        SEC 03
+      </div>
+
       {/* Arrows */}
       <button
         type="button"

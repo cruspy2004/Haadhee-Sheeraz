@@ -10,13 +10,21 @@ import Jack from '@/components/jack/Jack';
 /**
  * HERO → EDUCATION → EXPERIENCE → (pivot) → PROJECTS → CONTACT.
  * One continuous scroll.
+ *
+ * The frame and grid are fixed overlays rather than wrappers: a wrapping
+ * element would introduce an overflow/transform ancestor around the
+ * Experience section and disable its position: sticky.
  */
 export default function Page() {
   return (
     <>
+      <div className="grid-field" aria-hidden="true" />
+      <div className="tech-frame" aria-hidden="true" />
+
       <GlassNav />
       <Jack />
-      <main>
+
+      <main className="relative z-[1]">
         <HeroResting />
         <EducationSection />
         <ExperienceSection />

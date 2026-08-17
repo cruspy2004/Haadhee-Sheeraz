@@ -6,59 +6,75 @@ import JackScene from '@/components/jack/JackScene';
 import { EASE_ENTRANCE, STAGGER } from '@/lib/animation/easings';
 
 /**
- * Sits directly under the hero. Deliberately quiet — hairline rules, mono
- * dates, no cards, no accent colour — so it reads as supporting credential
- * rather than competing with the path animation below it.
+ * Credentials, set as a spec sheet inside a bordered module.
+ *
+ * The neo-tech reference treats every block as a labelled component with
+ * an index, a rule and a value column — so this reads as a datasheet
+ * rather than as a list, which is also closer to what the content is.
  */
 export default function EducationSection() {
   return (
     <section
       id="education"
-      className="relative mx-auto w-full max-w-5xl px-6 py-28 sm:py-36"
+      className="relative mx-auto w-full max-w-5xl px-5 py-24 sm:px-8 sm:py-32"
     >
-      <motion.p
-        className="eyebrow mb-12"
-        initial={{ opacity: 0, y: 12 }}
+      <motion.div
+        className="panel panel-ticks p-6 sm:p-10"
+        initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: '-80px' }}
-        transition={{ duration: 0.6, ease: EASE_ENTRANCE }}
+        transition={{ duration: 0.65, ease: EASE_ENTRANCE }}
       >
-        Education
-      </motion.p>
+        <div className="mb-10 flex items-baseline justify-between">
+          <p className="eyebrow">Education</p>
+          <p className="tech-index">SEC 01</p>
+        </div>
 
-      <ul className="border-t border-white/[0.07]">
-        {education.map((entry, i) => (
-          <motion.li
-            key={entry.institution}
-            className="grid grid-cols-1 gap-1 border-b border-white/[0.07] py-7 sm:grid-cols-[1fr_auto] sm:items-baseline sm:gap-8"
-            initial={{ opacity: 0, y: 22 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-60px' }}
-            transition={{
-              duration: 0.6,
-              delay: i * STAGGER,
-              ease: EASE_ENTRANCE,
-            }}
-          >
-            <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:gap-4">
-              <h3 className="text-[length:var(--t-h3)] font-normal tracking-tight text-silver-bright">
-                {entry.institution}
-              </h3>
-              <span
-                aria-hidden="true"
-                className="hidden h-px flex-1 bg-white/[0.08] sm:block"
-              />
-              <p className="text-[length:var(--t-body-s)] text-silver-dim">
-                {entry.credential}
-              </p>
-            </div>
-            <p className="meta whitespace-nowrap">{entry.dates}</p>
-          </motion.li>
-        ))}
-      </ul>
+        <ul>
+          {education.map((entry, i) => (
+            <motion.li
+              key={entry.institution}
+              className="border-t border-[var(--hair)] py-6 first:border-t-0 first:pt-0"
+              initial={{ opacity: 0, y: 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-60px' }}
+              transition={{
+                duration: 0.55,
+                delay: i * STAGGER,
+                ease: EASE_ENTRANCE,
+              }}
+            >
+              {/* Desktop: label — rule — value. Phones: stacked. */}
+              <div className="hidden spec-row sm:grid">
+                <h3 className="text-[length:var(--t-h3)] font-normal tracking-tight text-silver-bright">
+                  {entry.institution}
+                </h3>
+                <span className="rule" aria-hidden="true" />
+                <div className="flex items-baseline gap-6">
+                  <p className="text-[length:var(--t-body-s)] text-silver-dim">
+                    {entry.credential}
+                  </p>
+                  <p className="meta w-[11.5rem] shrink-0 text-right">
+                    {entry.dates}
+                  </p>
+                </div>
+              </div>
 
-      {/* Jack runs in and summarises this section. */}
-      <div className="mt-8">
+              <div className="sm:hidden">
+                <h3 className="text-[length:var(--t-h3)] font-normal tracking-tight text-silver-bright">
+                  {entry.institution}
+                </h3>
+                <p className="mt-1 text-[length:var(--t-body-s)] text-silver-dim">
+                  {entry.credential}
+                </p>
+                <p className="meta mt-2">{entry.dates}</p>
+              </div>
+            </motion.li>
+          ))}
+        </ul>
+      </motion.div>
+
+      <div className="mt-6">
         <JackScene
           stopAt={0.3}
           lines={[

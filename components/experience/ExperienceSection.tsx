@@ -186,8 +186,10 @@ export default function ExperienceSection() {
         ref={stageRef}
         className="sticky top-0 h-[100svh] overflow-hidden"
       >
-        <div className="pointer-events-none absolute left-1/2 top-10 z-10 -translate-x-1/2 text-center sm:top-14">
+        {/* Module header, matched to the other sections' spec labelling. */}
+        <div className="pointer-events-none absolute inset-x-5 top-8 z-10 flex items-baseline justify-between sm:inset-x-10 sm:top-12">
           <p className="eyebrow">Experience</p>
+          <p className="tech-index">SEC 02</p>
         </div>
 
         {size.w > 0 && (

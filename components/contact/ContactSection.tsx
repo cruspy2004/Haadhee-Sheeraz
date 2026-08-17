@@ -84,12 +84,14 @@ export default function ContactSection() {
       id="contact"
       className="relative flex min-h-[100svh] items-center justify-center px-6 py-28"
     >
-      <div className="glass w-full max-w-5xl p-7 sm:p-12">
+      <div className="panel panel-ticks w-full max-w-5xl p-6 sm:p-12">
+        <div className="mb-10 flex items-baseline justify-between">
+          <p className="eyebrow">Contact</p>
+          <p className="tech-index">SEC 04</p>
+        </div>
+
         <div className="grid gap-12 lg:grid-cols-[1fr_1fr] lg:gap-16">
           <div>
-            <motion.p {...rise(0)} className="eyebrow">
-              Contact
-            </motion.p>
             <motion.h2
               {...rise(1)}
               className="mt-5 text-[clamp(1.9rem,4.5vw,3rem)] font-light leading-[1.05] tracking-[-0.04em]"
