@@ -36,8 +36,8 @@ export const GlassDock = React.forwardRef<HTMLDivElement, GlassDockProps>(
         <div
           className={cn(
             'relative flex gap-4 items-center px-6 py-4 rounded-2xl',
-            'glass-border bg-black/70',
-            'backdrop-blur-xl shadow-2xl',
+            'glass-surface',
+            'shadow-2xl shadow-black/40',
             dockClassName
           )}
           onMouseLeave={() => {
@@ -63,9 +63,8 @@ export const GlassDock = React.forwardRef<HTMLDivElement, GlassDockProps>(
                 <div
                   className={cn(
                     'px-5 py-2 rounded-lg',
-                    'bg-portfolio-gold/90 text-portfolio-black',
+                    'glass-surface',
                     'shadow-md flex items-center justify-center',
-                    'border border-portfolio-gold/50',
                     'min-w-[100px]'
                   )}
                 >
@@ -78,7 +77,7 @@ export const GlassDock = React.forwardRef<HTMLDivElement, GlassDockProps>(
                         animate={{ x: 0, opacity: 1, filter: 'blur(0px)' }}
                         exit={{ x: direction > 0 ? -35 : 35, opacity: 0, filter: 'blur(6px)' }}
                         transition={{ duration: 0.3, ease: 'easeOut' }}
-                        className="text-[13px] font-medium tracking-wide whitespace-nowrap"
+                        className="text-[13px] font-medium tracking-wide whitespace-nowrap text-portfolio-silver"
                       >
                         {items[hoveredIndex].title}
                       </motion.span>
@@ -133,8 +132,8 @@ export const GlassDock = React.forwardRef<HTMLDivElement, GlassDockProps>(
                     className={cn(
                       'transition-colors duration-200',
                       isHovered
-                        ? 'text-portfolio-gold'
-                        : 'text-portfolio-lightgray/60'
+                        ? 'text-portfolio-silver'
+                        : 'text-portfolio-muted-silver/60'
                     )}
                   />
                 </motion.div>

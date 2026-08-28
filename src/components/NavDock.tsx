@@ -1,15 +1,12 @@
-import { Home, User, FolderGit2, Briefcase, GraduationCap, Wrench, Mail } from 'lucide-react';
+import { Home, User, FolderGit2, Briefcase, Mail } from 'lucide-react';
 import { GlassDock } from '@/components/ui/glass-dock';
 
 const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 
 const navItems = [
   { title: 'Home', icon: Home, onClick: scrollToTop },
-  { title: 'About', icon: User, href: '#about' },
-  { title: 'Projects', icon: FolderGit2, href: '#projects' },
   { title: 'Experience', icon: Briefcase, href: '#experience' },
-  { title: 'Education', icon: GraduationCap, href: '#education' },
-  { title: 'Skills', icon: Wrench, href: '#skills' },
+  { title: 'Projects', icon: FolderGit2, href: '#projects' },
   { title: 'Contact', icon: Mail, href: '#contact' },
 ];
 
