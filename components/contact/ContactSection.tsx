@@ -7,12 +7,12 @@ import { site } from '@/lib/site';
 import JackScene from '@/components/jack/JackScene';
 
 /**
- * PRD §4.6 — same glass treatment as the nav, real contact details, résumé
+ * PRD §4.6, same glass treatment as the nav, real contact details, résumé
  * download, and a working form.
  *
  * Submissions POST to FormSubmit, which relays them to `site.email`. It was
  * chosen over Formspree/Resend because it needs no account, no dashboard
- * and no API key — nothing secret ends up in the repo — and over the
+ * and no API key, nothing secret ends up in the repo, and over the
  * previous `mailto:` handler because that silently did nothing for anyone
  * without a configured desktop mail client, which is most visitors.
  *
@@ -34,8 +34,8 @@ export default function ContactSection() {
   const [status, setStatus] = useState<Status>('idle');
 
   const mailtoFallback = `mailto:${site.email}?subject=${encodeURIComponent(
-    `Portfolio enquiry — ${name || 'Hello'}`
-  )}&body=${encodeURIComponent(`${message}\n\n—\n${name}\n${email}`.trim())}`;
+    `Portfolio enquiry from ${name || 'the site'}`
+  )}&body=${encodeURIComponent(`${message}\n\n-\n${name}\n${email}`.trim())}`;
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -52,7 +52,7 @@ export default function ContactSection() {
           name,
           email,
           message,
-          _subject: `Portfolio enquiry — ${name || 'Hello'}`,
+          _subject: `Portfolio enquiry from ${name || 'the site'}`,
           // Honeypot: bots fill hidden fields, humans never see this one.
           _honey: '',
           _template: 'table',

@@ -36,7 +36,7 @@ const RAIL = 76;
  * need roughly 1000px of column and the sticky stage is one viewport tall,
  * so they overlapped into an unreadable pile. Here each entry instead
  * occupies the same centred slot and only the one the travelling head has
- * reached is shown — the comet still drives the reveal, it just swaps
+ * reached is shown, the comet still drives the reveal, it just swaps
  * entries in place rather than laying them out in space.
  */
 export default function ExperienceEntry({

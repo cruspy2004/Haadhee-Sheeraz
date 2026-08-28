@@ -12,7 +12,7 @@ import { site } from '@/lib/site';
  * The portrait is anchored to the BOTTOM of the viewport rather than
  * centred in the flow. Because the frame is taller than the source image
  * is wide-to-tall, object-cover scales the image to fill the frame's
- * height and crops horizontally only — so the full height of the photo is
+ * height and crops horizontally only, so the full height of the photo is
  * always shown, and bottom-aligning the frame puts the bottom of the image
  * exactly on the bottom of the screen.
  *
@@ -36,7 +36,7 @@ export default function HeroResting() {
     >
       <HeroGrid />
 
-      {/* Ambient breathing light behind the subject — straight-ahead motion
+      {/* Ambient breathing light behind the subject. Straight-ahead motion
           (principle 4), so it never reads as a visible loop. */}
       <div
         aria-hidden="true"
@@ -61,8 +61,8 @@ export default function HeroResting() {
       </div>
 
       {/* Wordmark overlaps the top of the hair. Centred with inset rather
-          than a translate class — Framer owns `transform` on anything it
-          animates and would overwrite it. */}
+          than a translate class, because Framer owns `transform` on
+          anything it animates and would overwrite it. */}
       {/* POSITION: --hero-name-* in globals.css */}
       <motion.h1
         className="pointer-events-none absolute inset-x-0 px-4 text-center font-script font-semibold uppercase leading-none text-silver-bright"
@@ -100,8 +100,8 @@ export default function HeroResting() {
         </motion.p>
         {/*
           The tagline stays as written. The line under it is what a hiring
-          manager can actually act on — "simple, reliable builder" is a
-          good line but it names nothing you have done.
+          manager can actually act on: "simple, reliable builder" is a good
+          line but it names nothing you have done.
         */}
         <motion.p
           custom={1}
@@ -115,8 +115,8 @@ export default function HeroResting() {
           variants={rise}
           className="max-w-lg text-[length:var(--t-body-s)] leading-relaxed text-silver-dim"
         >
-          I ship products end to end — and I teach 7.5k developers how they
-          work.
+          Three years designing and building products end to end, and
+          teaching 7.5k developers how they work.
         </motion.p>
         <motion.div
           custom={3}

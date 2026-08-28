@@ -2,11 +2,11 @@
 export const site = {
   name: 'Haadhee Sheeraz',
   /*
-   * Targets two lanes: full-stack product engineer, and developer
-   * advocacy. "Software Engineer" served neither — it says what he is
-   * qualified as, not what he is good at. See vault/Positioning.md.
+   * Design Engineer: builds the thing and decides how it looks and moves.
+   * Chosen over "Software Engineer", which says what he is qualified as
+   * rather than what he is good at. See vault/Positioning.md.
    */
-  role: 'Product Engineer · Developer Advocate',
+  role: 'Design Engineer',
   email: 'haadheesheeraz2004@gmail.com',
   phone: '+92 325 8660707',
   phoneHref: '+923258660707',

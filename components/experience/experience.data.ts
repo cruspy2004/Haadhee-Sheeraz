@@ -11,8 +11,8 @@ export type ExperienceEntryData = {
 };
 
 /**
- * PRD §4.3 — real work history, most recent first. Source: resume.pdf,
- * plus the current FlyRank AI role.
+ * Real work history, most recent first. Source: resume.pdf, plus the
+ * current FlyRank AI role.
  *
  * `anchor` values are spread across the path with room at each end so the
  * first entry is not already on screen when the section is reached and the
@@ -24,9 +24,9 @@ export const experience: ExperienceEntryData[] = [
     number: '01',
     role: 'Backend Engineering Intern',
     company: 'FlyRank AI',
-    dates: 'Aug 2026 — Present',
+    dates: 'Aug 2026 - Present',
     description:
-      'Building and shipping backend services and APIs for an AI product.',
+      'Building and shipping backend services for an AI product. Designing API endpoints and the data models underneath them, wiring up the integrations the product runs on, and keeping all of it stable while the surface area grows week to week.',
     anchor: 0.15,
     side: 'right',
   },
@@ -35,9 +35,9 @@ export const experience: ExperienceEntryData[] = [
     number: '02',
     role: 'Software Engineering Intern',
     company: 'Wateen Telecom',
-    dates: 'May 2025 — Aug 2025',
+    dates: 'May 2025 - Aug 2025',
     description:
-      'Selected from 5,000 applicants. Engineered the backend for Watify, an internal platform serving 5,000+ employees — REST and GraphQL APIs, PostgreSQL schema and migrations, JWT authentication, and lazy loading for scale. Shipped in an agile team on the PERN stack.',
+      'Selected from 5,000 applicants. Engineered the backend for Watify, an internal platform serving 5,000+ employees: REST and GraphQL APIs, PostgreSQL schema and migrations, JWT authentication, and lazy loading for scale. Shipped in an agile team on the PERN stack.',
     anchor: 0.38,
     side: 'left',
   },
@@ -46,9 +46,9 @@ export const experience: ExperienceEntryData[] = [
     number: '03',
     role: 'Growth Engineer',
     company: 'Leetly',
-    dates: 'Nov 2024 — Jan 2025',
+    dates: 'Nov 2024 - Jan 2025',
     description:
-      'Drove user adoption for a mobile DSA learning product through data-driven growth experiments — instrumenting the funnel, testing against it, and acting on what the numbers said.',
+      'Drove user adoption for a mobile DSA learning product through data-driven growth experiments. Instrumented the funnel, tested against it, and acted on what the numbers actually said rather than what the roadmap assumed.',
     anchor: 0.62,
     side: 'right',
   },
@@ -57,9 +57,9 @@ export const experience: ExperienceEntryData[] = [
     number: '04',
     role: 'Content Engineer',
     company: 'REM / IT Empire',
-    dates: 'Sep 2024 — Nov 2024',
+    dates: 'Sep 2024 - Nov 2024',
     description:
-      'Built content strategy and brand voice for an AI B2B SaaS helping realtors matchmake properties, at startup stage.',
+      'Built content strategy and brand voice for an AI B2B SaaS helping realtors matchmake properties. Joined at startup stage, when the product still had to explain itself to every visitor it got.',
     anchor: 0.86,
     side: 'left',
   },

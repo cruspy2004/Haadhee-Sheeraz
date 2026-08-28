@@ -1,5 +1,5 @@
 /**
- * Jack — sprite sheet contract and physics constants.
+ * Jack, sprite sheet contract and physics constants.
  *
  * The sheet is a 6 x 4 grid of 64 x 64 cells (384 x 256 total), every pose
  * facing RIGHT. Left-facing is produced with scaleX(-1) at render time, so
@@ -90,7 +90,7 @@ export type ClipName = keyof typeof CLIPS;
  *    frame *began*, so a performance.now() taken inside a scroll or resize
  *    handler during that same frame is LATER than it. Storing that as the
  *    clip's start makes `now - start` negative, and JavaScript's % returns
- *    a negative remainder for negative operands — so frames[-2].
+ *    a negative remainder for negative operands, so frames[-2].
  * 2. NaN, from a start time that was never set.
  *
  * The modulo is Euclidean, so the result is always a valid index.
@@ -112,7 +112,7 @@ export function frameAt(clip: Clip, elapsedMs: number): [number, number] {
 /*
  * Physics. Units are CSS pixels and seconds.
  *
- * Mario's jump is not an eased tween — it is an instantaneous upward
+ * Mario's jump is not an eased tween, it is an instantaneous upward
  * impulse followed by constant downward acceleration, which is what
  * produces the parabola. The gravity here is deliberately high relative to
  * the jump height: a low-gravity jump floats and reads as weightless,
@@ -132,7 +132,7 @@ export const LAND_MS = 130;
 export const GREET_DELAY = 1600;
 
 /* ══════════════════════════════════════════════════════════════════
-   ⬇⬇⬇  JACK'S LANDING SPOT — EDIT HERE  ⬇⬇⬇
+   ⬇⬇⬇  JACK'S LANDING SPOT, EDIT HERE  ⬇⬇⬇
 
    Where Jack lands when he jumps the portrait. The fractions are of the
    hero photo's frame, not the screen, so they hold at any window size.

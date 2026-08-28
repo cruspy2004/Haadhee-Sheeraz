@@ -14,7 +14,7 @@ type Props = {
 
 /**
  * One full-screen project. Content follows 100-150ms behind the background
- * colour crossfade (principle 5) — handled by the delay offsets below.
+ * colour crossfade (principle 5), handled by the delay offsets below.
  */
 export default function ProjectCard({ project, index, total, active }: Props) {
   const { ink } = project;
@@ -150,7 +150,7 @@ export default function ProjectCard({ project, index, total, active }: Props) {
 }
 
 /**
- * Designed cover for projects with no screenshot yet — an oversized initial
+ * Designed cover for projects with no screenshot yet, an oversized initial
  * struck into the panel colour, with the tag list set as a specimen. Built
  * so a real image can replace it by setting `imagePath`, nothing else.
  */

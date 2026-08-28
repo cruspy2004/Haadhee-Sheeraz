@@ -10,7 +10,7 @@ import {
 } from '@/lib/animation/easings';
 
 /**
- * PRD §4.4 — the page-turn into Projects. Plays once.
+ * PRD §4.4, the page-turn into Projects. Plays once.
  *
  * The outgoing panel's transform origin is the top-right corner, so its
  * centre genuinely travels a quarter-circle around that anchor rather than
@@ -41,7 +41,7 @@ export default function PivotTransition({
     };
 
     if (reduced) {
-      // Design-doc §7 — a plain crossfade stands in for the turn.
+      // Design-doc §7, a plain crossfade stands in for the turn.
       forceFinal();
       return;
     }
@@ -64,7 +64,7 @@ export default function PivotTransition({
       failsafe = window.setTimeout(forceFinal, DUR.pivot * 1000 + 2500);
 
       tl
-        // Principle 2 — 2° counter-rotation wind-up before the turn.
+        // Principle 2, 2° counter-rotation wind-up before the turn.
         .to(panel, {
           rotate: 2,
           duration: ANTICIPATION_DUR,
@@ -78,7 +78,7 @@ export default function PivotTransition({
           duration: DUR.pivot,
           ease: GSAP_EASE_EXIT,
           onStart: () => {
-            // Principle 8 — chromatic ripple across the nav glass at the
+            // Principle 8, chromatic ripple across the nav glass at the
             // exact pivot moment, decaying over 400ms.
             if (nav) {
               nav.classList.add('nav-ripple');
@@ -105,7 +105,7 @@ export default function PivotTransition({
     /*
      * Plain passive scroll check rather than a ScrollTrigger: this only
      * needs to fire once at a threshold, and a scroll listener evaluates
-     * immediately on mount — so a load that restores straight into Projects
+     * immediately on mount, so a load that restores straight into Projects
      * still plays (or skips to) the finished state.
      */
     const check = () => {
@@ -128,11 +128,11 @@ export default function PivotTransition({
      * Clipped locally: the incoming section is parked at xPercent 16 until
      * the turn plays, which would otherwise push the document wider than the
      * viewport and produce a horizontal scrollbar. Clipping here rather than
-     * on html/body keeps the Experience section's `sticky` working — an
+     * on html/body keeps the Experience section's `sticky` working, an
      * overflow value on a scroll ancestor would disable it.
      */
     <div className="relative overflow-hidden">
-      {/* Outgoing panel — carries the preceding section's surface colour
+      {/* Outgoing panel, carries the preceding section's surface colour
           across the turn so the background shift happens mid-transition. */}
       <div
         ref={panelRef}

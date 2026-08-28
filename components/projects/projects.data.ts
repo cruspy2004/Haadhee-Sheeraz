@@ -12,7 +12,7 @@ export type Project = {
   /**
    * Hero image. `null` means no real screenshot has been supplied yet and
    * the card falls back to its designed typographic cover. Drop a file into
-   * /public/project-images and set the path here — nothing else changes.
+   * /public/project-images and set the path here, nothing else changes.
    */
   imagePath: string | null;
   liveUrl: string;
@@ -21,11 +21,11 @@ export type Project = {
 };
 
 /**
- * PRD §4.5 — real copy, real destinations. Live URLs are the ones linked
+ * PRD §4.5, real copy, real destinations. Live URLs are the ones linked
  * from resume.pdf's own hyperlinks.
  */
 /*
- * H1GROW leads — Haadhee's call. The rest follow by what they prove:
+ * H1GROW leads, Haadhee's call. The rest follow by what they prove:
  * Watify is the engineering, JavascriptPeter is the audience, TopicPulse
  * is both with public code. See vault/Site Copy.md.
  */
@@ -48,7 +48,7 @@ export const projects: Project[] = [
     name: 'WATIFY',
     tags: ['Internal Tools', 'PERN', 'WebSockets'],
     description:
-      'An in-house communication platform for Wateen Telecom, serving 5,000+ employees. I engineered the full backend — REST + GraphQL APIs, PostgreSQL schema and migrations, JWT authentication, and lazy loading for scale.',
+      'An in-house communication platform for Wateen Telecom, serving 5,000+ employees. I engineered the full backend: REST and GraphQL APIs, PostgreSQL schema and migrations, JWT authentication, and lazy loading for scale.',
     color: '#1f6f4f',
     colorDeep: '#0c3327',
     ink: '#eefaf3',
@@ -61,9 +61,9 @@ export const projects: Project[] = [
     name: 'JAVASCRIPTPETER',
     tags: ['Instagram', 'Content Automation', 'Python', 'OpenAI API'],
     description:
-      'An automated content pipeline using Python and the OpenAI API that generates, produces, and schedules short-form technical videos from simple prompts. Grew to 7.5k+ followers and 3M+ views within 2 months, validating pipeline output quality at scale. Covers bite-sized JS content — DSA, JS syntax, new AI tools, and interviews.',
+      'An automated content pipeline using Python and the OpenAI API that generates, produces, and schedules short-form technical videos from simple prompts. Grew to 7.5k+ followers and 3M+ views within 2 months, validating pipeline output quality at scale. Covers bite-sized JS content: DSA, JS syntax, new AI tools, and interviews.',
     // Darkened from #c2477f, which put the heading at 4.16:1 and the
-    // description at ~3.4:1 — both under the AA floor.
+    // description at ~3.4:1, both under the AA floor.
     color: '#a12f68',
     colorDeep: '#4b1230',
     ink: '#fdeef5',
@@ -91,7 +91,7 @@ export const projects: Project[] = [
     description:
       'A compilation game built in Java (Swing/JavaFX). Added responsive memes to classic games, driving a 60% boost in interaction and a 14% higher click-through rate.',
     // Darkened hard from #c8862a: amber with near-white ink measured
-    // 2.84:1 on the heading and ~2.3:1 on the description — the worst
+    // 2.84:1 on the heading and ~2.3:1 on the description, the worst
     // pairing on the site and effectively unreadable.
     color: '#7c4f0f',
     colorDeep: '#3a2405',

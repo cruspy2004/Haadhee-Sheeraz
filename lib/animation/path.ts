@@ -3,7 +3,7 @@
  *
  * The path is generated in the sticky viewport's own pixel space, so one
  * SVG user unit === one CSS pixel. That means getPointAtLength() hands back
- * coordinates the entries can be positioned with directly — no hardcoded
+ * coordinates the entries can be positioned with directly, no hardcoded
  * pixel offsets, and the layout survives any later retune of the shape.
  */
 

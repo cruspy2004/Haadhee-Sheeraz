@@ -2,7 +2,7 @@
  * Shared motion language (design-doc §4).
  *
  * Every component imports curves and durations from here rather than
- * redefining them — principle 12 says consistency IS the polish.
+ * redefining them, principle 12 says consistency IS the polish.
  */
 
 export const EASE_ENTRANCE = [0.16, 1, 0.3, 1] as const; // expo-out
@@ -22,7 +22,7 @@ export const GSAP_EASE_ENTRANCE = `cubic-bezier(${EASE_ENTRANCE.join(',')})`;
 export const GSAP_EASE_EXIT = `cubic-bezier(${EASE_EXIT.join(',')})`;
 export const GSAP_EASE_AMBIENT = `cubic-bezier(${EASE_AMBIENT.join(',')})`;
 
-/** Principle 9 — duration scales with weight. Seconds, for GSAP/Framer. */
+/** Principle 9, duration scales with weight. Seconds, for GSAP/Framer. */
 export const DUR = {
   micro: 0.2, // hover, button          150-250ms
   component: 0.45, // card, nav item    350-500ms
@@ -33,12 +33,12 @@ export const DUR = {
   swipe: 0.6, // project crossfade      500-700ms
 } as const;
 
-/** Principle 5 — grouped elements stagger 50-70ms; secondaries lag 100-150ms. */
+/** Principle 5, grouped elements stagger 50-70ms; secondaries lag 100-150ms. */
 export const STAGGER = 0.06;
 export const SECONDARY_LAG = 0.13;
 
-/** Principle 2 — anticipation is 10-15% of the main move, 80-120ms, ease-in. */
+/** Principle 2, anticipation is 10-15% of the main move, 80-120ms, ease-in. */
 export const ANTICIPATION_DUR = 0.1;
 
-/** Principle 3 — the non-focal element recedes rather than disappearing. */
+/** Principle 3, the non-focal element recedes rather than disappearing. */
 export const DEFOCUS = { opacity: 0.4, blur: 6 } as const;

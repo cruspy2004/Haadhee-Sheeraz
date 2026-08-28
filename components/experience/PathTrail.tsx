@@ -25,7 +25,7 @@ type Props = {
  * on top, a stack of short segments with decreasing opacity trails the
  * head, which is what produces a genuine comet rather than a line that
  * fills in. Segments are used instead of a single gradient stroke because
- * an SVG gradient is spatial — it would not stay oriented to the path as
+ * an SVG gradient is spatial, it would not stay oriented to the path as
  * the route changes direction.
  */
 export default function PathTrail({
@@ -57,7 +57,7 @@ export default function PathTrail({
     });
   }, [headLen, segLen, totalLength]);
 
-  // Principle 8 — the head's glow grows as it travels.
+  // Principle 8, the head's glow grows as it travels.
   const glowR = 13 + head * 9;
 
   return (
@@ -81,7 +81,7 @@ export default function PathTrail({
       {/*
         The complete route, always visible once the section is reached.
         At the design doc's 8%/1.25px this was effectively invisible on a
-        real screen — and it is the central device of the section that
+        real screen, and it is the central device of the section that
         occupies most of the page, so it needs to read as a deliberate
         object rather than a rendering artifact.
       */}

@@ -28,7 +28,7 @@ type Phase =
   | 'jumpToHead'
   | 'crossHead'
   | 'dropOff'
-  /** Scrolled past without being clicked — trots back off the left. */
+  /** Scrolled past without being clicked, trots back off the left. */
   | 'dismissed'
   | 'gone';
 
@@ -50,7 +50,7 @@ type Runtime = {
 };
 
 /**
- * Jack — a pixel dog with platformer physics.
+ * Jack, a pixel dog with platformer physics.
  *
  * He waits, trots in from the left, sits and says hello. Clicking him
  * sends him off: he runs at the portrait, jumps the arc up its left side,
@@ -58,7 +58,7 @@ type Runtime = {
  *
  * Motion is integrated per frame (impulse + constant gravity) rather than
  * tweened, and sprite frames advance on their own fixed clock with no
- * interpolation — both are what make it read as a platformer rather than
+ * interpolation, both are what make it read as a platformer rather than
  * as a moving image.
  */
 export default function Jack() {
@@ -77,7 +77,7 @@ export default function Jack() {
     img.onload = () => setReady(true);
     img.onerror = () =>
       console.info(
-        `[Jack] sprite sheet not found at ${SHEET_SRC} — Jack is disabled until it is added.`
+        `[Jack] sprite sheet not found at ${SHEET_SRC}. Jack is disabled until it is added.`
       );
     img.src = SHEET_SRC;
   }, []);
@@ -150,7 +150,7 @@ export default function Jack() {
 
     /*
      * He is position:fixed, so without this he stays welded to the screen
-     * for the whole page — following the visitor into every section below.
+     * for the whole page, following the visitor into every section below.
      * If the hero scrolls away and he was never clicked, he trots back off
      * the left and does not return.
      */
@@ -237,7 +237,7 @@ export default function Jack() {
             s.clipStart = now;
             s.landedAt = now;
           }
-          // Missed the platform entirely — keep falling and exit below.
+          // Missed the platform entirely, keep falling and exit below.
           if (s.y > window.innerHeight + DISPLAY) {
             s.phase = 'gone';
             setInteractive(false);
@@ -272,7 +272,7 @@ export default function Jack() {
           s.vy += GRAVITY * dt;
           s.y += s.vy * dt;
           // A small forward carry so it reads as a hop off the edge, not
-          // a trapdoor — but nothing like a run.
+          // a trapdoor, but nothing like a run.
           s.x += HEAD_RUN_SPEED * 0.35 * dt;
           s.clip = s.vy > 60 ? 'fall' : 'apex';
 
@@ -294,7 +294,7 @@ export default function Jack() {
       /* ---- render ---- */
       const [row, col] = frameAt(CLIPS[s.clip], now - s.clipStart);
 
-      // Squash release on touchdown — the only non-physics flourish.
+      // Squash release on touchdown, the only non-physics flourish.
       const sinceLand = now - s.landedAt;
       const squash =
         sinceLand < LAND_MS
@@ -326,7 +326,7 @@ export default function Jack() {
         ref={nodeRef}
         onClick={start}
         role={interactive ? 'button' : undefined}
-        aria-label={interactive ? 'Jack the dog — click to send him running' : undefined}
+        aria-label={interactive ? 'Jack the dog. Click to send him running' : undefined}
         tabIndex={interactive ? 0 : -1}
         onKeyDown={(e) => {
           if (e.key === 'Enter' || e.key === ' ') {
@@ -370,7 +370,7 @@ function Bubble({ onClick }: { onClick: () => void }) {
       }}
     >
       <span className="font-mono text-[length:var(--t-meta)] tracking-[0.04em]">
-        Hi, I&rsquo;m Jack — click me to interact
+        Hi, I&rsquo;m Jack. Click me
       </span>
       <style jsx>{`
         .jack-bubble {

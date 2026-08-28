@@ -7,7 +7,7 @@ import SmoothScroll from '@/components/providers/SmoothScroll';
  * Fonts are self-hosted from /public/fonts rather than pulled through
  * next/font/google. next/font/google fetches the binaries from
  * fonts.gstatic.com at build time and falls back to Arial *silently* (only
- * a warning) if that request fails — which would ship the whole site in the
+ * a warning) if that request fails, which would ship the whole site in the
  * wrong typeface without failing the build. Self-hosting makes the build
  * deterministic and removes the network dependency entirely.
  *
@@ -16,7 +16,7 @@ import SmoothScroll from '@/components/providers/SmoothScroll';
  */
 /*
  * Wordmark face. BDO Grotesk is a commercial Atipo Foundry release, so
- * this is Schibsted Grotesk — the closest free neo-grotesque in
+ * this is Schibsted Grotesk, the closest free neo-grotesque in
  * proportion and aperture. Swapping to the real thing later is a matter
  * of dropping the woff2 in and changing this one path.
  */

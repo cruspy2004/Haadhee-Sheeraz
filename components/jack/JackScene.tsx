@@ -33,8 +33,8 @@ type Phase = 'idle' | 'running' | 'talking' | 'leaving' | 'gone';
  * to the right. The hero keeps its own component because only there does
  * he jump the portrait.
  *
- * Motion is the same as the hero's — constant velocity, frames on a fixed
- * clock — so he reads as the same animal in both places.
+ * Motion is the same as the hero's, constant velocity, frames on a fixed
+ * clock, so he reads as the same animal in both places.
  */
 export default function JackScene({
   lines,
@@ -81,7 +81,7 @@ export default function JackScene({
         st.current.stopX = r.width * stopAt;
         st.current.phase = 'running';
         // clipStart is deliberately left for the loop to set from its own
-        // rAF timestamp — see frameAt() on why mixing the two clocks here
+        // rAF timestamp, see frameAt() on why mixing the two clocks here
         // produces a negative elapsed time.
         st.current.clipStart = -1;
       }
@@ -216,7 +216,7 @@ export default function JackScene({
 
         /*
           Phones first. Anchoring the bubble beside Jack pushed it straight
-          off the right edge — his lines were being clipped mid-sentence.
+          off the right edge, his lines were being clipped mid-sentence.
           Here it spans the container instead and wraps, sitting above him.
         */
         .jack-line {
@@ -242,8 +242,8 @@ export default function JackScene({
           Roomy screens: the bubble sits beside him again.
 
           It wraps rather than truncating. nowrap + text-overflow: ellipsis
-          was cutting his longer lines off mid-sentence — "Founders
-          Institute unde…" — which reads as a layout bug, not as brevity.
+          was cutting his longer lines off mid-sentence, "Founders
+          Institute unde…", which reads as a layout bug, not as brevity.
           The box grows upward from its bottom edge, so a second line is
           free.
         */

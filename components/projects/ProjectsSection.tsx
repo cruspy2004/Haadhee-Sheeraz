@@ -15,7 +15,7 @@ const DRAG_THRESHOLD = 56;
  * drag and arrow keys move between projects, while vertical scroll passes
  * straight through so scrolling down still exits into Contact.
  *
- * Nothing is pinned — the section is a single viewport-tall panel, so the
+ * Nothing is pinned, the section is a single viewport-tall panel, so the
  * page's normal scroll is never intercepted.
  */
 export default function ProjectsSection() {
@@ -180,8 +180,12 @@ export default function ProjectsSection() {
         onClick={() => go(-1)}
         disabled={index === 0}
         aria-label="Previous project"
-        className="absolute left-3 top-1/2 z-20 grid h-11 w-11 -translate-y-1/2 place-items-center rounded-full border transition disabled:opacity-25 sm:left-6"
-        style={{ borderColor: `color-mix(in srgb, ${project.ink} 26%, transparent)`, color: project.ink }}
+        className="nav-arrow absolute left-3 top-1/2 z-20 grid h-12 w-12 -translate-y-1/2 place-items-center rounded-full border text-xl transition disabled:opacity-20 sm:left-6 sm:h-14 sm:w-14"
+        style={{
+          borderColor: `color-mix(in srgb, ${project.ink} 62%, transparent)`,
+          background: `color-mix(in srgb, ${project.ink} 13%, transparent)`,
+          color: project.ink,
+        }}
       >
         ←
       </button>
@@ -190,8 +194,12 @@ export default function ProjectsSection() {
         onClick={() => go(1)}
         disabled={index === projects.length - 1}
         aria-label="Next project"
-        className="absolute right-3 top-1/2 z-20 grid h-11 w-11 -translate-y-1/2 place-items-center rounded-full border transition disabled:opacity-25 sm:right-6"
-        style={{ borderColor: `color-mix(in srgb, ${project.ink} 26%, transparent)`, color: project.ink }}
+        className="nav-arrow absolute right-3 top-1/2 z-20 grid h-12 w-12 -translate-y-1/2 place-items-center rounded-full border text-xl transition disabled:opacity-20 sm:right-6 sm:h-14 sm:w-14"
+        style={{
+          borderColor: `color-mix(in srgb, ${project.ink} 62%, transparent)`,
+          background: `color-mix(in srgb, ${project.ink} 13%, transparent)`,
+          color: project.ink,
+        }}
       >
         →
       </button>
@@ -212,13 +220,13 @@ export default function ProjectsSection() {
             style={{
               width: i === index ? 30 : 10,
               background: project.ink,
-              opacity: i === index ? 0.9 : 0.32,
+              opacity: i === index ? 1 : 0.5,
             }}
           />
         ))}
       </div>
 
-      {/* Discoverability cue — nothing else on the site is horizontal. */}
+      {/* Discoverability cue, nothing else on the site is horizontal. */}
       <AnimatePresence>
         {inView && !hintSeen && (
           <motion.p
@@ -242,7 +250,7 @@ export default function ProjectsSection() {
           lines={[
             'Five shipped projects down here.',
             'Backend for 5,000 users, and 3M views teaching JavaScript.',
-            'Click any of them — they all go somewhere real.',
+            'Click any of them. They all go somewhere real.',
           ]}
         />
       </div>

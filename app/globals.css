@@ -56,7 +56,7 @@
     color: var(--ink);
   }
 
-  /* Section headings: light weight, tight tracking — restraint over flourish. */
+  /* Section headings: light weight, tight tracking, restraint over flourish. */
   h1,
   h2,
   h3 {
@@ -67,7 +67,7 @@
 }
 
 /* ══════════════════════════════════════════════════════════════════
-   ⬇⬇⬇  POSITIONING CONTROLS — EDIT HERE  ⬇⬇⬇
+   ⬇⬇⬇  POSITIONING CONTROLS, EDIT HERE  ⬇⬇⬇
 
    Every number that moves the hero photo, the big heading, or the nav
    bar lives in this one block. Change a value, save, the page updates.
@@ -127,19 +127,19 @@
   One type scale, used everywhere.
 
   The build had drifted to fourteen size/weight pairs, six of them between
-  10.4px and 12px — perceptually identical but inconsistent, which is
+  10.4px and 12px, perceptually identical but inconsistent, which is
   exactly what reads as unresolved. Principle 12: consistency IS the polish.
 
   Sizes are the only ones any component should reach for.
 */
 :root {
-  --t-eyebrow: 0.6875rem; /* 11px — uppercase mono labels */
-  --t-meta: 0.8125rem; /*    13px — dates, tags, link labels */
-  --t-body-s: 0.875rem; /*   14px — dense body copy */
-  --t-body: 1rem; /*         16px — body copy */
-  --t-h3: 1.25rem; /*        20px — entry roles */
-  --t-h2: 2rem; /*           32px — section headings */
-  --t-display: 3.5rem; /*    56px — project names */
+  --t-eyebrow: 0.6875rem; /* 11px, uppercase mono labels */
+  --t-meta: 0.8125rem; /*    13px, dates, tags, link labels */
+  --t-body-s: 0.875rem; /*   14px, dense body copy */
+  --t-body: 1rem; /*         16px, body copy */
+  --t-h3: 1.25rem; /*        20px, entry roles */
+  --t-h2: 2rem; /*           32px, section headings */
+  --t-display: 3.5rem; /*    56px, project names */
 }
 
 @layer components {
@@ -178,7 +178,7 @@
 }
 
 /*
-  Cinematic grain. Fixed, non-interactive, very low opacity — it stops the
+  Cinematic grain. Fixed, non-interactive, very low opacity, it stops the
   large black fields from banding on cheap panels and gives the whole page
   a single filmic surface.
 */
@@ -215,7 +215,7 @@
 }
 
 /*
-  Principle 8 — secondary action on the pivot: a faint chromatic ripple
+  Principle 8, secondary action on the pivot: a faint chromatic ripple
   runs across the nav's glass at the exact moment the page turns, decaying
   over 400ms. Added and removed by PivotTransition.
 */
@@ -238,7 +238,7 @@
   }
 }
 
-/* Principle 3 — staging: what isn't focal recedes, it doesn't vanish. */
+/* Principle 3, staging: what isn't focal recedes, it doesn't vanish. */
 .defocus {
   opacity: 0.4;
   filter: blur(6px);
@@ -264,7 +264,7 @@
   transform: translate(-50%, -50%);
 }
 
-/* Principle 1 — squash & stretch, hover/press feedback only. */
+/* Principle 1, squash & stretch, hover/press feedback only. */
 .press {
   transition: transform 180ms var(--ease-overshoot);
 }
@@ -323,7 +323,7 @@
   border-radius: var(--radius-panel);
 }
 
-/* Corner markers — the small circles that make the frame read as a
+/* Corner markers, the small circles that make the frame read as a
    machined part rather than as a plain box. */
 .tech-frame::before,
 .tech-frame::after {
@@ -346,7 +346,7 @@
 }
 
 /*
-   Hairline grid. Scoped to the hero only — running it down the whole page
+   Hairline grid. Scoped to the hero only, running it down the whole page
    competed with the Experience path and the coloured project panels, both
    of which already carry their own structure.
 
@@ -467,4 +467,24 @@
   .tech-frame::after {
     box-shadow: calc(100vw - 2 * var(--frame-inset) - 35px) 0 0 var(--silver-faint);
   }
+}
+
+/*
+  Project navigation arrows.
+
+  The originals were a 26%-alpha hairline ring with no fill, sitting on
+  large saturated colour fields. On the lighter panels they were close to
+  invisible. Now they carry a fill, a much stronger ring, and a blur that
+  separates them from whatever is behind, plus a real hover state.
+*/
+.nav-arrow {
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  box-shadow: 0 4px 18px -6px rgba(0, 0, 0, 0.55);
+}
+.nav-arrow:not(:disabled):hover {
+  transform: translateY(-50%) scale(1.08);
+}
+.nav-arrow:not(:disabled):active {
+  transform: translateY(-50%) scale(0.96);
 }

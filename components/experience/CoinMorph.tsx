@@ -11,18 +11,18 @@ type Props = {
 };
 
 /**
- * PRD §4.3 — the hero photo condenses into a coin, drifts down a shallow
+ * PRD §4.3, the hero photo condenses into a coin, drifts down a shallow
  * S-curve as it shrinks, flips in 3D, then collapses into the glowing head
  * that travels the path. Same scroll-progress value as PathTrail, so there
  * is no seam between the two.
  *
  * Principle 11 (solid drawing): one light source for the whole flip. The
- * specular sweep is fixed at 135° — matching the hero photo's top-left key
- * light — and lives on both faces, so the lit edge never contradicts the
+ * specular sweep is fixed at 135°, matching the hero photo's top-left key
+ * light, and lives on both faces, so the lit edge never contradicts the
  * photo as the coin turns.
  */
 export default function CoinMorph({ t, from, to }: Props) {
-  // Principle 7 — arcs: a shallow S rather than a straight translate.
+  // Principle 7, arcs: a shallow S rather than a straight translate.
   const drift = Math.sin(t * Math.PI * 2) * 36;
 
   const ease = 1 - Math.pow(1 - t, 3); // expo-ish out
@@ -69,7 +69,7 @@ export default function CoinMorph({ t, from, to }: Props) {
           transform: `rotateY(${spin}deg) scale(${scale})`,
         }}
       >
-        {/* Face A — the photo itself, circularly cropped. */}
+        {/* Face A, the photo itself, circularly cropped. */}
         <div
           className="absolute inset-0 overflow-hidden rounded-full"
           style={{ backfaceVisibility: 'hidden' }}
@@ -84,7 +84,7 @@ export default function CoinMorph({ t, from, to }: Props) {
           <div className="absolute inset-0" style={{ background: SHEEN }} />
         </div>
 
-        {/* Face B — struck silver. */}
+        {/* Face B, struck silver. */}
         <div
           className="absolute inset-0 overflow-hidden rounded-full"
           style={{
@@ -107,7 +107,7 @@ export default function CoinMorph({ t, from, to }: Props) {
         </div>
       </div>
 
-      {/* Principle 8 — light flare trailing the coin at 30% intensity. */}
+      {/* Principle 8, light flare trailing the coin at 30% intensity. */}
       <div
         className="absolute inset-0 -z-10 rounded-full blur-2xl"
         style={{

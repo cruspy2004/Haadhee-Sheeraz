@@ -5,14 +5,14 @@ import Image from 'next/image';
 /**
  * Drop-in slot for the AI-generated hero video (PRD §4.1, design-doc §8).
  * Point this at a file in /public and the container, sizing, masking and
- * breathing glow all stay exactly as they are — zero layout change.
+ * breathing glow all stay exactly as they are, zero layout change.
  */
 const HERO_VIDEO_SRC: string | null = null;
 
 /**
  * Edge treatment.
  *
- * The previous mask was radial-gradient(72% 62% at 50% 44%) — an ellipse
+ * The previous mask was radial-gradient(72% 62% at 50% 44%), an ellipse
  * narrower than the frame, which cut the shoulders off and faded the
  * bottom of the portrait out well before the container ended. That, not
  * the object-fit crop, was what made it look like most of the photo was
@@ -20,7 +20,7 @@ const HERO_VIDEO_SRC: string | null = null;
  *
  * This one is deliberately generous: it reaches past the frame on every
  * side (120% x 110%) and is centred low, so only the far corners feather
- * and the bottom edge stays fully opaque — the portrait can run all the
+ * and the bottom edge stays fully opaque, the portrait can run all the
  * way down to the bottom of the screen. The source image is already on
  * pure black, so the sides blend into the page on their own.
  */

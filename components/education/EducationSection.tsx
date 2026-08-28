@@ -9,7 +9,7 @@ import { EASE_ENTRANCE, STAGGER } from '@/lib/animation/easings';
  * Credentials, set as a spec sheet inside a bordered module.
  *
  * The neo-tech reference treats every block as a labelled component with
- * an index, a rule and a value column — so this reads as a datasheet
+ * an index, a rule and a value column, so this reads as a datasheet
  * rather than as a list, which is also closer to what the content is.
  */
 export default function EducationSection() {
@@ -44,7 +44,7 @@ export default function EducationSection() {
                 ease: EASE_ENTRANCE,
               }}
             >
-              {/* Desktop: label — rule — value. Phones: stacked. */}
+              {/* Desktop: label, rule, value. Phones: stacked. */}
               <div className="hidden spec-row sm:grid">
                 <h3 className="text-[length:var(--t-h3)] font-normal tracking-tight text-silver-bright">
                   {entry.institution}
@@ -78,7 +78,7 @@ export default function EducationSection() {
         <JackScene
           stopAt={0.3}
           lines={[
-            'Computer Science at NUST SEECS — graduating 2027.',
+            'Computer Science at NUST SEECS, graduating 2027.',
             'McKinsey Forward, and Founders Institute under NIC Pakistan.',
             'Cohort 3. He finished it.',
           ]}

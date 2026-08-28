@@ -18,7 +18,7 @@ import { useIsomorphicLayoutEffect } from '@/lib/useIsomorphicLayoutEffect';
  *
  * The viewport is held with CSS `position: sticky` rather than a
  * ScrollTrigger pin. Design-doc §7 flags pin jank on low-end mobile
- * specifically at this handoff — sticky avoids the pin-spacer layout shift
+ * specifically at this handoff, sticky avoids the pin-spacer layout shift
  * entirely while ScrollTrigger still supplies the progress value.
  */
 export default function ExperienceSection() {
@@ -88,7 +88,7 @@ export default function ExperienceSection() {
   }, []);
 
   /*
-   * COIN MORPH — DISABLED, PENDING REVISIT.
+   * COIN MORPH, DISABLED, PENDING REVISIT.
    *
    * The hero-photo-to-coin morph is switched off rather than deleted: the
    * component, its easing and its S-curve maths are all still in
@@ -162,14 +162,14 @@ export default function ExperienceSection() {
       ref={sectionRef}
       /*
        * 320svh, down from 520. At 520 this section was 62% of the whole
-       * document while Projects — six shipped projects, the actual point
-       * of the site — got 11%. The path still has room to read; it just
+       * document while Projects, six shipped projects, the actual point
+       * of the site, got 11%. The path still has room to read; it just
        * no longer outweighs the work.
        */
       className="relative h-[320svh]"
       aria-label="Experience"
     >
-      {/* COIN MORPH — DISABLED, PENDING REVISIT. See the note above.
+      {/* COIN MORPH, DISABLED, PENDING REVISIT. See the note above.
           Sat outside the sticky stage because the coin is viewport-
           positioned and began moving while the hero was still on screen.
 

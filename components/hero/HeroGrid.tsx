@@ -9,7 +9,7 @@ import { useEffect, useRef } from 'react';
  * element rather than held in React state: this updates on every mouse
  * move, and a state write per move would re-render the hero on each one.
  * The two properties feed a mask on .grid-field::after, so the browser
- * only recomposites — no layout, no paint of the grid itself.
+ * only recomposites, no layout, no paint of the grid itself.
  */
 export default function HeroGrid() {
   const ref = useRef<HTMLDivElement | null>(null);
