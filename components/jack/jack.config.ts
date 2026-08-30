@@ -129,7 +129,7 @@ export const LAND_SQUASH = 0.72;
 export const LAND_MS = 130;
 
 /** Delay before Jack first appears, in ms. */
-export const GREET_DELAY = 1600;
+export const GREET_DELAY = 1000;
 
 /* ══════════════════════════════════════════════════════════════════
    ⬇⬇⬇  JACK'S LANDING SPOT, EDIT HERE  ⬇⬇⬇
@@ -149,7 +149,7 @@ export const HEAD = {
   /** Where it stops being wide enough. */
   rightFrac: 0.72,
   /** Pixel nudge. Negative = he stands higher. */
-  nudgeY: -10,
+  nudgeY: -15,
 };
 /* ══════════════════════════════════════════════════════════════════
    ⬆⬆⬆  END JACK'S LANDING SPOT  ⬆⬆⬆
