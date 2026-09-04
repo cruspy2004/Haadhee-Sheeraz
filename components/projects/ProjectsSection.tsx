@@ -174,56 +174,67 @@ export default function ProjectsSection() {
         SEC 03
       </div>
 
-      {/* Arrows */}
-      <button
-        type="button"
+      {/*
+        Navigation.
+
+        On wide screens the arrows flank the panel. On phones that puts
+        them dead centre vertically, straight on top of the project title,
+        which is what they were doing. There they join the dots in a single
+        control row above Jack instead.
+      */}
+      <Arrow
+        dir={-1}
         onClick={() => go(-1)}
         disabled={index === 0}
-        aria-label="Previous project"
-        className="nav-arrow absolute left-3 top-1/2 z-20 grid h-12 w-12 -translate-y-1/2 place-items-center rounded-full border text-xl transition disabled:opacity-20 sm:left-6 sm:h-14 sm:w-14"
-        style={{
-          borderColor: `color-mix(in srgb, ${project.ink} 62%, transparent)`,
-          background: `color-mix(in srgb, ${project.ink} 13%, transparent)`,
-          color: project.ink,
-        }}
-      >
-        ←
-      </button>
-      <button
-        type="button"
+        ink={project.ink}
+        className="absolute left-3 top-1/2 hidden -translate-y-1/2 sm:left-6 sm:grid"
+      />
+      <Arrow
+        dir={1}
         onClick={() => go(1)}
         disabled={index === projects.length - 1}
-        aria-label="Next project"
-        className="nav-arrow absolute right-3 top-1/2 z-20 grid h-12 w-12 -translate-y-1/2 place-items-center rounded-full border text-xl transition disabled:opacity-20 sm:right-6 sm:h-14 sm:w-14"
-        style={{
-          borderColor: `color-mix(in srgb, ${project.ink} 62%, transparent)`,
-          background: `color-mix(in srgb, ${project.ink} 13%, transparent)`,
-          color: project.ink,
-        }}
-      >
-        →
-      </button>
+        ink={project.ink}
+        className="absolute right-3 top-1/2 hidden -translate-y-1/2 sm:right-6 sm:grid"
+      />
 
-      {/* Progress dots */}
-      <div className="absolute bottom-16 left-1/2 z-20 flex -translate-x-1/2 items-center gap-2">
-        {projects.map((p, i) => (
-          <button
-            key={p.id}
-            type="button"
-            onClick={() => {
-              setIndex(i);
-              setHintSeen(true);
-            }}
-            aria-label={`Go to ${p.name}`}
-            aria-current={i === index}
-            className="h-1.5 rounded-full transition-all duration-300"
-            style={{
-              width: i === index ? 30 : 10,
-              background: project.ink,
-              opacity: i === index ? 1 : 0.5,
-            }}
-          />
-        ))}
+      {/* Control row. Sits clear of Jack's 132px band on phones. */}
+      <div className="absolute inset-x-0 bottom-[9rem] z-20 flex items-center justify-center gap-4 sm:bottom-16">
+        <Arrow
+          dir={-1}
+          onClick={() => go(-1)}
+          disabled={index === 0}
+          ink={project.ink}
+          className="grid sm:hidden"
+        />
+
+        <div className="flex items-center gap-2">
+          {projects.map((p, i) => (
+            <button
+              key={p.id}
+              type="button"
+              onClick={() => {
+                setIndex(i);
+                setHintSeen(true);
+              }}
+              aria-label={`Go to ${p.name}`}
+              aria-current={i === index}
+              className="h-1.5 rounded-full transition-all duration-300"
+              style={{
+                width: i === index ? 30 : 10,
+                background: project.ink,
+                opacity: i === index ? 1 : 0.5,
+              }}
+            />
+          ))}
+        </div>
+
+        <Arrow
+          dir={1}
+          onClick={() => go(1)}
+          disabled={index === projects.length - 1}
+          ink={project.ink}
+          className="grid sm:hidden"
+        />
       </div>
 
       {/* Discoverability cue, nothing else on the site is horizontal. */}
@@ -255,5 +266,42 @@ export default function ProjectsSection() {
         />
       </div>
     </section>
+  );
+}
+
+/**
+ * One arrow, rendered twice per breakpoint rather than styled twice.
+ * `-translate-y-1/2` only applies in the side-mounted desktop variant, so
+ * the hover transform in globals.css is written to match whichever
+ * position class is present.
+ */
+function Arrow({
+  dir,
+  onClick,
+  disabled,
+  ink,
+  className,
+}: {
+  dir: -1 | 1;
+  onClick: () => void;
+  disabled: boolean;
+  ink: string;
+  className: string;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      disabled={disabled}
+      aria-label={dir === -1 ? 'Previous project' : 'Next project'}
+      className={`nav-arrow z-20 h-12 w-12 place-items-center rounded-full border text-xl transition disabled:opacity-20 sm:h-14 sm:w-14 ${className}`}
+      style={{
+        borderColor: `color-mix(in srgb, ${ink} 62%, transparent)`,
+        background: `color-mix(in srgb, ${ink} 13%, transparent)`,
+        color: ink,
+      }}
+    >
+      {dir === -1 ? '←' : '→'}
+    </button>
   );
 }

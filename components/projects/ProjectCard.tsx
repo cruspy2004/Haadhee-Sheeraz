@@ -34,7 +34,7 @@ export default function ProjectCard({ project, index, total, active }: Props) {
 
   return (
     <div
-      className="absolute inset-0 flex items-center justify-center px-5 pb-20 pt-24 sm:px-10 sm:pb-24 sm:pt-28"
+      className="absolute inset-0 flex items-center justify-center px-5 pb-[13rem] pt-20 sm:px-10 sm:pb-24 sm:pt-28"
       style={{ color: ink, pointerEvents: active ? 'auto' : 'none' }}
       aria-hidden={!active}
     >
@@ -131,7 +131,7 @@ export default function ProjectCard({ project, index, total, active }: Props) {
         >
           {project.imagePath ? (
             // Height-capped so the stacked layout still fits one viewport.
-            <div className="relative aspect-[16/10] max-h-[26svh] w-full sm:max-h-[30svh] md:max-h-[50svh]">
+            <div className="relative aspect-[16/10] max-h-[20svh] w-full sm:max-h-[30svh] md:max-h-[50svh]">
               <Image
                 src={project.imagePath}
                 alt={`${project.name} interface`}
@@ -158,7 +158,7 @@ function TypographicCover({ project }: { project: Project }) {
   const { ink, colorDeep } = project;
   return (
     <div
-      className="relative aspect-[16/10] max-h-[26svh] w-full overflow-hidden sm:max-h-[30svh] md:max-h-[50svh]"
+      className="relative aspect-[16/10] max-h-[20svh] w-full overflow-hidden sm:max-h-[30svh] md:max-h-[50svh]"
       style={{
         background: `radial-gradient(120% 130% at 18% 8%, ${colorDeep} 0%, transparent 62%)`,
       }}

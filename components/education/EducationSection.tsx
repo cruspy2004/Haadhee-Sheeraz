@@ -8,9 +8,13 @@ import { EASE_ENTRANCE, STAGGER } from '@/lib/animation/easings';
 /**
  * Credentials, set as a spec sheet inside a bordered module.
  *
- * The neo-tech reference treats every block as a labelled component with
- * an index, a rule and a value column, so this reads as a datasheet
- * rather than as a list, which is also closer to what the content is.
+ * ONE layout that reflows, not a desktop copy plus a mobile copy. The
+ * previous version rendered both and hid one with Tailwind's `hidden`,
+ * which silently failed: `hidden` lives in @layer utilities, the old
+ * .spec-row rule was unlayered, and unlayered CSS outranks layered CSS in
+ * the cascade. Every entry appeared twice on phones. Two copies of the
+ * same content is the bug waiting to happen; one that reflows cannot
+ * desynchronise.
  */
 export default function EducationSection() {
   return (
@@ -44,30 +48,24 @@ export default function EducationSection() {
                 ease: EASE_ENTRANCE,
               }}
             >
-              {/* Desktop: label, rule, value. Phones: stacked. */}
-              <div className="hidden spec-row sm:grid">
-                <h3 className="text-[length:var(--t-h3)] font-normal tracking-tight text-silver-bright">
+              <div className="flex flex-col gap-1.5 sm:flex-row sm:items-baseline sm:gap-4">
+                <h3 className="whitespace-nowrap text-[length:var(--t-h3)] font-normal tracking-tight text-silver-bright">
                   {entry.institution}
                 </h3>
-                <span className="rule" aria-hidden="true" />
-                <div className="flex items-baseline gap-6">
-                  <p className="text-[length:var(--t-body-s)] text-silver-dim">
-                    {entry.credential}
-                  </p>
-                  <p className="meta w-[11.5rem] shrink-0 text-right">
-                    {entry.dates}
-                  </p>
-                </div>
-              </div>
 
-              <div className="sm:hidden">
-                <h3 className="text-[length:var(--t-h3)] font-normal tracking-tight text-silver-bright">
-                  {entry.institution}
-                </h3>
-                <p className="mt-1 text-[length:var(--t-body-s)] text-silver-dim">
+                {/* Connecting rule, desktop only. */}
+                <span
+                  aria-hidden="true"
+                  className="hidden h-px flex-1 bg-[var(--hair)] sm:block"
+                />
+
+                <p className="text-[length:var(--t-body-s)] text-silver-dim">
                   {entry.credential}
                 </p>
-                <p className="meta mt-2">{entry.dates}</p>
+
+                <p className="meta shrink-0 whitespace-nowrap sm:ml-6">
+                  {entry.dates}
+                </p>
               </div>
             </motion.li>
           ))}
