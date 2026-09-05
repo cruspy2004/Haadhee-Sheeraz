@@ -47,7 +47,7 @@ export default function HeroMedia() {
         />
       ) : (
         <Image
-          src="/hero-photo.png"
+          src="/hero-photo.webp"
           alt="Haadhee Sheeraz"
           fill
           priority

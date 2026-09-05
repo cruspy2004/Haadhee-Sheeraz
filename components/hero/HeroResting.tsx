@@ -95,9 +95,16 @@ export default function HeroResting() {
         initial="hidden"
         animate="show"
       >
-        <motion.p custom={0} variants={rise} className="eyebrow">
+        {/* An h2, not a p: the page had no h2 at all before Projects, so a
+            screen reader walked h1 straight into a wall of h3s. */}
+        <motion.h2
+          custom={0}
+          variants={rise}
+          className="eyebrow font-normal"
+          style={{ letterSpacing: '0.22em' }}
+        >
           {site.role} · Islamabad
-        </motion.p>
+        </motion.h2>
         {/*
           The tagline stays as written. The line under it is what a hiring
           manager can actually act on: "simple, reliable builder" is a good
@@ -115,11 +122,40 @@ export default function HeroResting() {
           variants={rise}
           className="max-w-lg text-[length:var(--t-body-s)] leading-relaxed text-silver-dim"
         >
-          Three years designing and building products end to end, and
-          teaching 7.5k developers how they work.
+          Backend for 5,000 employees at Wateen Telecom. 3M views teaching
+          JavaScript with a pipeline I wrote. Now at FlyRank AI. NUST, class
+          of 2027.
         </motion.p>
         <motion.div
           custom={3}
+          variants={rise}
+          className="mt-2 flex flex-wrap items-center justify-center gap-2.5"
+        >
+          <a
+            href={site.resume}
+            download
+            className="press meta inline-flex min-h-[44px] items-center rounded-full border border-white/15 bg-white/[0.07] px-5 text-silver-bright hover:bg-white/[0.11]"
+          >
+            Résumé ↓
+          </a>
+          <a
+            href={site.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="press meta inline-flex min-h-[44px] items-center rounded-full border border-white/12 px-5 text-silver-bright hover:bg-white/[0.06]"
+          >
+            GitHub ↗
+          </a>
+          <a
+            href="#contact"
+            className="press meta inline-flex min-h-[44px] items-center rounded-full border border-white/12 px-5 text-silver-bright hover:bg-white/[0.06]"
+          >
+            Email
+          </a>
+        </motion.div>
+
+        <motion.div
+          custom={4}
           variants={rise}
           className="mt-1 flex flex-col items-center gap-2"
           aria-hidden="true"

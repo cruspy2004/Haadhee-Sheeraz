@@ -142,6 +142,33 @@ export default function ProjectsSection() {
       onPointerCancel={endDrag}
       style={{ touchAction: 'pan-y' }}
     >
+      {/* Module header. The numbers are here in visible copy, not only in
+          Jack's bubble, which is aria-hidden. */}
+      <div className="pointer-events-none absolute inset-x-5 top-8 z-20 flex items-baseline justify-between gap-6 sm:inset-x-10 sm:top-[5.5rem]">
+        <h2
+          className="panel-label m-0 font-normal"
+          style={{ color: `color-mix(in srgb, ${project.ink} 78%, ${project.color})` }}
+        >
+          Projects · one backend for 5,000 people · 3M views teaching JavaScript
+        </h2>
+        <span className="panel-label shrink-0" style={{ color: project.ink, opacity: 0.55 }}>
+          SEC 03
+        </span>
+      </div>
+
+      {/*
+        Every project, for readers who never get to swipe. The carousel
+        exposes one card at a time; without this a screen reader was told
+        the section contained exactly one project.
+      */}
+      <ul className="sr-only">
+        {projects.map((p) => (
+          <li key={p.id}>
+            <a href={p.liveUrl}>{p.name}</a>
+          </li>
+        ))}
+      </ul>
+
       {/* Full-screen colour field. Crossfades 500-700ms, EASE_AMBIENT. */}
       {projects.map((p, i) => (
         <div
@@ -165,14 +192,6 @@ export default function ProjectsSection() {
           active={i === index}
         />
       ))}
-
-      {/* Module index, matched to the other sections. */}
-      <div
-        className="panel-label pointer-events-none absolute right-5 top-8 z-20 sm:right-10 sm:top-12"
-        style={{ color: project.ink, opacity: 0.55 }}
-      >
-        SEC 03
-      </div>
 
       {/*
         Navigation.
@@ -259,9 +278,8 @@ export default function ProjectsSection() {
           stopAt={0.24}
           lineSeconds={2.9}
           lines={[
-            'Five shipped projects down here.',
-            'Backend for 5,000 users, and 3M views teaching JavaScript.',
-            'Click any of them. They all go somewhere real.',
+            'Five shipped things down here.',
+            'Every one of them goes somewhere real.',
           ]}
         />
       </div>

@@ -36,7 +36,7 @@ export default function ProjectCard({ project, index, total, active }: Props) {
     <div
       className="absolute inset-0 flex items-center justify-center px-5 pb-[13rem] pt-20 sm:px-10 sm:pb-24 sm:pt-28"
       style={{ color: ink, pointerEvents: active ? 'auto' : 'none' }}
-      aria-hidden={!active}
+      {...(active ? {} : ({ inert: '' } as Record<string, string>))}
     >
       {/*
         Two columns from md up, not lg: the panel is locked to one viewport
@@ -107,6 +107,34 @@ export default function ProjectCard({ project, index, total, active }: Props) {
                 ↗
               </span>
             </a>
+            {project.repoUrl && (
+              <a
+                href={project.repoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="press ml-2 inline-flex min-h-[44px] items-center gap-2 rounded-full border px-5 font-mono text-[length:var(--t-meta)] uppercase tracking-[0.16em] transition-colors"
+                style={{
+                  borderColor: `color-mix(in srgb, ${ink} 30%, transparent)`,
+                  color: ink,
+                }}
+              >
+                Code ↗
+              </a>
+            )}
+            {project.writeupUrl && (
+              <a
+                href={project.writeupUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="press ml-2 inline-flex min-h-[44px] items-center gap-2 rounded-full border px-5 font-mono text-[length:var(--t-meta)] uppercase tracking-[0.16em] transition-colors"
+                style={{
+                  borderColor: `color-mix(in srgb, ${ink} 30%, transparent)`,
+                  color: ink,
+                }}
+              >
+                How it works →
+              </a>
+            )}
             <p
               className="mt-3 font-mono text-[length:var(--t-meta)] tracking-[0.04em]"
               style={{ color: `color-mix(in srgb, ${ink} 68%, ${project.color})` }}

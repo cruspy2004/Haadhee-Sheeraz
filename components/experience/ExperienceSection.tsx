@@ -161,12 +161,11 @@ export default function ExperienceSection() {
       id="experience"
       ref={sectionRef}
       /*
-       * 320svh, down from 520. At 520 this section was 62% of the whole
-       * document while Projects, six shipped projects, the actual point
-       * of the site, got 11%. The path still has room to read; it just
-       * no longer outweighs the work.
+       * 220svh. Was 520, then 320. Four internships were still getting
+       * 3.2x the scroll of five shipped projects, and a fast scroller saw
+       * entries mid-transition. The comet still reads at this length.
        */
-      className="relative h-[320svh]"
+      className="relative h-[220svh]"
       aria-label="Experience"
     >
       {/* COIN MORPH, DISABLED, PENDING REVISIT. See the note above.
@@ -187,8 +186,8 @@ export default function ExperienceSection() {
         className="sticky top-0 h-[100svh] overflow-hidden"
       >
         {/* Module header, matched to the other sections' spec labelling. */}
-        <div className="pointer-events-none absolute inset-x-5 top-8 z-10 flex items-baseline justify-between sm:inset-x-10 sm:top-12">
-          <p className="eyebrow">Experience</p>
+        <div className="pointer-events-none absolute inset-x-5 top-8 z-10 flex items-baseline justify-between sm:inset-x-10 sm:top-[5.5rem]">
+          <h2 className="eyebrow m-0 font-normal">Experience</h2>
           <p className="tech-index">SEC 02</p>
         </div>
 

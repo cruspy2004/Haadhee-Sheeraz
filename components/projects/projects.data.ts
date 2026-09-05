@@ -18,6 +18,13 @@ export type Project = {
   liveUrl: string;
   /** Shown next to the visit affordance, e.g. 'h1grow.store'. */
   linkLabel: string;
+  /**
+   * Optional proof links. A live URL shows that something exists; these
+   * let an interviewer read how it was built, which is the thing a
+   * technical screen actually needs.
+   */
+  repoUrl?: string;
+  writeupUrl?: string;
 };
 
 /**
@@ -48,7 +55,7 @@ export const projects: Project[] = [
     name: 'WATIFY',
     tags: ['Internal Tools', 'PERN', 'WebSockets'],
     description:
-      'An in-house communication platform for Wateen Telecom, serving 5,000+ employees. I engineered the full backend: REST and GraphQL APIs, PostgreSQL schema and migrations, JWT authentication, and lazy loading for scale.',
+      'Real-time messaging for 5,000+ Wateen Telecom employees. WebSockets for the live layer, REST and GraphQL on top of PostgreSQL, JWT for auth, paginated queries so the first screen loads before the history does.',
     color: '#1f6f4f',
     colorDeep: '#0c3327',
     ink: '#eefaf3',
@@ -82,22 +89,22 @@ export const projects: Project[] = [
     ink: '#eaf0ff',
     imagePath: '/project-images/topicpulse.png',
     liveUrl: 'https://medium-scrapper-and-sentiment-analy.vercel.app/',
-    linkLabel: 'medium-scrapper-and-sentiment-analy.vercel.app',
+    linkLabel: 'live demo',
   },
   {
     id: 'memetent',
     name: 'PROJECT MEMETENT',
     tags: ['Java', 'Swing', 'JavaFX', 'Game'],
     description:
-      'A compilation game built in Java (Swing/JavaFX). Added responsive memes to classic games, driving a 60% boost in interaction and a 14% higher click-through rate.',
+      'A compilation game built in Java (Swing/JavaFX). Added responsive memes to classic games, driving a 60% boost in interaction.',
     // Darkened hard from #c8862a: amber with near-white ink measured
     // 2.84:1 on the heading and ~2.3:1 on the description, the worst
     // pairing on the site and effectively unreadable.
     color: '#7c4f0f',
     colorDeep: '#3a2405',
     ink: '#fff6e6',
-    imagePath: '/project-images/memetent.png',
+    imagePath: '/project-images/memetent.webp',
     liveUrl: 'https://github.com/cruspy2004/memetent-memes-and-games-',
-    linkLabel: 'github.com/cruspy2004',
+    linkLabel: 'github.com/cruspy2004/memetent',
   },
 ];

@@ -2,11 +2,12 @@
 export const site = {
   name: 'Haadhee Sheeraz',
   /*
-   * Design Engineer: builds the thing and decides how it looks and moves.
-   * Chosen over "Software Engineer", which says what he is qualified as
-   * rather than what he is good at. See vault/Positioning.md.
+   * Product Engineer. Every project on the page is backend, pipeline or
+   * shipped product; none is UI or motion work, so "Design Engineer" was
+   * a label with no evidence under it. This one the projects support.
+   * See vault/Positioning.md.
    */
-  role: 'Design Engineer',
+  role: 'Product Engineer',
   email: 'haadheesheeraz2004@gmail.com',
   phone: '+92 325 8660707',
   phoneHref: '+923258660707',

@@ -5,6 +5,7 @@ import PivotTransition from '@/components/pivot/PivotTransition';
 import ProjectsSection from '@/components/projects/ProjectsSection';
 import ContactSection from '@/components/contact/ContactSection';
 import Jack from '@/components/jack/Jack';
+import CornerLinks from '@/components/nav/CornerLinks';
 
 /**
  * HERO → EDUCATION → EXPERIENCE → (pivot) → PROJECTS → CONTACT.
@@ -18,6 +19,7 @@ export default function Page() {
   return (
     <>
       <div className="tech-frame" aria-hidden="true" />
+      <CornerLinks />
 
       <Jack />
 

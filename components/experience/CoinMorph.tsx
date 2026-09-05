@@ -75,7 +75,7 @@ export default function CoinMorph({ t, from, to }: Props) {
           style={{ backfaceVisibility: 'hidden' }}
         >
           <Image
-            src="/hero-photo.png"
+            src="/hero-photo.webp"
             alt=""
             fill
             sizes="260px"

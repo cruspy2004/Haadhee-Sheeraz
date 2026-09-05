@@ -59,14 +59,34 @@ const mono = localFont({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.haadheesheeraz.online'),
-  title: 'Haadhee Sheeraz',
+  /*
+   * Title, description and hero must all say the same job. They did not:
+   * the tab said only the name, the description said "software engineer
+   * building backend systems", the hero said "Design Engineer". A
+   * recruiter reading tab, preview card, then page got three answers.
+   */
+  title: 'Haadhee Sheeraz, Product Engineer',
   description:
-    'Software engineer building backend systems at scale, AI content pipelines, and products people actually use. NUST SEECS.',
+    'Product engineer. Built the backend for a 5,000-employee platform at Wateen Telecom and an AI content pipeline with 3M views. Backend intern at FlyRank AI. NUST SEECS, class of 2027.',
   openGraph: {
-    title: 'Haadhee Sheeraz',
+    title: 'Haadhee Sheeraz, Product Engineer',
     description:
-      'Software engineer building backend systems at scale, AI content pipelines, and products people actually use.',
+      'Built the backend for a 5,000-employee platform at Wateen Telecom and an AI content pipeline with 3M views. Backend intern at FlyRank AI. NUST SEECS, class of 2027.',
     type: 'website',
+    url: 'https://www.haadheesheeraz.online',
+    images: [{ url: '/og.png', width: 1200, height: 630, alt: 'Haadhee Sheeraz, Product Engineer' }],
+  },
+  /*
+   * A static PNG rather than Next's generated opengraph-image route. The
+   * generated route pulled in @vercel/og, which either forces the route
+   * dynamic (edge) or fails to prerender on Windows (node). A committed
+   * image has no runtime, no build step and no platform quirk. Regenerate
+   * it with the Pillow script if the copy changes.
+   */
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Haadhee Sheeraz, Product Engineer',
+    images: ['/og.png'],
   },
 };
 

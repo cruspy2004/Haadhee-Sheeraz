@@ -37,7 +37,7 @@ export const experience: ExperienceEntryData[] = [
     company: 'Wateen Telecom',
     dates: 'May 2025 - Aug 2025',
     description:
-      'Selected from 5,000 applicants. Engineered the backend for Watify, an internal platform serving 5,000+ employees: REST and GraphQL APIs, PostgreSQL schema and migrations, JWT authentication, and lazy loading for scale. Shipped in an agile team on the PERN stack.',
+      'Engineered the backend for Watify, an internal platform serving 5,000+ employees: REST and GraphQL APIs, PostgreSQL schema and migrations, JWT authentication, and paginated queries so the first screen loads before the history does. Shipped in an agile team on the PERN stack. Selected for the role from 5,000 applicants.',
     anchor: 0.38,
     side: 'left',
   },
@@ -55,11 +55,11 @@ export const experience: ExperienceEntryData[] = [
   {
     id: 'rem',
     number: '04',
-    role: 'Content Engineer',
+    role: 'Web & Growth',
     company: 'REM / IT Empire',
     dates: 'Sep 2024 - Nov 2024',
     description:
-      'Built content strategy and brand voice for an AI B2B SaaS helping realtors matchmake properties. Joined at startup stage, when the product still had to explain itself to every visitor it got.',
+      'Built the landing pages and sales funnels for a pre-launch AI real-estate SaaS: the pages prospects landed on and the sequence that moved them toward a demo. Shipped at startup stage, when the product still had to explain itself to every visitor.',
     anchor: 0.86,
     side: 'left',
   },

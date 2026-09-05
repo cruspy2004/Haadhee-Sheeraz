@@ -30,7 +30,7 @@ export default function EducationSection() {
         transition={{ duration: 0.65, ease: EASE_ENTRANCE }}
       >
         <div className="mb-10 flex items-baseline justify-between">
-          <p className="eyebrow">Education</p>
+          <h2 className="eyebrow m-0 font-normal">Education</h2>
           <p className="tech-index">SEC 01</p>
         </div>
 
@@ -76,9 +76,8 @@ export default function EducationSection() {
         <JackScene
           stopAt={0.3}
           lines={[
-            'Computer Science at NUST SEECS, graduating 2027.',
-            'McKinsey Forward, and Founders Institute under NIC Pakistan.',
-            'Cohort 3. He finished it.',
+            'NUST, class of 2027.',
+            'McKinsey Forward. Founders Institute, cohort 3.',
           ]}
         />
       </div>

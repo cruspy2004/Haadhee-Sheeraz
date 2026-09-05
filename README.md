@@ -1,4 +1,4 @@
-# Haadhee Sheeraz — Portfolio
+# Haadhee Sheeraz, Portfolio
 
 Single-scroll cinematic portfolio built to `PRD.txt` and `design-doc.txt`
 (both inside `portfollio.zip`).
@@ -12,7 +12,7 @@ Framer Motion · Lenis.
 npm run dev
 ```
 
-> Do **not** run `npm run build` while `npm run dev` is running — the build
+> Do **not** run `npm run build` while `npm run dev` is running, the build
 > overwrites `.next` and leaves the dev server serving 404s for its CSS and
 > chunks. If that happens: stop dev, delete `.next`, restart.
 
@@ -24,14 +24,21 @@ Everything below is a one-line change. Nothing else needs touching.
 
 ### Project screenshots
 
-Three projects still use the designed typographic cover instead of a real
-screenshot: **TopicPulse**, **Project Memetent**, **Karobar Box**.
+Every project has a real screenshot. To swap one:
 
 1. Drop the image into `public/project-images/`.
-2. In `components/projects/projects.data.ts`, set that project's
-   `imagePath` from `null` to `'/project-images/<file>'`.
+2. In `components/projects/projects.data.ts`, point that project's
+   `imagePath` at it.
 
-Landscape, roughly 16:10, ≥1280px wide reads best.
+Landscape, roughly 16:10, at least 1280px wide reads best. If a project
+ever has no image, set `imagePath: null` and the card falls back to its
+typographic cover automatically.
+
+### Code and write-up links
+
+`repoUrl` and `writeupUrl` on any project render `Code` and `How it works`
+pills beside `Visit live`. Both optional. Watify wants a write-up; it is the
+strongest engineering claim on the site and currently unverifiable.
 
 ### Hero video
 
@@ -46,7 +53,7 @@ Self-hosted in `public/fonts` and wired up in `app/layout.tsx` via
 
 This is deliberate. `next/font/google` downloads the binaries from
 `fonts.gstatic.com` at build time and, if that request fails, falls back to
-Arial with **only a warning** — the build still succeeds and the entire site
+Arial with **only a warning**, the build still succeeds and the entire site
 ships in the wrong typeface. Self-hosting makes the build deterministic.
 
 To change a face: download the woff2 from Google Fonts into `public/fonts`
@@ -54,7 +61,7 @@ and update the path in `app/layout.tsx`.
 
 ### Contact form
 
-Composes a pre-filled `mailto:` in the visitor's mail client — no backend,
+Composes a pre-filled `mailto:` in the visitor's mail client, no backend,
 no third-party service, no secrets. The address is also shown in plain text
 above the form so it stays usable without a configured mail client.
 
@@ -65,9 +72,9 @@ To move to a hosted form later, replace the `onSubmit` handler in
 
 ## How the motion is wired
 
-- `lib/animation/easings.ts` — the four shared curves and the duration
+- `lib/animation/easings.ts`, the four shared curves and the duration
   scale. Import from here; never redefine a curve in a component.
-- `lib/animation/path.ts` — the Experience path is generated in the sticky
+- `lib/animation/path.ts`, the Experience path is generated in the sticky
   stage's own pixel space, so one SVG unit is one CSS pixel and
   `getPointAtLength()` positions the entries directly. Retuning the path
   shape moves the entries automatically; there are no hardcoded offsets.
@@ -79,7 +86,7 @@ To move to a hosted form later, replace the `onSubmit` handler in
 
 ### Failsafes
 
-Animation-gated content can strand a visitor if the animation never runs —
+Animation-gated content can strand a visitor if the animation never runs,
 rAF is paused in a background tab, so a page opened in one would otherwise
 sit blank behind a locked scroll. Both gates have escape hatches:
 
@@ -97,7 +104,7 @@ and pivot, and shows the full Experience path with all entries visible.
 
 - `npm audit` reports two high-severity advisories that cannot be resolved
   on Next 14: a Next Image Optimizer DoS (only affects self-hosted
-  deployments configured with `remotePatterns` — this site serves local
+  deployments configured with `remotePatterns`, this site serves local
   images only) and a transitive `postcss` advisory. Both are fixed only in
   Next 16, which is a breaking change away from the pinned stack. Revisit if
   you upgrade.
