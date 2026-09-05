@@ -86,20 +86,20 @@ export default function ContactSection() {
     >
       <div className="panel panel-ticks w-full max-w-5xl p-6 sm:p-12">
         <div className="mb-10 flex items-baseline justify-between">
-          <h2 className="eyebrow m-0 font-normal">Contact</h2>
+          <p className="eyebrow">Contact</p>
           <p className="tech-index">SEC 04</p>
         </div>
 
         <div className="grid gap-12 lg:grid-cols-[1fr_1fr] lg:gap-16">
           <div>
-            <motion.h3
+            <motion.h2
               {...rise(1)}
               className="mt-5 text-[clamp(1.9rem,4.5vw,3rem)] font-light leading-[1.05] tracking-[-0.04em]"
             >
-              Class of 2027. Hiring for
+              Hiring, or building
               <br />
-              product engineering or DevRel?
-            </motion.h3>
+              something? Say hi.
+            </motion.h2>
 
             <motion.dl {...rise(2)} className="mt-10 space-y-4">
               <div>
@@ -234,7 +234,7 @@ export default function ContactSection() {
             stopAt={0.34}
             lines={[
               'Still here? Say something.',
-              'He reads every one.',
+              'He actually replies. Usually.',
             ]}
           />
         </div>
