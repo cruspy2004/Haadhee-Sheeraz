@@ -16,6 +16,7 @@ good it was.
 
 ## Map
 
+- [[Ideal Hirer]] — the one person the site is built for, and his pain
 - [[Positioning]] — the one-line pitch and what it replaces
 - [[Gaps]] — what's missing, ranked
 - Evidence: [[Watify]] · [[JavascriptPeter]] · [[H1GROW]] · [[TopicPulse]]
