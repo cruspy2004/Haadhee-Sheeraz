@@ -52,6 +52,7 @@ export default function HeroResting() {
         id="hero-media"
         className="absolute left-1/2 h-[var(--hero-photo-height)] w-[var(--hero-photo-width)]"
         style={{
+          top: 'var(--hero-photo-top)',
           bottom: 'var(--hero-photo-bottom)',
           transform:
             'translateX(calc(-50% + var(--hero-photo-shift-x)))',

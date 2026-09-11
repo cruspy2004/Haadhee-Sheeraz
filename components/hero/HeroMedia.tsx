@@ -52,7 +52,16 @@ export default function HeroMedia() {
           fill
           priority
           sizes="(max-width: 768px) 94vw, 74vh"
-          className="object-cover object-center"
+          /*
+           * object-top on phones. There the box is wider than the source's
+           * aspect, so cover is width-driven and the overflow is vertical;
+           * centring it would crop the top of his hair as well as the
+           * shoulders. Anchoring to the top spends the whole crop on the
+           * jacket at the bottom. On desktop the box is taller than it is
+           * wide, cover is height-driven, and there is no vertical
+           * overflow for object-position to act on.
+           */
+          className="object-cover object-top sm:object-center"
         />
       )}
     </div>

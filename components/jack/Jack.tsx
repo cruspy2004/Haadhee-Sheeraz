@@ -65,15 +65,20 @@ export default function Jack() {
   const [ready, setReady] = useState(false);
   const [showBubble, setShowBubble] = useState(false);
   /*
-   * Where the bubble is pinned, in viewport px, captured when he stops.
-   * It used to be a hard-coded `bottom: calc(14vh + 64px)` while Jack
-   * himself stands on `hero-media`'s bottom edge. Those two only agree
-   * at desktop proportions; on a phone the bubble landed a third of the
-   * way up the screen, on top of the hero paragraph.
+   * The bubble is driven from live layout every frame, exactly like Jack
+   * himself, rather than from a position captured once when he stops.
+   *
+   * Two earlier versions of this were wrong. First a hard-coded
+   * `bottom: calc(14vh + N px)` while Jack stands on `hero-media`'s
+   * bottom edge: those agree only at desktop proportions, so on a phone
+   * the bubble sat a third of the way up the screen on the paragraph.
+   * Then a snapshot in state, which drifts the moment the layout moves
+   * under it and parked the bubble on top of the résumé button. A ref
+   * written from the same loop that positions him cannot disagree
+   * with him.
    */
-  const [greet, setGreet] = useState<{ x: number; bottom: number } | null>(
-    null
-  );
+  const bubbleRef = useRef<HTMLButtonElement | null>(null);
+  const bubblePos = useRef({ x: 0, ground: 0 });
   const [interactive, setInteractive] = useState(false);
   const nodeRef = useRef<HTMLDivElement | null>(null);
   const rt = useRef<Runtime | null>(null);
@@ -156,20 +161,6 @@ export default function Jack() {
     const onResize = () => {
       if (!rt.current) return;
       Object.assign(rt.current, measure());
-      // The ground line moves with the portrait, so the bubble has to
-      // follow it. Guarded on phase and on an actual change, because
-      // onScroll calls this on every scroll event.
-      if (rt.current.phase === 'greeting') {
-        const next = {
-          x: rt.current.x,
-          bottom: window.innerHeight - rt.current.ground + 10,
-        };
-        setGreet((prev) =>
-          prev && prev.x === next.x && prev.bottom === next.bottom
-            ? prev
-            : next
-        );
-      }
     };
 
     /*
@@ -226,7 +217,7 @@ export default function Jack() {
             s.phase = 'greeting';
             s.clip = 'bark';
             s.clipStart = now;
-            setGreet({ x: s.x, bottom: window.innerHeight - s.y + 10 });
+            bubblePos.current = { x: s.x, ground: s.ground };
             setShowBubble(true);
             setInteractive(true);
           }
@@ -331,6 +322,19 @@ export default function Jack() {
       )}px, 0) scaleX(${s.facing}) scaleY(${squash})`;
       node.style.backgroundPosition = `${-col * DISPLAY}px ${-row * DISPLAY}px`;
       node.style.visibility = s.phase === 'waiting' || s.phase === 'gone' ? 'hidden' : 'visible';
+
+      // Keep the bubble on his head. `ground` is re-measured from
+      // `hero-media` on every resize and scroll, so this tracks the
+      // portrait wherever the breakpoint puts it.
+      if (s.phase === 'greeting') {
+        bubblePos.current.x = s.x;
+        bubblePos.current.ground = s.ground;
+        const b = bubbleRef.current;
+        if (b) {
+          b.style.left = `${Math.max(12, Math.round(s.x + DISPLAY / 2 - 28))}px`;
+          b.style.bottom = `${Math.round(window.innerHeight - s.ground + 10)}px`;
+        }
+      }
     };
 
     rafRef.current = requestAnimationFrame(loop);
@@ -377,8 +381,13 @@ export default function Jack() {
         }}
       />
 
-      {showBubble && greet && (
-        <Bubble x={greet.x} bottom={greet.bottom} onClick={start} />
+      {showBubble && (
+        <Bubble
+          elRef={bubbleRef}
+          x={bubblePos.current.x}
+          ground={bubblePos.current.ground}
+          onClick={start}
+        />
       )}
     </div>
   );
@@ -389,22 +398,26 @@ export default function Jack() {
  * `left` puts the tail (which is 12px wide at left:22px) over his centre.
  */
 function Bubble({
+  elRef,
   x,
-  bottom,
+  ground,
   onClick,
 }: {
+  elRef: React.RefObject<HTMLButtonElement>;
   x: number;
-  bottom: number;
+  ground: number;
   onClick: () => void;
 }) {
+  // Only the first paint; the loop owns these from the next frame on.
   return (
     <button
+      ref={elRef}
       type="button"
       onClick={onClick}
       className="jack-bubble pointer-events-auto absolute"
       style={{
         left: Math.max(12, Math.round(x + DISPLAY / 2 - 28)),
-        bottom: Math.round(bottom),
+        bottom: Math.round(window.innerHeight - ground + 10),
       }}
     >
       <span className="font-mono text-[length:var(--t-meta)] tracking-[0.04em]">

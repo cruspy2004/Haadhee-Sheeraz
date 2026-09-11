@@ -88,6 +88,7 @@
      or right (positive).                                          */
   --hero-photo-height: 86svh;
   --hero-photo-width: min(94vw, 72svh);
+  --hero-photo-top: auto;
   --hero-photo-bottom: 0px;
   --hero-photo-shift-x: 0px;
 
@@ -137,7 +138,16 @@
      * source is only cropped ~50px vertically, so the whole portrait
      * survives instead of losing its sides.
      */
-    --hero-photo-height: 72svh;
+    /*
+     * Top-anchored and stretched, not a fixed height. Safari's URL bar
+     * means a phone's svh is ~707px, not the 852 the device reports, and
+     * a fixed 72svh left only ~22px between the buttons and the top of
+     * the hair there: they landed on his head. Pinning the top just
+     * below the copy and letting the bottom edge do the rest makes the
+     * clearance independent of how tall the viewport actually is.
+     */
+    --hero-photo-top: calc(var(--hero-copy-top) + 16rem);
+    --hero-photo-height: auto;
     --hero-photo-width: 100vw;
     --hero-name-top: 3rem;
     --hero-copy-top: 6.5rem;
