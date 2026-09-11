@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import localFont from 'next/font/local';
 import './globals.css';
 import SmoothScroll from '@/components/providers/SmoothScroll';
+import { Analytics } from '@vercel/analytics/next';
 
 /*
  * Fonts are self-hosted from /public/fonts rather than pulled through
@@ -107,6 +108,7 @@ export default function RootLayout({
     >
       <body className="grain antialiased">
         <SmoothScroll>{children}</SmoothScroll>
+        <Analytics />
       </body>
     </html>
   );
