@@ -50,7 +50,7 @@ export default function HeroResting() {
       {/* POSITION: size/offset come from --hero-photo-* in globals.css */}
       <div
         id="hero-media"
-        className="absolute left-1/2 h-[var(--hero-photo-height)] w-[min(94vw,var(--hero-photo-max-width))]"
+        className="absolute left-1/2 h-[var(--hero-photo-height)] w-[var(--hero-photo-width)]"
         style={{
           bottom: 'var(--hero-photo-bottom)',
           transform:
@@ -81,7 +81,7 @@ export default function HeroResting() {
       {/* Scrim so the copy stays legible over the portrait's lower half. */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 bottom-0 h-[34svh]"
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-[var(--hero-scrim-height)]"
         style={{
           background:
             'linear-gradient(to top, rgba(5,5,6,0.92) 0%, rgba(5,5,6,0.72) 38%, transparent 100%)',
@@ -91,7 +91,10 @@ export default function HeroResting() {
       {/* POSITION: --hero-copy-bottom in globals.css */}
       <motion.div
         className="absolute inset-x-0 flex flex-col items-center gap-3 px-6 text-center"
-        style={{ bottom: 'var(--hero-copy-bottom)' }}
+        style={{
+          top: 'var(--hero-copy-top)',
+          bottom: 'var(--hero-copy-bottom)',
+        }}
         initial="hidden"
         animate="show"
       >
@@ -134,7 +137,7 @@ export default function HeroResting() {
           <a
             href={site.resume}
             download
-            className="press meta inline-flex min-h-[44px] items-center rounded-full border border-white/15 bg-white/[0.07] px-5 text-silver-bright hover:bg-white/[0.11]"
+            className="press meta inline-flex min-h-[44px] items-center rounded-full border border-white/15 bg-white/[0.07] px-4 sm:px-5 text-silver-bright hover:bg-white/[0.11]"
           >
             Résumé ↓
           </a>
@@ -142,22 +145,25 @@ export default function HeroResting() {
             href={site.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="press meta inline-flex min-h-[44px] items-center rounded-full border border-white/12 px-5 text-silver-bright hover:bg-white/[0.06]"
+            className="press meta inline-flex min-h-[44px] items-center rounded-full border border-white/12 px-4 sm:px-5 text-silver-bright hover:bg-white/[0.06]"
           >
             GitHub ↗
           </a>
           <a
             href="#contact"
-            className="press meta inline-flex min-h-[44px] items-center rounded-full border border-white/12 px-5 text-silver-bright hover:bg-white/[0.06]"
+            className="press meta inline-flex min-h-[44px] items-center rounded-full border border-white/12 px-4 sm:px-5 text-silver-bright hover:bg-white/[0.06]"
           >
             Email
           </a>
         </motion.div>
 
+        {/* Hidden on phones: the copy sits at the TOP there, so this cue
+            would float mid-screen pointing at the portrait rather than at
+            anything below it. */}
         <motion.div
           custom={4}
           variants={rise}
-          className="mt-1 flex flex-col items-center gap-2"
+          className="mt-1 hidden flex-col items-center gap-2 sm:flex"
           aria-hidden="true"
         >
           <span className="eyebrow tracking-[0.3em]">SCROLL</span>

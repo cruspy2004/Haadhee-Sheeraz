@@ -81,12 +81,13 @@
    ══════════════════════════════════════════════════════════════════ */
 :root {
   /* ── THE HERO PHOTO ─────────────────────────────────────────────
-     Bigger height = taller photo. Bigger max-width = wider / less
-     cropped at the sides. Increase `bottom` to lift it off the
+     Bigger height = taller photo. Bigger width = wider / less cropped
+     at the sides; on phones it is deliberately wider than the screen,
+     so the head fills the frame and bleeds off both edges. Increase `bottom` to lift it off the
      bottom edge of the screen. `shift-x` nudges it left (negative)
      or right (positive).                                          */
   --hero-photo-height: 86svh;
-  --hero-photo-max-width: 72svh;
+  --hero-photo-width: min(94vw, 72svh);
   --hero-photo-bottom: 0px;
   --hero-photo-shift-x: 0px;
 
@@ -102,8 +103,16 @@
   --hero-name-tracking: -0.035em;
 
   /* ── THE TEXT UNDER THE PHOTO (role, tagline, SCROLL) ───────────
-     Distance up from the bottom of the screen.                     */
+     Distance up from the bottom of the screen. On phones the copy
+     moves ABOVE the portrait instead, so `top` takes over and
+     `bottom` goes to auto. Set one or the other, never both.       */
+  --hero-copy-top: auto;
   --hero-copy-bottom: 2.25rem;
+
+  /* ── THE SCRIM ──────────────────────────────────────────────────
+     The dark wash at the bottom of the hero that the copy sits on.
+     Taller = the portrait fades out higher up.                     */
+  --hero-scrim-height: 34svh;
 
   /* ── JACK ───────────────────────────────────────────────────────
      How far up from the bottom of a section Jack stands.           */
@@ -113,10 +122,27 @@
 /* Phones: same knobs, different values. */
 @media (max-width: 640px) {
   :root {
-    --hero-photo-height: 66svh;
-    --hero-photo-max-width: 90vw;
+    /*
+     * On a phone the copy sits ABOVE the portrait rather than on top
+     * of it. A 354px-wide cover crop of a near-square source lands the
+     * face in the vertical middle, which is exactly where the copy
+     * goes, and the arithmetic says there is no way out of that while
+     * the photo is anchored to the bottom: clearing the face needs a
+     * box over 92svh tall, which then crops half the head off sideways.
+     * Darkening it is not an answer either, because a scrim heavy
+     * enough to read over hides the face it is covering.
+     *
+     * So: name, copy, then the portrait filling the bottom with Jack
+     * standing on its lower edge. 100vw wide because at that width the
+     * source is only cropped ~50px vertically, so the whole portrait
+     * survives instead of losing its sides.
+     */
+    --hero-photo-height: 72svh;
+    --hero-photo-width: 100vw;
     --hero-name-top: 3rem;
-    --hero-copy-bottom: 1.5rem;
+    --hero-copy-top: 6.5rem;
+    --hero-copy-bottom: auto;
+    --hero-scrim-height: 20svh;
   }
 }
 /* ══════════════════════════════════════════════════════════════════

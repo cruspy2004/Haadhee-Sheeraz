@@ -64,6 +64,16 @@ type Runtime = {
 export default function Jack() {
   const [ready, setReady] = useState(false);
   const [showBubble, setShowBubble] = useState(false);
+  /*
+   * Where the bubble is pinned, in viewport px, captured when he stops.
+   * It used to be a hard-coded `bottom: calc(14vh + 64px)` while Jack
+   * himself stands on `hero-media`'s bottom edge. Those two only agree
+   * at desktop proportions; on a phone the bubble landed a third of the
+   * way up the screen, on top of the hero paragraph.
+   */
+  const [greet, setGreet] = useState<{ x: number; bottom: number } | null>(
+    null
+  );
   const [interactive, setInteractive] = useState(false);
   const nodeRef = useRef<HTMLDivElement | null>(null);
   const rt = useRef<Runtime | null>(null);
@@ -146,6 +156,20 @@ export default function Jack() {
     const onResize = () => {
       if (!rt.current) return;
       Object.assign(rt.current, measure());
+      // The ground line moves with the portrait, so the bubble has to
+      // follow it. Guarded on phase and on an actual change, because
+      // onScroll calls this on every scroll event.
+      if (rt.current.phase === 'greeting') {
+        const next = {
+          x: rt.current.x,
+          bottom: window.innerHeight - rt.current.ground + 10,
+        };
+        setGreet((prev) =>
+          prev && prev.x === next.x && prev.bottom === next.bottom
+            ? prev
+            : next
+        );
+      }
     };
 
     /*
@@ -202,6 +226,7 @@ export default function Jack() {
             s.phase = 'greeting';
             s.clip = 'bark';
             s.clipStart = now;
+            setGreet({ x: s.x, bottom: window.innerHeight - s.y + 10 });
             setShowBubble(true);
             setInteractive(true);
           }
@@ -352,21 +377,34 @@ export default function Jack() {
         }}
       />
 
-      {showBubble && <Bubble onClick={start} />}
+      {showBubble && greet && (
+        <Bubble x={greet.x} bottom={greet.bottom} onClick={start} />
+      )}
     </div>
   );
 }
 
-/** Speech bubble anchored to Jack's greeting position. */
-function Bubble({ onClick }: { onClick: () => void }) {
+/**
+ * Speech bubble, pinned just above Jack wherever he actually stopped.
+ * `left` puts the tail (which is 12px wide at left:22px) over his centre.
+ */
+function Bubble({
+  x,
+  bottom,
+  onClick,
+}: {
+  x: number;
+  bottom: number;
+  onClick: () => void;
+}) {
   return (
     <button
       type="button"
       onClick={onClick}
       className="jack-bubble pointer-events-auto absolute"
       style={{
-        left: `max(24px, 8vw)`,
-        bottom: `calc(14vh + ${DISPLAY}px)`,
+        left: Math.max(12, Math.round(x + DISPLAY / 2 - 28)),
+        bottom: Math.round(bottom),
       }}
     >
       <span className="font-mono text-[length:var(--t-meta)] tracking-[0.04em]">
