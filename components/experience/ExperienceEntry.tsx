@@ -29,15 +29,16 @@ const RAIL = 76;
 /**
  * A single work-history block, anchored to its point on the path.
  *
- * Wide screens: absolutely positioned beside its anchor, alternating
- * sides, all four on screen at once.
+ * Stacked: absolutely positioned beside its anchor, alternating sides,
+ * every entry on screen at once.
  *
- * Narrow screens: that layout does not fit. Four blocks of running prose
- * need roughly 1000px of column and the sticky stage is one viewport tall,
- * so they overlapped into an unreadable pile. Here each entry instead
- * occupies the same centred slot and only the one the travelling head has
- * reached is shown, the comet still drives the reveal, it just swaps
- * entries in place rather than laying them out in space.
+ * One-at-a-time: used whenever the stack does not fit, which is either a
+ * screen too narrow for two columns or one too short to hold every block
+ * in a single viewport. Five blocks of running prose need roughly 900px
+ * of stage height, so this is no longer only phones. Each entry occupies
+ * the same centred slot and only the one the travelling head has reached
+ * is shown; the comet still drives the reveal, it just swaps entries in
+ * place rather than laying them out in space.
  */
 export default function ExperienceEntry({
   entry,
@@ -56,6 +57,13 @@ export default function ExperienceEntry({
         style={{
           left: RAIL,
           right: MARGIN,
+          /*
+           * Capped. This branch is no longer phones-only: a short wide
+           * screen (1280x720, 1536x864) cannot stack five blocks either,
+           * and without a cap the paragraph would run the full 1400px of
+           * such a viewport, which is an unreadable line length.
+           */
+          maxWidth: MAX_W + 80,
           top: stageH * 0.5,
           translateY: '-50%',
         }}

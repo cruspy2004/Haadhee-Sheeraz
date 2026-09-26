@@ -21,12 +21,24 @@ import { useIsomorphicLayoutEffect } from '@/lib/useIsomorphicLayoutEffect';
  * specifically at this handoff, sticky avoids the pin-spacer layout shift
  * entirely while ScrollTrigger still supplies the progress value.
  */
+/** Breathing room between stacked blocks, and from the stage edges. */
+const GAP_PREF = 28;
+const GAP_MIN = 16;
+const STAGE_PAD = 12;
+
 export default function ExperienceSection() {
   const sectionRef = useRef<HTMLElement | null>(null);
   const stageRef = useRef<HTMLDivElement | null>(null);
   const [progress, setProgress] = useState(0);
   const [morphRaw, setMorph] = useState(0);
   const [size, setSize] = useState({ w: 0, h: 0 });
+  /*
+   * Measured, not assumed. A block is 159px with two-line descriptions
+   * and 181px with three, and which one you get depends on the copy, the
+   * viewport and the font that actually loaded. Whether five of them fit
+   * in a one-viewport stage turns on that number, so it has to be real.
+   */
+  const [blockH, setBlockH] = useState(170);
   const reduced = usePrefersReducedMotion();
 
   /**
@@ -69,6 +81,22 @@ export default function ExperienceSection() {
       window.removeEventListener('orientationchange', onResize);
     };
   }, []);
+
+  /*
+   * Read back the tallest block once it has rendered. Guarded on a 2px
+   * delta so this settles after one correction instead of oscillating.
+   */
+  useIsomorphicLayoutEffect(() => {
+    const el = stageRef.current;
+    if (!el) return;
+    const arts = el.querySelectorAll('article');
+    if (!arts.length) return;
+    let max = 0;
+    arts.forEach((a) => {
+      max = Math.max(max, a.getBoundingClientRect().height);
+    });
+    if (max > 0 && Math.abs(max - blockH) > 2) setBlockH(max);
+  });
 
   useEffect(() => {
     const el = sectionRef.current;
@@ -116,7 +144,20 @@ export default function ExperienceSection() {
   //   return () => st.kill();
   // }, []);
 
-  const narrow = size.w > 0 && size.w < 860;
+  /*
+   * Stacked layout needs room for every block at once, because an
+   * arrived block never leaves. Five two-line blocks want ~900px of
+   * stage; a 1280x720 laptop has 720 and the last two used to render
+   * below the stage's overflow:hidden, i.e. invisible. When they do not
+   * fit we use the one-at-a-time layout instead of cropping entries
+   * away. With four entries this was already at the edge (720px needed,
+   * 720px available); the fifth is what pushed it over.
+   */
+  const stackNeeds =
+    experience.length * blockH +
+    (experience.length - 1) * GAP_MIN +
+    STAGE_PAD * 2;
+  const narrow = size.w > 0 && (size.w < 860 || size.h < stackNeeds);
 
   const { d, length, pointAt } = useMemo(() => {
     const path = buildSnakePath(size.w, size.h, narrow);
@@ -129,16 +170,52 @@ export default function ExperienceSection() {
 
   const headPoint = useMemo(() => pointAt(head), [pointAt, head]);
 
-  const anchors = useMemo(
-    () =>
-      experience.map((e) => {
-        const p = pointAt(e.anchor);
-        // Keep blocks from hanging off the top or bottom of the stage.
-        const clampedY = Math.max(150, Math.min(size.h - 150, p.y));
-        return { ...e, x: p.x, y: clampedY };
-      }),
-    [pointAt, size.h]
-  );
+  /*
+   * Block placement on wide screens.
+   *
+   * x comes from the path, so each block still sits beside the curve.
+   * y starts at the path's own y and is then pushed apart, because the
+   * path's y is not evenly distributed: the snake flattens out where it
+   * turns, which bunches consecutive anchors within a few dozen pixels
+   * of each other. With four entries that was survivable. With five it
+   * put entry 04's date line inside entry 03's description.
+   *
+   * So: take the path's y as the preference, then enforce a minimum
+   * centre-to-centre gap, then pull the whole run back inside the stage
+   * and re-check from the bottom up. Content-independent, which matters
+   * because the block height is set by how many lines the description
+   * wraps to and that changes with both the copy and the viewport.
+   */
+  const anchors = useMemo(() => {
+    const n = experience.length;
+    const pad = STAGE_PAD + blockH / 2; // y is the block's centre
+    // Centre-to-centre. Squeezes toward GAP_MIN before the layout gives
+    // up and hands over to the one-at-a-time branch.
+    const available = (size.h - pad * 2) / Math.max(n - 1, 1);
+    const step = Math.max(
+      blockH + GAP_MIN,
+      Math.min(blockH + GAP_PREF, available)
+    );
+
+    const ys = experience.map((e) => pointAt(e.anchor).y);
+
+    // Top down: nothing may sit closer than `step` below its predecessor.
+    for (let i = 1; i < n; i += 1) {
+      ys[i] = Math.max(ys[i], ys[i - 1] + step);
+    }
+    // The run may now hang off the bottom. Shift it back up as a unit.
+    const overflow = ys[n - 1] - (size.h - pad);
+    if (overflow > 0) {
+      for (let i = 0; i < n; i += 1) ys[i] -= overflow;
+    }
+    // Bottom up: that shift can push the head of the run off the top.
+    for (let i = n - 2; i >= 0; i -= 1) {
+      ys[i] = Math.min(ys[i], ys[i + 1] - step);
+    }
+    ys[0] = Math.max(ys[0], pad);
+
+    return experience.map((e, i) => ({ ...e, x: pointAt(e.anchor).x, y: ys[i] }));
+  }, [pointAt, size.h, blockH]);
 
   /*
    * Narrow screens show one entry at a time in a fixed slot, so we need to

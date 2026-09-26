@@ -54,7 +54,7 @@ export const experience: ExperienceEntryData[] = [
     company: 'Wateen Telecom',
     dates: 'May 2025 - Aug 2025',
     description:
-      'Backend for Watify, an internal platform serving 5,000+ employees: REST and GraphQL over PostgreSQL, JWT auth, paginated queries. Selected from a field of 5,000 applicants.',
+      'Watify, an internal platform for 5,000+ employees: REST and GraphQL over PostgreSQL, JWT auth, paginated queries. Picked from 5,000 applicants.',
     anchor: 0.48,
     side: 'right',
   },
@@ -65,7 +65,7 @@ export const experience: ExperienceEntryData[] = [
     company: 'Leetly',
     dates: 'Nov 2024 - Jan 2025',
     description:
-      'Growth experiments for a mobile DSA learning app. Instrumented the funnel and shipped against what the numbers said, not what the roadmap assumed.',
+      'Growth experiments for a mobile DSA learning app. Instrumented the funnel and shipped against what the numbers said.',
     anchor: 0.66,
     side: 'left',
   },
