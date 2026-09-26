@@ -127,7 +127,7 @@ export default function HeroResting() {
           className="max-w-lg text-[length:var(--t-body-s)] leading-relaxed text-silver-dim"
         >
           Backend for 5,000 employees at Wateen Telecom. 3M views teaching
-          JavaScript with a pipeline I wrote. Now at FlyRank AI. NUST, class
+          JavaScript with a pipeline I wrote. Now at SF Digital. NUST, class
           of 2027.
         </motion.p>
         <motion.div

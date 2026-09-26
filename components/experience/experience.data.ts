@@ -12,7 +12,13 @@ export type ExperienceEntryData = {
 
 /**
  * Real work history, most recent first. Source: resume.pdf, plus the
- * current FlyRank AI role.
+ * current SF Digital role.
+ *
+ * Descriptions are deliberately one or two sentences. They used to run
+ * 240-330 characters each, which on a phone is a wall of text arriving
+ * mid-scroll, and the extra words were carrying attitude rather than
+ * evidence. Anything that survived the cut is a fact: a stack, a number,
+ * or a named artefact.
  *
  * `anchor` values are spread across the path with room at each end so the
  * first entry is not already on screen when the section is reached and the
@@ -20,47 +26,58 @@ export type ExperienceEntryData = {
  */
 export const experience: ExperienceEntryData[] = [
   {
-    id: 'flyrank',
+    id: 'sfdigital',
     number: '01',
-    role: 'Backend Engineering Intern',
-    company: 'FlyRank AI',
-    dates: 'Aug 2026 - Present',
+    role: 'Forward Deployed Product Engineer',
+    company: 'SF Digital',
+    dates: 'Sep 2026 - Present',
     description:
-      'Building and shipping backend services for an AI product. Designing API endpoints and the data models underneath them, wiring up the integrations the product runs on, and keeping all of it stable while the surface area grows week to week.',
-    anchor: 0.15,
+      'Embedded with clients, building automated content pipelines on Claude Code that generate the SEO and GEO pages their customers land on.',
+    anchor: 0.12,
     side: 'right',
   },
   {
-    id: 'wateen',
+    id: 'flyrank',
     number: '02',
+    role: 'Backend Engineering Intern',
+    company: 'FlyRank AI',
+    dates: 'Aug 2026',
+    description:
+      'Backend services for an AI product: API endpoints, the data models under them, and the integrations the product runs on.',
+    anchor: 0.3,
+    side: 'left',
+  },
+  {
+    id: 'wateen',
+    number: '03',
     role: 'Software Engineering Intern',
     company: 'Wateen Telecom',
     dates: 'May 2025 - Aug 2025',
     description:
-      'Engineered the backend for Watify, an internal platform serving 5,000+ employees: REST and GraphQL APIs, PostgreSQL schema and migrations, JWT authentication, and paginated queries so the first screen loads before the history does. Shipped in an agile team on the PERN stack. Selected for the role from 5,000 applicants.',
-    anchor: 0.38,
-    side: 'left',
+      'Backend for Watify, an internal platform serving 5,000+ employees: REST and GraphQL over PostgreSQL, JWT auth, paginated queries. Selected from a field of 5,000 applicants.',
+    anchor: 0.48,
+    side: 'right',
   },
   {
     id: 'leetly',
-    number: '03',
+    number: '04',
     role: 'Growth Engineer',
     company: 'Leetly',
     dates: 'Nov 2024 - Jan 2025',
     description:
-      'Drove user adoption for a mobile DSA learning product through data-driven growth experiments. Instrumented the funnel, tested against it, and acted on what the numbers actually said rather than what the roadmap assumed.',
-    anchor: 0.62,
-    side: 'right',
+      'Growth experiments for a mobile DSA learning app. Instrumented the funnel and shipped against what the numbers said, not what the roadmap assumed.',
+    anchor: 0.66,
+    side: 'left',
   },
   {
     id: 'rem',
-    number: '04',
+    number: '05',
     role: 'Web & Growth',
     company: 'REM / IT Empire',
     dates: 'Sep 2024 - Nov 2024',
     description:
-      'Built the landing pages and sales funnels for a pre-launch AI real-estate SaaS: the pages prospects landed on and the sequence that moved them toward a demo. Shipped at startup stage, when the product still had to explain itself to every visitor.',
-    anchor: 0.86,
-    side: 'left',
+      'Landing pages and sales funnels for a pre-launch AI real-estate SaaS, when the product still had to explain itself to every visitor.',
+    anchor: 0.84,
+    side: 'right',
   },
 ];

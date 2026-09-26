@@ -67,11 +67,11 @@ export const metadata: Metadata = {
    */
   title: 'Haadhee Sheeraz, Product Engineer',
   description:
-    'Product engineer. Built the backend for a 5,000-employee platform at Wateen Telecom and an AI content pipeline with 3M views. Backend intern at FlyRank AI. NUST SEECS, class of 2027.',
+    'Product engineer. Built the backend for a 5,000-employee platform at Wateen Telecom and an AI content pipeline with 3M views. Forward deployed product engineer at SF Digital. NUST SEECS, class of 2027.',
   openGraph: {
     title: 'Haadhee Sheeraz, Product Engineer',
     description:
-      'Built the backend for a 5,000-employee platform at Wateen Telecom and an AI content pipeline with 3M views. Backend intern at FlyRank AI. NUST SEECS, class of 2027.',
+      'Built the backend for a 5,000-employee platform at Wateen Telecom and an AI content pipeline with 3M views. Forward deployed product engineer at SF Digital. NUST SEECS, class of 2027.',
     type: 'website',
     url: 'https://www.haadheesheeraz.online',
     images: [{ url: '/og.png', width: 1200, height: 630, alt: 'Haadhee Sheeraz, Product Engineer' }],

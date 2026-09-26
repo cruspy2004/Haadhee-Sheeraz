@@ -161,11 +161,13 @@ export default function ExperienceSection() {
       id="experience"
       ref={sectionRef}
       /*
-       * 220svh. Was 520, then 320. Four internships were still getting
-       * 3.2x the scroll of five shipped projects, and a fast scroller saw
-       * entries mid-transition. The comet still reads at this length.
+       * 250svh. Was 520, then 320, then 220 when four internships were
+       * still getting 3.2x the scroll of five shipped projects. There are
+       * five entries now, so this keeps each one at roughly 50svh of
+       * scroll rather than squeezing them into 44svh, without going back
+       * to dwarfing the Projects section.
        */
-      className="relative h-[220svh]"
+      className="relative h-[250svh]"
       aria-label="Experience"
     >
       {/* COIN MORPH, DISABLED, PENDING REVISIT. See the note above.
