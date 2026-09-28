@@ -7,7 +7,7 @@ import PathTrail from './PathTrail';
 import CoinMorph from './CoinMorph';
 import ExperienceEntry from './ExperienceEntry';
 import { experience } from './experience.data';
-import { buildSnakePath, measurePath } from '@/lib/animation/path';
+import { buildSnakePath, measurePath, type Pt } from '@/lib/animation/path';
 import { usePrefersReducedMotion } from '@/lib/animation/useScrollProgress';
 import { useIsomorphicLayoutEffect } from '@/lib/useIsomorphicLayoutEffect';
 
@@ -159,10 +159,19 @@ export default function ExperienceSection() {
     STAGE_PAD * 2;
   const narrow = size.w > 0 && (size.w < 860 || size.h < stackNeeds);
 
-  const { d, length, pointAt } = useMemo(() => {
+  const { d, length, pointAt, samples } = useMemo(() => {
     const path = buildSnakePath(size.w, size.h, narrow);
     const m = measurePath(path);
-    return { d: path, length: m.length, pointAt: m.pointAt };
+    /*
+     * A dense polyline of the curve. Blocks are placed beside the path,
+     * but a block is ~160px tall and the curve wanders horizontally over
+     * that height, so "beside" has to be evaluated across the block's
+     * whole vertical span rather than at a single point.
+     */
+    const N = 400;
+    const samples: Pt[] = [];
+    for (let i = 0; i <= N; i += 1) samples.push(m.pointAt(i / N));
+    return { d: path, length: m.length, pointAt: m.pointAt, samples };
   }, [size.w, size.h, narrow]);
 
   // Reduced motion: the route is simply present and every entry is shown.
@@ -214,8 +223,36 @@ export default function ExperienceSection() {
     }
     ys[0] = Math.max(ys[0], pad);
 
-    return experience.map((e, i) => ({ ...e, x: pointAt(e.anchor).x, y: ys[i] }));
-  }, [pointAt, size.h, blockH]);
+    /*
+     * x is the curve's OUTERMOST edge across the block's own height, not
+     * the x of its anchor point. The anchor's x was right until the
+     * spacing pass above started moving y: once a block no longer sits at
+     * its anchor's height, the clearance was being measured somewhere the
+     * block isn't, and the curve cut straight through entries 02 and 04.
+     * Right-hand blocks clear the rightmost point of the curve over their
+     * span, left-hand blocks the leftmost.
+     */
+    const half = blockH / 2;
+    return experience.map((e, i) => {
+      const top = ys[i] - half;
+      const bottom = ys[i] + half;
+      let minX = Infinity;
+      let maxX = -Infinity;
+      for (const pt of samples) {
+        if (pt.y >= top && pt.y <= bottom) {
+          if (pt.x < minX) minX = pt.x;
+          if (pt.x > maxX) maxX = pt.x;
+        }
+      }
+      // A block parked past either end of the curve sees no samples.
+      if (!Number.isFinite(minX)) {
+        const at = pointAt(e.anchor);
+        minX = at.x;
+        maxX = at.x;
+      }
+      return { ...e, x: e.side === 'right' ? maxX : minX, y: ys[i] };
+    });
+  }, [pointAt, samples, size.h, blockH]);
 
   /*
    * Narrow screens show one entry at a time in a fixed slot, so we need to

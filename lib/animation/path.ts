@@ -17,14 +17,23 @@ export type Pt = { x: number; y: number };
 export function buildSnakePath(w: number, h: number, narrow: boolean): string {
   if (w <= 0 || h <= 0) return '';
 
+  /*
+   * The rail is capped rather than a straight fraction of the stage.
+   * Narrow layout is no longer phones-only: a short wide viewport uses
+   * it too, and at 1280px a 0.3w rail reaches x=384, which is not a rail
+   * down the side any more, it is a curve through the middle of the
+   * text. Capped, it occupies the same ~140px ribbon at any width.
+   */
+  const rail = Math.min(w, 460);
+
   const pts: Pt[] = narrow
     ? [
-        { x: w * 0.16, y: h * 0.02 },
-        { x: w * 0.3, y: h * 0.2 },
-        { x: w * 0.12, y: h * 0.42 },
-        { x: w * 0.3, y: h * 0.64 },
-        { x: w * 0.14, y: h * 0.85 },
-        { x: w * 0.22, y: h * 1.0 },
+        { x: rail * 0.16, y: h * 0.02 },
+        { x: rail * 0.3, y: h * 0.2 },
+        { x: rail * 0.12, y: h * 0.42 },
+        { x: rail * 0.3, y: h * 0.64 },
+        { x: rail * 0.14, y: h * 0.85 },
+        { x: rail * 0.22, y: h * 1.0 },
       ]
     : [
         { x: w * 0.5, y: h * 0.02 },

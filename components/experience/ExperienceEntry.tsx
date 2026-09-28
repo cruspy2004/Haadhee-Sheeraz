@@ -55,7 +55,13 @@ export default function ExperienceEntry({
       <motion.article
         className="absolute"
         style={{
-          left: RAIL,
+          /*
+           * Phones have no width to spare, so the text starts at RAIL and
+           * the faint curve passes behind its first few characters. A wide
+           * stage using this branch does have room, so there the text is
+           * pushed clear of the capped rail entirely.
+           */
+          left: stageW >= 860 ? 184 : RAIL,
           right: MARGIN,
           /*
            * Capped. This branch is no longer phones-only: a short wide
