@@ -10,6 +10,7 @@ import { site } from '@/lib/site';
  * This is not that bar back. It is three mono labels in the top-right
  * corner, inside the frame, in the same register as the SEC 01 markers,
  * so a recruiter with forty seconds can get the résumé from anywhere.
+ * The fourth, AI video, leaves for the aivideo.* subdomain.
  *
  * Hidden on phones: the frame inset there is 8px and the corner is Jack's
  * and the section marker's already. The hero CTA row covers mobile.
@@ -33,6 +34,10 @@ export default function CornerLinks() {
       <span aria-hidden="true" className="mx-1 h-3 w-px bg-white/15" />
       <a href="#contact" className={link}>
         Contact
+      </a>
+      <span aria-hidden="true" className="mx-1 h-3 w-px bg-white/15" />
+      <a href={site.aivideo} className={link}>
+        AI video ↗
       </a>
     </nav>
   );

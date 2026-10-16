@@ -12,3 +12,7 @@ npm-debug.log*
 .vercel
 *.tsbuildinfo
 next-env.d.ts
+# Raw source folder for aivideo.*. The renamed copies the page actually
+# plays live in public/ai-videos and ARE committed; this would just put
+# the same 75MB into git a second time.
+AI_video_examples/

@@ -14,4 +14,10 @@ export const site = {
   github: 'https://github.com/cruspy2004',
   linkedin: 'https://www.linkedin.com/in/m-haadhee-sheeraz-mian-7a25a12a2/',
   resume: '/resume.pdf',
+  /*
+   * Absolute, because the two halves live on different hosts: a relative
+   * link from aivideo.* to '/' would just land back on the AI video page.
+   */
+  url: 'https://www.haadheesheeraz.online',
+  aivideo: 'https://aivideo.haadheesheeraz.online',
 } as const;

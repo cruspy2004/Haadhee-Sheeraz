@@ -70,6 +70,55 @@ To move to a hosted form later, replace the `onSubmit` handler in
 
 ---
 
+## AI video subdomain
+
+`aivideo.haadheesheeraz.online` is this same app, not a second deploy. A
+host-matched rewrite in `next.config.mjs` serves `app/aivideo` for `/` on
+any `aivideo.*` host, and `/aivideo` on the main domain 308s to the
+subdomain so each page has one public URL.
+
+**HERO → ABOUT → WORK → CONTACT**, white page, black type, all in
+`components/aivideo/`. Locally it is at `http://localhost:3000/aivideo`,
+or `http://aivideo.localhost:3000` to exercise the rewrite itself.
+
+The root layout is the main site's dark one, so `app/aivideo/layout.tsx`
+turns the dark body, the grain overlay and the pale text selection off for
+this host only.
+
+### Going live (one time)
+
+1. Vercel → this project → Settings → Domains → add
+   `aivideo.haadheesheeraz.online`.
+2. At the DNS provider, add the record Vercel shows for it: a `CNAME`
+   named `aivideo` pointing at the target Vercel gives.
+### The videos
+
+The clips the page plays are committed in `public/ai-videos/` and deploy
+with the site, so Vercel's CDN serves them on the Hobby plan's free
+bandwidth with no extra account or setup. `AI_video_examples/` is the raw
+source folder and stays out of git, so the same 75 MB is not committed
+twice.
+
+Browsers cache the clips for a week (`headers()` in `next.config.mjs`). To
+replace one, give the new file a new name and update `aivideo.data.ts`, or
+returning visitors may see the old cut for up to a week.
+
+If the videos ever outgrow that (very large files, or heavy traffic), upload
+the same files with the same names to one folder on a video host and set
+`NEXT_PUBLIC_VIDEO_BASE_URL=https://<host>/<folder>` in Vercel's
+environment variables. No code changes.
+
+### Adding or changing an example
+
+Everything is in `components/aivideo/aivideo.data.ts`: one entry per
+category, one or two examples each. Add the mp4 to `public/ai-videos/`,
+then add an entry with `src: video('name.mp4')` and
+`ratio` set to the frame it was cut in (`'9:16'`, `'4:5'`, `'1:1'`,
+`'4:3'`, `'16:9'`). The zig-zag is automatic: the first example in a
+category has its video on the right, the second on the left.
+
+---
+
 ## How the motion is wired
 
 - `lib/animation/easings.ts`, the four shared curves and the duration
