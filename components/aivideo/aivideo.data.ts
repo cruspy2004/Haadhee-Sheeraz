@@ -19,7 +19,16 @@ export const ratioValue = (r: Ratio) => {
  * URL; nothing else changes.
  */
 const VIDEO_BASE = (process.env.NEXT_PUBLIC_VIDEO_BASE_URL ?? '/ai-videos').replace(/\/$/, '');
-const video = (file: string) => `${VIDEO_BASE}/${file}`;
+
+/**
+ * A clip and its poster: `name.mp4` and `posters/name.jpg` (the frame it
+ * opens on, ~40KB, so a card shows a picture instantly instead of a grey
+ * box while the video loads).
+ */
+const clip = (name: string) => ({
+  src: `${VIDEO_BASE}/${name}.mp4`,
+  poster: `${VIDEO_BASE}/posters/${name}.jpg`,
+});
 
 export type Example = {
   id: string;
@@ -42,34 +51,36 @@ export type Category = {
 };
 
 /*
- * Page order. Within a category the layout alternates on its own: the
- * first example has the video on the right, the second on the left.
+ * Page order. The layout alternates down the whole page, not per category:
+ * the first example has its video on the right, the next on the left, and
+ * so on, so two rows in a row never put the video on the same side.
  */
 export const categories: Category[] = [
   {
     id: 'ads',
     name: 'Ads',
     intro: 'Ads that look like the feed they run in, from creator-style UGC to product spots.',
+    // Strongest first: the Sriracha spot opens the work.
     examples: [
-      {
-        id: 'ugc-ad',
-        title: 'Beauty UGC ad',
-        summary:
-          'Several AI creators, one lip product, cut together the way real creator ads are: a fast hook, the product in hand, a face close to camera. No one to cast, ship product to or reshoot.',
-        src: video('ugc-ad.mp4'),
-        ratio: '9:16',
-        length: '12 seconds',
-        madeFor: 'TikTok, Reels, Meta ads',
-      },
       {
         id: 'sriracha-ad',
         title: 'Sriracha product ad',
         summary:
           'It opens on the bottle in a city street at night. One drop flies into a food truck, past the cooks and into a bowl of pho, and the bottle closes the shot. A product story told in a single move, with no set, no crew and no real sauce.',
-        src: video('sriracha-ad.mp4'),
+        ...clip('sriracha-ad'),
         ratio: '4:3',
         length: '17 seconds',
         madeFor: 'Pre-roll, brand channels, launches',
+      },
+      {
+        id: 'ugc-ad',
+        title: 'Beauty UGC ad',
+        summary:
+          'Several AI creators, one lip product, cut together the way real creator ads are: a fast hook, the product in hand, a face close to camera. No one to cast, ship product to or reshoot.',
+        ...clip('ugc-ad'),
+        ratio: '9:16',
+        length: '12 seconds',
+        madeFor: 'TikTok, Reels, Meta ads',
       },
     ],
   },
@@ -83,7 +94,7 @@ export const categories: Category[] = [
         title: 'Animated storytime',
         summary:
           'A Pixar-style story in ninety seconds: a teenager, two parents who do not believe him, and a business run from a laptop that takes off. It opens on a shocked face and a price, so the viewer stays to find out why.',
-        src: video('storytime-cartoon.mp4'),
+        ...clip('storytime-cartoon'),
         ratio: '9:16',
         length: '89 seconds',
         madeFor: 'Reels, TikTok, Shorts',
@@ -100,7 +111,7 @@ export const categories: Category[] = [
         title: 'H1GROW promo',
         summary:
           'Fifteen seconds for H1GROW, a product I built. It opens on the problem ("Products you own: 0"), reveals the brand, then animates the product UI in. Bold type and a tight edit do the selling.',
-        src: video('motion-graphics.mp4'),
+        ...clip('motion-graphics'),
         ratio: '16:9',
         length: '15 seconds',
         madeFor: 'Launch posts, landing pages, LinkedIn',
@@ -117,7 +128,7 @@ export const categories: Category[] = [
         title: 'Pyramids travel vlog',
         summary:
           'A phone-shot travel vlog at the pyramids of Giza: handheld framing, harsh desert light, a camel drinking from a water bottle. None of it was filmed.',
-        src: video('cinematic.mp4'),
+        ...clip('cinematic'),
         ratio: '4:3',
         length: '12 seconds',
         madeFor: 'Travel and lifestyle brands, b-roll',
@@ -134,7 +145,7 @@ export const categories: Category[] = [
         title: 'AI, explained',
         summary:
           'Artificial intelligence explained step by step in under ninety seconds. Numbered on-screen structure, AI b-roll and word-by-word captions hold attention with no presenter on camera.',
-        src: video('explainer.mp4'),
+        ...clip('explainer'),
         ratio: '9:16',
         length: '86 seconds',
         madeFor: 'Reels, Shorts, edtech pages',
@@ -144,7 +155,7 @@ export const categories: Category[] = [
         title: 'Two-character AWS explainer',
         summary:
           'Two cartoon characters talk through EC2, S3, RDS and Lambda as interview prep, over runner-game footage. The back-and-forth keeps a dry topic moving.',
-        src: video('dialogue-explainer.mp4'),
+        ...clip('dialogue-explainer'),
         ratio: '9:16',
         length: '41 seconds',
         madeFor: 'TikTok, Reels, Shorts',
@@ -152,3 +163,11 @@ export const categories: Category[] = [
     ],
   },
 ];
+
+/** Every example in page order, for the viewer's arrows and the zig-zag. */
+export const allExamples = categories.flatMap((category) =>
+  category.examples.map((example) => ({ example, category })),
+);
+
+/** Plays in the hero card. */
+export const featuredId = 'cinematic';

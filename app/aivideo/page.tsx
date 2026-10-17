@@ -1,22 +1,15 @@
-import Hero from '@/components/aivideo/Hero';
-import About from '@/components/aivideo/About';
-import WorkSection from '@/components/aivideo/WorkSection';
-import Contact from '@/components/aivideo/Contact';
+import Portfolio from '@/components/aivideo/Portfolio';
 
 /**
  * aivideo.haadheesheeraz.online: HERO → ABOUT → WORK → CONTACT.
- * White page, black type. Shares the app, fonts and motion curves with the
- * main site, nothing of its dark surface.
+ * Off-white ground with drifting lines behind it, after the OpenDictate
+ * reference. Shares the app, fonts and motion curves with the main site,
+ * nothing of its dark surface.
  */
 export default function AiVideoPage() {
   return (
-    <div className="aivideo min-h-screen bg-white text-ink">
-      <Hero />
-      <main>
-        <About />
-        <WorkSection />
-      </main>
-      <Contact />
+    <div className="aivideo min-h-screen text-ink">
+      <Portfolio />
     </div>
   );
 }
