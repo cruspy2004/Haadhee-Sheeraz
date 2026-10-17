@@ -1,15 +1,36 @@
-import Portfolio from '@/components/aivideo/Portfolio';
+import Hero from '@/components/aivideo/Hero';
+import About from '@/components/aivideo/About';
+import WorkSection from '@/components/aivideo/WorkSection';
+import Contact from '@/components/aivideo/Contact';
 
 /**
  * aivideo.haadheesheeraz.online: HERO → ABOUT → WORK → CONTACT.
- * Off-white ground with drifting lines behind it, after the OpenDictate
- * reference. Shares the app, fonts and motion curves with the main site,
+ * Off-white ground with a soft glow; the drifting lines live in the hero
+ * only. Shares the app, fonts and motion curves with the main site,
  * nothing of its dark surface.
  */
 export default function AiVideoPage() {
   return (
     <div className="aivideo min-h-screen text-ink">
-      <Portfolio />
+      {/* Soft light on the off-white ground: a white bloom up top and a
+          faint peach glow in the top-left corner. */}
+      <div
+        aria-hidden
+        className="pointer-events-none fixed inset-0 z-0"
+        style={{
+          background:
+            'radial-gradient(60% 50% at 50% 30%, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0) 70%), radial-gradient(28% 30% at 0% 0%, rgba(255,190,175,0.35) 0%, rgba(255,190,175,0) 70%)',
+        }}
+      />
+
+      <div className="relative z-[1]">
+        <Hero />
+        <main>
+          <About />
+          <WorkSection />
+        </main>
+        <Contact />
+      </div>
     </div>
   );
 }

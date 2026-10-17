@@ -2,7 +2,6 @@
 
 import { useEffect, useRef } from 'react';
 import { ratioValue, type Category, type Example } from './aivideo.data';
-import { MONO } from './ui';
 
 const focusRing =
   'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white';
@@ -89,7 +88,7 @@ export default function VideoLightbox({
               <button type="button" onClick={() => step(1)} aria-label="Next video" className={arrow}>
                 →
               </button>
-              <span className={`ml-1 text-[0.8125rem] text-white/60 ${MONO}`}>
+              <span className="ml-1 text-[0.875rem] text-white/60">
                 {index + 1} of {items.length}
               </span>
             </>
@@ -98,7 +97,7 @@ export default function VideoLightbox({
         <button
           type="button"
           onClick={onClose}
-          className={`press inline-flex min-h-[44px] items-center rounded-full bg-white px-5 text-[0.875rem] font-medium text-[#0a0a0a] hover:bg-white/90 ${MONO} ${focusRing}`}
+          className={`press inline-flex min-h-[44px] items-center rounded-full bg-white px-5 text-[0.9375rem] font-medium text-[#0a0a0a] hover:bg-white/90 ${focusRing}`}
         >
           Close
         </button>
@@ -127,12 +126,13 @@ export default function VideoLightbox({
         </div>
 
         <aside className="w-full shrink-0 md:w-72">
-          <p className={`text-[0.75rem] uppercase tracking-[0.08em] text-white/60 ${MONO}`}>{category.name}</p>
-          <h2 className="mt-2 font-script text-[1.625rem] font-bold leading-tight tracking-[-0.035em] text-white">
+          <p className="text-[0.875rem] text-white/60">{category.name}</p>
+          <h2 className="mt-1 font-script text-[1.5rem] font-semibold leading-tight tracking-[-0.03em] text-white">
             {example.title}
           </h2>
-          <p className="mt-3 font-serif text-[1.0625rem] leading-relaxed text-white/75">{example.summary}</p>
-          <p className={`mt-4 text-[0.8125rem] text-white/60 ${MONO}`}>
+          <p className="mt-3 text-[0.9375rem] leading-relaxed text-white/75">{example.summary}</p>
+          <p className="mt-4 text-[0.875rem] text-white/60">{example.technique}</p>
+          <p className="mt-1 text-[0.875rem] text-white/60">
             {example.length}, {example.ratio}
           </p>
         </aside>

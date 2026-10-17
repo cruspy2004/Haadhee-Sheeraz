@@ -64,7 +64,7 @@ export default function WordRotator({ words }: { words: string[] }) {
           transition={{ duration: 0.5, ease: EASE_ENTRANCE }}
         >
           {/* First in the DOM so the (transformed) word paints over it. */}
-          <span className="absolute bottom-[0.3em] left-0 right-[0.05em] h-[0.075em] rounded-full bg-neutral-300" />
+          <span className="absolute bottom-[0.3em] left-0 right-[0.05em] h-[0.075em] rounded-full bg-[#c9c9c6]" />
           <AnimatePresence mode="popLayout" initial={false}>
             <motion.span
               key={words[i]}
