@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import { MotionConfig, motion } from 'framer-motion';
 import FlowLines from './FlowLines';
 import WordRotator from './WordRotator';
@@ -37,12 +38,39 @@ export default function Hero() {
   );
 }
 
+/**
+ * Hidden while the hero fills the screen, so the headline stands alone;
+ * it slides down once the visitor has scrolled a little (a third of the
+ * viewport). `inert` keeps the hidden links out of the tab order.
+ */
+function useScrolledPastTop() {
+  const [past, setPast] = useState(false);
+  useEffect(() => {
+    const check = () => setPast(window.scrollY > window.innerHeight * 0.33);
+    check();
+    window.addEventListener('scroll', check, { passive: true });
+    window.addEventListener('resize', check);
+    return () => {
+      window.removeEventListener('scroll', check);
+      window.removeEventListener('resize', check);
+    };
+  }, []);
+  return past;
+}
+
 function Nav() {
+  const shown = useScrolledPastTop();
   const link = `whitespace-nowrap rounded-full px-3 py-2 text-[0.8125rem] text-neutral-600 hover:text-ink ${MONO} ${focusRing}`;
   return (
     <nav
       aria-label="Primary"
-      className="fixed left-1/2 top-3 z-50 flex w-[min(1000px,calc(100%-24px))] -translate-x-1/2 items-center justify-between gap-3 rounded-full border border-neutral-200 bg-white/85 py-2 pl-3 pr-2 shadow-[0_10px_30px_-14px_rgba(0,0,0,0.25)] backdrop-blur-md"
+      {...(shown ? {} : ({ inert: '' } as Record<string, string>))}
+      style={{
+        transform: `translate(-50%, ${shown ? '0' : 'calc(-100% - 16px)'})`,
+        opacity: shown ? 1 : 0,
+        transition: 'transform 450ms cubic-bezier(0.16, 1, 0.3, 1), opacity 300ms ease',
+      }}
+      className="fixed left-1/2 top-3 z-50 flex w-[min(1000px,calc(100%-24px))] items-center justify-between gap-3 rounded-full border border-neutral-200 bg-white/85 py-2 pl-3 pr-2 shadow-[0_10px_30px_-14px_rgba(0,0,0,0.25)] backdrop-blur-md"
     >
       <a href="#top" className={`flex items-center gap-2.5 rounded-full ${focusRing}`}>
         <span className="flex h-8 w-8 items-center justify-center rounded-full bg-ink font-script text-[0.9375rem] font-bold text-white">

@@ -27,9 +27,16 @@ export default function AiVideoPage() {
         <Hero />
         <main>
           <About />
-          <WorkSection />
+          {/* Off-white up top, the original white for the work: a long
+              fade so the ground changes gradually, landing on white by the
+              time the Ads section starts. */}
+          <div style={{ background: 'linear-gradient(to bottom, rgba(255,255,255,0) 0px, #ffffff 560px)' }}>
+            <WorkSection />
+          </div>
         </main>
-        <Contact />
+        <div className="bg-white">
+          <Contact />
+        </div>
       </div>
     </div>
   );
