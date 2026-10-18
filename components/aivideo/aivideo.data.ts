@@ -68,7 +68,7 @@ export const categories: Category[] = [
     id: 'ads',
     name: 'Ads',
     intro: 'Ads that blend into the feed they run in, from creator-style UGC to CGI product spots.',
-    // The UGC ad opens the work, then the two product spots.
+    // The UGC ad opens the work, then the CGI product spot.
     examples: [
       {
         id: 'ugc-melatonin',
@@ -80,17 +80,6 @@ export const categories: Category[] = [
         ratio: '9:16',
         length: '16 seconds',
         madeFor: 'TikTok, Reels, Meta ads',
-      },
-      {
-        id: 'sriracha-ad',
-        title: 'Sriracha product ad',
-        summary:
-          'One continuous follow shot. It opens on a macro of the bottle cap against a bokeh-lit night street, then chases a single drop through a food truck window, past the cooks at the griddle and across the tables into a bowl of pho, before landing on a packshot of the bottle. No set, no crew, no real sauce.',
-        technique: 'Continuous follow shot, macro, shallow depth of field, night exteriors, packshot',
-        ...clip('sriracha-ad'),
-        ratio: '4:3',
-        length: '17 seconds',
-        madeFor: 'YouTube pre-roll, brand channels, launches',
       },
       {
         id: 'lays-paprika',
@@ -166,17 +155,6 @@ export const categories: Category[] = [
     name: 'Explainers',
     intro: 'Hard topics made simple, and short enough to watch to the end.',
     examples: [
-      {
-        id: 'explainer',
-        title: 'AI, explained',
-        summary:
-          'Artificial intelligence, step by step, in under 90 seconds. A numbered on-screen structure carries the argument, AI b-roll moves from macro robot close-ups to lab inserts, and single words on black punctuate the cuts. No presenter on camera.',
-        technique: 'Numbered structure, mixed-media b-roll, macro inserts, word-by-word captions',
-        ...clip('explainer'),
-        ratio: '9:16',
-        length: '86 seconds',
-        madeFor: 'Reels, Shorts, edtech pages',
-      },
       {
         id: 'dialogue-explainer',
         title: 'Two-character AWS explainer',
