@@ -43,6 +43,12 @@ export type Example = {
   poster?: string;
   length: string;
   madeFor: string;
+  /**
+   * A generator's visible mark baked into the file, softened on the page
+   * with a small blur patch until the file itself is cleaned. Centre (x, y)
+   * and diameter, as fractions of the frame's width / height / width.
+   */
+  watermark?: { x: number; y: number; size: number };
 };
 
 export type Category = {
@@ -76,14 +82,27 @@ export const categories: Category[] = [
         madeFor: 'Pre-roll, brand channels, launches',
       },
       {
-        id: 'ugc-ad',
-        title: 'Beauty UGC ad',
+        id: 'lays-paprika',
+        title: 'Lay’s Paprika ad',
         summary:
-          'Several AI creators, one lip product, cut the way real creator ads are: handheld selfie framing, natural window light, the product pushed to the lens in close-up and jump cuts on every line. No one to cast, ship product to or reshoot.',
-        technique: 'Handheld selfie framing, jump cuts, product close-ups, lip-synced dialogue',
-        ...clip('ugc-ad'),
+          'A night-time CGI product spot. The bag drops out of the dark onto a wet, lamp-lit road and hangs in rolling smoke as the camera pushes in, then it cuts to slow-motion chips tumbling through smoke and warm light, and closes on a clean “try Lay’s paprika” end card.',
+        technique: 'CGI product hero, push-in, volumetric smoke, slow motion, end card',
+        ...clip('lays-paprika'),
         ratio: '9:16',
-        length: '12 seconds',
+        length: '20 seconds',
+        madeFor: 'Reels, TikTok, Shorts',
+        // The generator's sparkle mark, bottom right, measured off the end card.
+        watermark: { x: 0.833, y: 0.906, size: 0.11 },
+      },
+      {
+        id: 'ugc-melatonin',
+        title: 'Melatonin UGC ad',
+        summary:
+          'One AI creator and a bedtime routine, shot the way real creator ads are: a talking-head hook to camera in soft bedside-lamp light, the Nutrifactor melatonin bottle held up to the lens, a packshot cutaway on the nightstand, and a closing shot of her asleep. No one to cast, ship product to or reshoot.',
+        technique: 'Talking-head hook, practical lamp light, product to lens, packshot cutaway, lip-sync',
+        ...clip('ugc-melatonin'),
+        ratio: '9:16',
+        length: '16 seconds',
         madeFor: 'TikTok, Reels, Meta ads',
       },
     ],

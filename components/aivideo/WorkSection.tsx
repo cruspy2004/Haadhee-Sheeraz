@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { allExamples, categories, ratioValue, type Category, type Example } from './aivideo.data';
 import { useAutoplayInView, withFirstFrame } from './autoplay';
 import VideoLightbox from './VideoLightbox';
+import WatermarkPatch from './WatermarkPatch';
 
 const focusRing =
   'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink';
@@ -162,6 +163,7 @@ function ExampleVideo({ example, onOpen }: { example: Example; onOpen: () => voi
         aria-hidden
         className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-entrance group-hover:scale-[1.02]"
       />
+      <WatermarkPatch example={example} />
       <span
         aria-hidden
         className="absolute bottom-3 right-3 inline-flex items-center gap-1.5 rounded-full bg-white/90 px-3.5 py-2 text-[0.8125rem] font-medium text-ink shadow-[0_6px_20px_-8px_rgba(0,0,0,0.35)] backdrop-blur-sm transition-transform duration-200 group-hover:scale-105"

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import { ratioValue, type Category, type Example } from './aivideo.data';
+import WatermarkPatch from './WatermarkPatch';
 
 const focusRing =
   'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white';
@@ -122,6 +123,7 @@ export default function VideoLightbox({
               playsInline
               className="absolute inset-0 h-full w-full object-contain"
             />
+            <WatermarkPatch example={example} />
           </div>
         </div>
 
