@@ -67,14 +67,14 @@ export const categories: Category[] = [
   {
     id: 'ads',
     name: 'Ads',
-    intro: 'Ads that look like the feed they run in, from creator-style UGC to product spots.',
+    intro: 'Ads that blend into the feed they run in, from creator-style UGC to CGI product spots.',
     // The UGC ad opens the work, then the two product spots.
     examples: [
       {
         id: 'ugc-melatonin',
         title: 'Melatonin UGC ad',
         summary:
-          'One AI creator and a bedtime routine, shot the way real creator ads are: a talking-head hook to camera in soft bedside-lamp light, the Nutrifactor melatonin bottle held up to the lens, a packshot cutaway on the nightstand, and a closing shot of her asleep. No one to cast, ship product to or reshoot.',
+          'One AI creator, one bedtime routine. A talking-head hook in warm bedside-lamp light, the Nutrifactor bottle brought up to the lens, a packshot cutaway on the nightstand, and a closing shot of her asleep. No casting, no shipping product, no reshoots.',
         technique: 'Talking-head hook, practical lamp light, product to lens, packshot cutaway, lip-sync',
         ...clip('ugc-melatonin'),
         ratio: '9:16',
@@ -85,18 +85,18 @@ export const categories: Category[] = [
         id: 'sriracha-ad',
         title: 'Sriracha product ad',
         summary:
-          'A single follow shot. It opens on a macro of the bottle cap against a night street, deep in shallow-focus bokeh, then the camera chases one drop through a food truck window, past the cooks at the griddle and across the tables into a bowl of pho, and lands on a packshot of the bottle. No set, no crew, no real sauce.',
+          'One continuous follow shot. It opens on a macro of the bottle cap against a bokeh-lit night street, then chases a single drop through a food truck window, past the cooks at the griddle and across the tables into a bowl of pho, before landing on a packshot of the bottle. No set, no crew, no real sauce.',
         technique: 'Continuous follow shot, macro, shallow depth of field, night exteriors, packshot',
         ...clip('sriracha-ad'),
         ratio: '4:3',
         length: '17 seconds',
-        madeFor: 'Pre-roll, brand channels, launches',
+        madeFor: 'YouTube pre-roll, brand channels, launches',
       },
       {
         id: 'lays-paprika',
         title: 'Lay’s Paprika ad',
         summary:
-          'A night-time CGI product spot. The bag drops out of the dark onto a wet, lamp-lit road and hangs in rolling smoke as the camera pushes in, then it cuts to slow-motion chips tumbling through smoke and warm light, and closes on a clean “try Lay’s paprika” end card.',
+          'A night-time CGI product spot. The bag drops onto a wet, lamp-lit road and hangs in rolling smoke as the camera pushes in, then slow-motion chips tumble through smoke and warm light before a clean “try Lay’s paprika” end card.',
         technique: 'CGI product hero, push-in, volumetric smoke, slow motion, end card',
         ...clip('lays-paprika'),
         ratio: '9:16',
@@ -110,13 +110,13 @@ export const categories: Category[] = [
   {
     id: 'storytime',
     name: 'Storytime cartoons',
-    intro: 'Animated stories with the same characters in every shot, captions on every line and a hook in the first second.',
+    intro: 'Animated stories with consistent characters, a caption on every line and a hook in the first second.',
     examples: [
       {
         id: 'storytime-cartoon',
         title: 'Animated storytime',
         summary:
-          'A Pixar-style 3D story in ninety seconds: a teenager, two parents who don’t believe him, and a business run from a laptop that takes off. It cold-opens on an extreme close-up reaction and a price, then moves through two-shots of the argument, over-the-shoulder inserts of the laptop screen and a night exterior, with the same characters in every shot.',
+          'A Pixar-style 3D story in 90 seconds: a teenager, two parents who don’t believe him, and a laptop business that takes off. It cold-opens on an extreme close-up and a price tag, then moves through two-shots of the argument, over-the-shoulder inserts of the screen and a night exterior, with the characters holding steady in every shot.',
         technique: '3D character animation, cold open, reaction close-ups, insert shots, burned-in captions',
         ...clip('storytime-cartoon'),
         ratio: '9:16',
@@ -128,13 +128,13 @@ export const categories: Category[] = [
   {
     id: 'motion-graphics',
     name: 'Motion graphics',
-    intro: 'Animated type and product UI that make one point, fast.',
+    intro: 'Animated type and product UI that land one point, fast.',
     examples: [
       {
         id: 'motion-graphics',
         title: 'H1GROW promo',
         summary:
-          'Fifteen seconds of kinetic typography for H1GROW, a product I built. It opens on the problem (“Products you own: 0”) and a big number counter, bursts into a logo reveal, then animates the product UI onto a phone mockup. Hard cuts between orange, lime and black keep the pace up.',
+          'A 15-second kinetic-type promo for H1GROW, a product I built. It opens on the problem (“Products you own: 0”) and a big number counter, bursts into a logo reveal, then animates the product UI onto a phone mockup. Hard cuts between orange, lime and black keep the pace high.',
         technique: 'Kinetic type, number counter, logo reveal, UI animation, hard cuts',
         ...clip('motion-graphics'),
         ratio: '16:9',
@@ -152,7 +152,7 @@ export const categories: Category[] = [
         id: 'cinematic',
         title: 'Pyramids travel vlog',
         summary:
-          'A phone-shot travel vlog at the pyramids of Giza: handheld selfie framing, a low angle into the sun with natural flare and wind in her scarf, then cutaways to a camel drinking from a water bottle. Lip-synced and captioned like a real creator post. None of it was filmed.',
+          'A phone-shot travel vlog at the pyramids of Giza: handheld selfie framing, a low angle into the sun with natural flare and wind in her scarf, and cutaways to a camel drinking from a water bottle. Lip-synced and captioned like a real creator post, and none of it was filmed.',
         technique: 'Handheld vlog framing, low angle into the sun, lens flare, cutaways, lip-sync',
         ...clip('cinematic'),
         ratio: '4:3',
@@ -164,13 +164,13 @@ export const categories: Category[] = [
   {
     id: 'explainers',
     name: 'Explainers',
-    intro: 'Hard topics made simple, and short enough to finish.',
+    intro: 'Hard topics made simple, and short enough to watch to the end.',
     examples: [
       {
         id: 'explainer',
         title: 'AI, explained',
         summary:
-          'Artificial intelligence explained step by step in under ninety seconds. A numbered on-screen structure carries the argument, AI b-roll runs from macro robot close-ups to lab inserts, and single words on black punctuate the cuts. No presenter on camera.',
+          'Artificial intelligence, step by step, in under 90 seconds. A numbered on-screen structure carries the argument, AI b-roll moves from macro robot close-ups to lab inserts, and single words on black punctuate the cuts. No presenter on camera.',
         technique: 'Numbered structure, mixed-media b-roll, macro inserts, word-by-word captions',
         ...clip('explainer'),
         ratio: '9:16',
@@ -181,7 +181,7 @@ export const categories: Category[] = [
         id: 'dialogue-explainer',
         title: 'Two-character AWS explainer',
         summary:
-          'Two cartoon characters talk through EC2, S3, RDS and Lambda as interview prep. Character cutouts over runner-game gameplay, each service’s logo popping in as it’s named, and bold captions with the key word highlighted in green. The back-and-forth keeps a dry topic moving.',
+          'Two cartoon characters talk through EC2, S3, RDS and Lambda as interview prep: character cutouts over runner-game footage, each service’s logo popping in as it’s named, and bold captions with the key word in green. The back-and-forth keeps a dry topic moving.',
         technique: 'Two-character dialogue, gameplay background, logo pop-ins, highlighted captions',
         ...clip('dialogue-explainer'),
         ratio: '9:16',

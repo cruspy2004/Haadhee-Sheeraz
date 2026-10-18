@@ -8,7 +8,7 @@ import { site } from '@/lib/site';
  */
 const title = `${site.name}, AI Video`;
 const description =
-  'Create content faster, better, simpler. AI ads, storytime cartoons, motion graphics, cinematic visuals and explainers by Haadhee Sheeraz.';
+  'Create content faster, better, simpler. AI ads, storytime cartoons, motion graphics, cinematics and explainers by Haadhee Sheeraz.';
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.aivideo),

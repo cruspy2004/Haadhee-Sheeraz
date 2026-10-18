@@ -28,16 +28,16 @@ export default function About() {
         <div className="max-w-[38ch] space-y-6 text-[clamp(1.25rem,2.2vw,1.75rem)] leading-[1.35] tracking-[-0.01em] text-ink">
           <p>
             5&nbsp;years of scripting, creating and directing content taught me
-            one thing: the difference between content that works and content
-            that doesn’t is research.
+            one thing: what separates content that works from content that
+            doesn’t is research.
           </p>
           <p>
-            For the past 3&nbsp;years I’ve made it with AI, and I think this is
-            how content gets made now.
+            For the past 3&nbsp;years I’ve made it with AI. I think this is how
+            content gets made now.
           </p>
           <p className="text-neutral-600">
-            What sets me apart is that I’ve been a copywriter for 5&nbsp;years.
-            That is why my pages grow, and it shows in the work.
+            What sets me apart is 5&nbsp;years as a copywriter. It’s why my
+            pages grow, and it shows in the work.
           </p>
         </div>
       </div>

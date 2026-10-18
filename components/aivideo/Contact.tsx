@@ -11,11 +11,11 @@ export default function Contact() {
     <section id="contact" className="mx-auto w-full max-w-7xl px-5 pb-10 pt-24 sm:px-10 sm:pt-36">
       <div className="rounded-[28px] bg-ink px-6 py-14 text-white sm:px-14 sm:py-20">
         <h2 className="max-w-3xl text-balance font-script text-[clamp(2.25rem,5.5vw,4.5rem)] font-semibold leading-[0.98] tracking-[-0.045em] text-white">
-          Let&apos;s make your next video.
+          Let’s make your next video.
         </h2>
         <p className="mt-6 max-w-lg text-[1.125rem] leading-relaxed text-white/70">
-          Send me the product and where it will run. I&apos;ll reply with how
-          I would make it.
+          Send me the product and where it will run, and I’ll reply with how
+          I’d make it.
         </p>
         <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-4">
           <a
