@@ -68,8 +68,19 @@ export const categories: Category[] = [
     id: 'ads',
     name: 'Ads',
     intro: 'Ads that look like the feed they run in, from creator-style UGC to product spots.',
-    // Strongest first: the Sriracha spot opens the work.
+    // The UGC ad opens the work, then the two product spots.
     examples: [
+      {
+        id: 'ugc-melatonin',
+        title: 'Melatonin UGC ad',
+        summary:
+          'One AI creator and a bedtime routine, shot the way real creator ads are: a talking-head hook to camera in soft bedside-lamp light, the Nutrifactor melatonin bottle held up to the lens, a packshot cutaway on the nightstand, and a closing shot of her asleep. No one to cast, ship product to or reshoot.',
+        technique: 'Talking-head hook, practical lamp light, product to lens, packshot cutaway, lip-sync',
+        ...clip('ugc-melatonin'),
+        ratio: '9:16',
+        length: '16 seconds',
+        madeFor: 'TikTok, Reels, Meta ads',
+      },
       {
         id: 'sriracha-ad',
         title: 'Sriracha product ad',
@@ -93,17 +104,6 @@ export const categories: Category[] = [
         madeFor: 'Reels, TikTok, Shorts',
         // The generator's sparkle mark, bottom right, measured off the end card.
         watermark: { x: 0.833, y: 0.906, size: 0.11 },
-      },
-      {
-        id: 'ugc-melatonin',
-        title: 'Melatonin UGC ad',
-        summary:
-          'One AI creator and a bedtime routine, shot the way real creator ads are: a talking-head hook to camera in soft bedside-lamp light, the Nutrifactor melatonin bottle held up to the lens, a packshot cutaway on the nightstand, and a closing shot of her asleep. No one to cast, ship product to or reshoot.',
-        technique: 'Talking-head hook, practical lamp light, product to lens, packshot cutaway, lip-sync',
-        ...clip('ugc-melatonin'),
-        ratio: '9:16',
-        length: '16 seconds',
-        madeFor: 'TikTok, Reels, Meta ads',
       },
     ],
   },
